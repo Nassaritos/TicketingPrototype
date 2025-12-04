@@ -4440,6 +4440,7 @@ body.rtl .banner-cta {
 }
 
 .hours-note {
+  font-weight: 700;
   margin-top: 16px;
   font-size: 0.9rem;
   color: #423426;
@@ -4489,11 +4490,11 @@ body.rtl .banner-cta {
 
 .footer-social-title {
   display: block;
-  font-size: 0.75rem;
+  font-size:15px;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: #f5f0e6;
-  opacity: 0.8;
+  color: #fbbf7a;
   margin-bottom: 8px;
 }
 
