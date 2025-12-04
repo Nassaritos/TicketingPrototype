@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Grand Egyptian Museum – Ticketing Prototype</title>
+    <link rel="icon" type="image/x-icon" href="GEM Logo Hi-Res white.png">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="style.css">
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
+
+</head>
+<body>
+  <!-- NAVBAR -->
+   <header class="site-header">
+  <div class="container nav-inner">
+    <!-- Logo -->
+    <a href="index.html" class="nav-logo">
+      <!-- TODO: change src to your real logo file -->
+      <img src="GEM Logo Hi-Res.png" alt="Grand Egyptian Museum logo" />
+      <span class="nav-logo-text">
+        Official Ticketing Website
+      </span>
+    </a>
+
+    <!-- Right side actions -->
+   <nav class="nav-actions">
+  <div class="nav-lang-switch">
+    <button class="nav-lang is-active" type="button" data-lang="en">EN</button>
+    <span class="nav-lang-sep">|</span>
+    <button class="nav-lang" type="button" onclick="window.location.href='#'" data-lang="ar">عربي</button>
+  </div>
+</nav>
+
+  </div>
+</header>
+
+
+  <section class="hero" >
+  <!-- background image + overlay -->
+  <div class="hero-bg">
+    <!-- TODO: replace src with your real GEM hero photo -->
+    <img src= "202302011917Home-Banner.jpg"
+         alt="Grand Egyptian Museum entrance (placeholder)" />
+  </div>
+
+  <!-- overlayed content -->
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="hero-badge">Welcome to the Grand Egyptian Museum</div>
+      <h1>WORLD’S LARGEST MUSEUM</h1>
+      <h1>Dedicated to a single civilisation</h1>
+      <p>
+        This is the only official website for purchasing tickets to the Grand Egyptian Museum. The museum is not responsible for tickets purchased through other platforms.
+      </p>
+      <div class="hero-actions">
+        <button class="nav-cta" type="button" id="hero-book-galleries">
+          Book Tickets
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" hidden>
+  <div class="container">
+    <div class="welcome-hours-card">
+      <!-- Left: official ticketing text -->
+      <div class="welcome-copy">
+        <h2>Welcome to the official ticketing website for the Grand Egyptian Museum</h2>
+        <p>
+          This is the <b> only</b> official website for purchasing tickets to the
+          Grand Egyptian Museum. The museum is not responsible for
+          tickets purchased through any other platform.
+        </p>
+      </div>
+
+      <!-- Right: opening hours -->
+      <div class="hours-wrapper">
+        <h3 class="hours-heading">Opening hours</h3>
+
+        <div class="hours-grid">
+          <!-- Daily block -->
+          <article class="hours-card-mini">
+            <div class="hours-chip">Daily (except Sat &amp; Wed)</div>
+            <div class="hours-row">
+              <span>GEM Complex</span>
+              <span>8:30 AM – 7:00 PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Galleries</span>
+              <span>9:00 AM – 6:00 PM</span>
+            </div>
+
+          </article>
+
+          <!-- Extended block -->
+          <article class="hours-card-mini">
+            <div class="hours-chip hours-chip--highlight">
+              Saturdays &amp; Wednesdays
+            </div>
+            <div class="hours-row">
+              <span>GEM Complex</span>
+              <span>8:30 AM – 10:00 PM</span>
+            </div>
+            <div class="hours-row">
+              <span>Galleries</span>
+              <span>9:00 AM – 9:00 PM</span>
+            </div>
+
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section class="section">
+    <div class="container intro-grid">
+      <div class="intro-card">
+        <h3>Welcome to the official ticketing website for the Grand Egyptian Museum</h3>
+        <p>
+          The Grand Egyptian Museum invites visitors to explore the world’s largest museum
+          dedicated to a single civilisation.
+        </p>
+        <p>
+          Your visit includes access to the Tutankhamun Galleries, Main Galleries, Grand Hall,
+          Grand Stairs, Khufu’s Boats Museum, commercial area and exterior gardens, offering an
+          unparalleled journey through Egypt’s ancient heritage and modern design.
+        </p>
+      <!--  <p class="alert-text">
+          This is the only official website for purchasing tickets to the Grand Egyptian Museum.
+          The museum is not responsible for tickets purchased through any other platform.
+        </p>-->
+      </div>
+
+     <div class="hours-card">
+  <div class="hours-header">
+    <h4>Opening Hours</h4>
+    <span class="hours-pill">Plan your visit</span>
+  </div>
+
+  <div class="hours-grid">
+    <!-- Standard days -->
+    <div class="hours-block">
+      <div class="hours-block-title">
+        <span class="hours-dot"></span>
+        <span>Daily (except Saturdays &amp; Wednesdays)</span>
+      </div>
+      <ul class="hours-list">
+        <li><span>GEM Complex</span><span>8:30 AM – 7:00 PM</span></li>
+        <li><span>Galleries</span><span>9:00 AM – 6:00 PM</span></li>
+      </ul>
+    </div>
+
+    <!-- Extended days -->
+    <div class="hours-block">
+      <div class="hours-block-title">
+        <span class="hours-dot hours-dot--highlight"></span>
+        <span>Saturdays &amp; Wednesdays</span>
+      </div>
+      <ul class="hours-list">
+        <li><span>GEM Complex</span><span>8:30 AM – 10:00 PM</span></li>
+        <li><span>Galleries</span><span>9:00 AM – 9:00 PM</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="hours-note">
+    Last entry to the galleries is one hour before closing time.
+  </p>
+</div>
+
+    </div>
+  </section> 
+
+  <!-- HOME EXPERIENCES 
+<section class="section experiences-home">
+  <div class="container">
+    <h3 class="section-title">Available Experiences</h3>
+
+    <div class="experience-banners">
+      <!-- GEM Galleries 
+      <article class="experience-banner" data-experience-banner="galleries" data-book="galleries">
+        <div class="experience-banner-image">
+          <img
+            src="GEM Grand Staircase - Copyright Grand Egyptian Museum.JPG"
+            alt="GEM Galleries at the Grand Egyptian Museum" />
+        </div>
+
+        <div class="experience-banner-content experience-banner-content-en">
+          <h3 class="experience-banner-title">GEM Galleries</h3>
+
+          <div class="experience-banner-row-en">
+            <p class="experience-banner-sub">
+              Explore Tutankhamun’s galleries, the main exhibition halls,
+              the Grand Hall and the monumental Grand Staircase.
+            </p>
+
+            <button class="banner-cta banner-cta-en" type="button" data-book="galleries">
+              Book Now ↗
+            </button>
+          </div>
+        </div>
+      </article>
+
+      Children’s Museum 
+      <article class="experience-banner children" data-experience-banner="children" data-book="children">
+        <div class="experience-banner-image">
+          <img
+            src="10.jpg"
+            alt="GEM Children’s Museum at the Grand Egyptian Museum" />
+        </div>
+
+        <div class="experience-banner-content experience-banner-content-en">
+          <h3 class="experience-banner-title">GEM Children’s Museum</h3>
+
+          <div class="experience-banner-row-en">
+            <p class="experience-banner-sub">
+              An interactive experience designed for children and families
+              to discover history in a playful and engaging way.
+            </p>
+
+            <button class="banner-cta banner-cta-en" type="button" data-book="children">
+              Book Now ↗
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>-->
+
+<!--<section class="card-slider-section">
+  <div class="card-slider-inner">
+    <h1 class="card-slider-title">Explore the Grand Egyptian Museum</h1>
+
+    <div class="swiper card-slider">
+      <div class="swiper-wrapper">
+
+        <article class="swiper-slide card-slide">
+          <div class="card-bg" style="background-image:url('MG.jpg');"></div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3 class="card-heading">Main Galleries</h3>
+          </div>
+        </article>
+
+        <article class="swiper-slide card-slide">
+          <div class="card-bg" style="background-image:url('DSC02866.jpg');"></div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3 class="card-heading">Tutankhamun's Galleries</h3>
+          </div>
+        </article>
+
+        <article class="swiper-slide card-slide">
+          <div class="card-bg" style="background-image:url('11.jpg');"></div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3 class="card-heading">Khufu's Boats</h3>
+          </div>
+        </article>
+
+        <article class="swiper-slide card-slide">
+          <div class="card-bg" style="background-image:url('Grand Hall.jpg');"></div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3 class="card-heading">Grand Hall</h3>
+          </div>
+        </article>
+
+        <article class="swiper-slide card-slide">
+          <div class="card-bg" style="background-image:url('GSC.jpg');"></div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3 class="card-heading">Grand Stairs</h3>
+          </div>
+        </article>
+
+        <article class="swiper-slide card-slide">
+          <div class="card-bg" style="background-image:url('Obliesk.jpg');"></div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <h3 class="card-heading">Hanging Obliesk</h3>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </div>
+</section>-->
+
+<section class="cta-ticket-section">
+  <div class="cta-ticket-inner">
+    <button type="button" class="cta-ticket-btn" id="open-info">
+      Book Tickets
+    </button>
+  </div>
+</section>
+
+  <!-- BOOKING SECTION -->
+<section id="booking-section" class="booking-hidden">
+  <div class="container">
+    <div class="booking-header">
+      <h2>Book Your Tickets</h2>
+    </div>
+
+    <div class="layout">
+      <!-- LEFT FLOW -->
+      <div>
+        <div class="stepper">
+          <div class="step-pill is-active" data-step-pill="1">
+            <span class="number">1</span><span>Date &amp; Tickets</span>
+          </div>
+                    <div class="step-pill" data-step-pill="2">
+            <span class="number">2</span><span>Add-Ons</span>
+          </div>
+          <div class="step-pill" data-step-pill="3">
+            <span class="number">3</span><span>Contact Details</span>
+          </div>
+          
+          <div class="step-pill" data-step-pill="4">
+            <span class="number">4</span><span>Review &amp; Pay</span>
+          </div>
+        </div>
+
+        <!-- STEP 1 (LOGICAL) = DATE & TICKETS -->
+        <section class="panel" id="step-2">
+          <div class="panel-header">
+            <h3>Date, Time & Ticket Types</h3>
+          </div>
+          <p class="panel-subtitle" id="step-2-subtitle"></p>
+
+          <div class="two-col">
+            <!-- Left: type + date/time -->
+            <div>
+              <div class="field-group">
+                <div class="field-label">Ticket Type</div>
+                <div class="field-row">
+                  <label class="radio-pill is-active">
+                    <input type="radio" name="ticketType" value="admission" checked />
+                    <span>Admission Ticket</span>
+                  </label>
+                  <label class="radio-pill">
+                    <input type="radio" name="ticketType" value="guided" />
+                    <span>Guided Tour Ticket</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Tour language (guided only) -->
+             
+
+              <!-- Visit date + custom calendar -->
+              <div class="field-group">
+                <div class="field-label">Visit Date</div>
+
+                <div class="calendar-field">
+                  <button type="button" class="calendar-display" id="visit-date-display">
+                    <span id="visit-date-text">Select a Date</span>
+                    <span class="calendar-icon">📅</span>
+                  </button>
+
+                  <div class="calendar-popup" id="visit-calendar">
+                    <div class="calendar-header">
+                      <button type="button" class="cal-nav" id="cal-prev">‹</button>
+                      <div class="cal-month-label" id="cal-month-label"></div>
+                      <button type="button" class="cal-nav" id="cal-next">›</button>
+                    </div>
+
+                    <div class="calendar-weekdays">
+                      <span>Su</span><span>Mo</span><span>Tu</span><span>We</span>
+                      <span>Th</span><span>Fr</span><span>Sa</span>
+                    </div>
+
+                    <div class="calendar-grid" id="cal-days"></div>
+                  </div>
+                </div>
+
+                <!-- hidden input used by JS -->
+                <input type="hidden" id="visit-date" />
+              </div>
+ <div class="field-group hidden" id="tour-language-group">
+                <div class="field-label">Tour Language</div>
+                <div class="field-row">
+                  <label class="radio-pill">
+                    <input type="radio" name="tourLanguage" value="ar" />
+                    <span>Arabic</span>
+                  </label>
+                  <label class="radio-pill">
+                    <input type="radio" name="tourLanguage" value="en" />
+                    <span>English</span>
+                  </label>
+                </div>
+              </div>
+              <!-- Time slots -->
+<div class="field-group" id="time-slot-wrapper">
+  <div class="field-label-row">
+    <span class="field-label" id="time-slot-title">
+      Entry Time Slot
+    </span>
+  </div>
+
+  <div class="time-slot-group" id="time-slot-group">
+
+                  <button type="button" class="time-slot" data-time="08:30 AM - 11:00 AM">08:30 AM - 11:00 AM</button>
+                  <button type="button" class="time-slot" data-time="11:00 AM - 01:00 PM">11:00 AM - 01:00 PM</button>
+                  <button type="button" class="time-slot" data-time="01:00 PM - 03:00 PM">01:00 PM - 03:00 PM</button>
+                  <button type="button" class="time-slot" data-time="03:00 PM - 05:00 PM">03:00 PM - 05:00 PM</button>
+                  <button
+  type="button"
+  class="time-slot extra-evening-slot is-hidden"
+  data-time="05:00 PM - 08:00 PM"
+  data-extra-slot="evening"
+>
+  05:00 PM - 08:00 PM
+</button>
+
+                </div>
+              </div>
+
+              <p class="discount-inline">
+                <a href="#" id="open-discounts" class="discount-link">
+                  View Discounts &amp; Free Admission
+                </a>
+              </p>
+
+              <!-- Inline add-ons trigger under time slot -->
+              <p class="addons-inline">
+                <a href="#" class="addons-link" data-open="addons">
+                  Choose optional add-ons (Children’s Museum, Discovery Challenge, audio guide…)
+                </a>
+              </p>
+            </div>
+
+            <!-- Right: ticket categories (tabbed) -->
+<div>
+  <!-- GALLERIES TICKETS -->
+  <div id="ticket-categories-galleries" class="ticket-categories">
+    <div class="field-label" style="margin-bottom: 6px;">
+      Ticket Categories
+    </div>
+
+    <!-- Tabs -->
+    <div class="category-tabs">
+      <button
+        type="button"
+        class="category-tab is-active"
+        data-group-tab="Egyptians"
+      >
+        <span class="label">Egyptians</span>
+      </button>
+
+      <button
+        type="button"
+        class="category-tab"
+        data-group-tab="Arabs"
+      >
+        <span class="label">Arabs or Other Nationalities</span>
+      </button>
+
+      <button
+        type="button"
+        class="category-tab"
+        data-group-tab="Expatriates"
+      >
+        <span class="label">Expatriates</span>
+      </button>
+    </div>
+
+    <div class="category-panels">
+      <!-- Egyptians -->
+      <div class="category-panel is-active" data-group-panel="Egyptians">
+        <div class="category-panel-header">Egyptians</div>
+
+        <!-- Adult + tooltip -->
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">Adult</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                Above 25 years old – Valid ID is required on site
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Egyptians"
+            data-type="Adult"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Egyptians"
+            data-type="Adult"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+
+        <!-- Child -->
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">Child</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                6 to 12 years old
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Egyptians"
+            data-type="Child"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Egyptians"
+            data-type="Child"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+
+        <!-- Student -->
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">Student</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                13 to 25 years old – Valid student ID is required on site
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Egyptians"
+            data-type="Student"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Egyptians"
+            data-type="Student"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+
+        <!-- Senior -->
+        <div class="ticket-row">
+<div class="ticket-label">
+            <span class="ticket-label-main">Senior</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                Above 60 years old - Valid ID is required on site
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Egyptians"
+            data-type="Senior"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Egyptians"
+            data-type="Senior"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arabs / Other Nationalities -->
+      <div class="category-panel" data-group-panel="Arabs">
+        <div class="category-panel-header">Arabs or Other Nationalities</div>
+
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">Adult</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                Above 25 years old – Valid ID is required on site
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Arabs"
+            data-type="Adult"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Arabs"
+            data-type="Adult"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">Child</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                6 to 12 years old
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Arabs"
+            data-type="Child"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Arabs"
+            data-type="Child"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">Student</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                13 to 25 years old – Valid student ID is required on site
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Arabs"
+            data-type="Student"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Arabs"
+            data-type="Student"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expatriates -->
+      <div class="category-panel" data-group-panel="Expatriates">
+        <div class="category-panel-header">Expatriates</div>
+
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">Adult</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                Above 25 years old – Valid ID is required on site
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Expatriates"
+            data-type="Adult"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Expatriates"
+            data-type="Adult"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">Child</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                6 to 12 years old
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Expatriates"
+            data-type="Child"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Expatriates"
+            data-type="Child"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">Student</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                13 to 25 years old – Valid student ID is required on site
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Expatriates"
+            data-type="Student"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Expatriates"
+            data-type="Student"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional add-ons summary box (same step, only a teaser) 
+  <section class="addons-summary-panel">
+    <div class="addons-summary-body">
+      <h4>Optional add-ons</h4>
+      <p class="addons-tagline">
+        Enhance your visit with Children’s Museum, Discovery Challenge, audio guide,
+        and mixed reality experiences.
+      </p>
+    </div>
+
+    <div class="addons-summary-action">
+      <button
+        type="button"
+        class="btn-secondary"
+        data-open="addons"
+      >
+        Choose add-ons (optional)
+      </button>
+    </div>
+  </section>-->
+</div>
+
+          </div>
+
+          <div class="actions-row" style="margin-top:16px;">
+            <span class="muted">
+              At least one ticket is required. You’ll enter contact details in the next step.
+            </span>
+            <button class="primary-btn" id="go-step-3" disabled>
+              Next →
+            </button>
+          </div>
+        </section>
+
+<section id="step-addons" class="panel">
+  <div class="panel-header">
+    <h3>Optional add-ons</h3>
+    <button class="ghost-btn" type="button" id="back-to-1">
+      ← Edit date &amp; tickets
+    </button>
+  </div>
+
+  <p class="panel-subtitle">
+    Enhance your visit with Children’s Museum, Discovery Challenge, audio guide,
+    and mixed reality experiences.
+  </p>
+
+  <div class="addons-modal-body">
+    <!-- Children’s Museum -->
+    <article class="addon-card">
+      <div class="addon-card-layout">
+        <figure class="addon-image">
+          <img src="cm.JPG" alt="Children’s Museum" loading="lazy" />
+        </figure>
+
+        <div class="addon-content">
+          <h3>Children’s Museum</h3>
+          <p class="addon-text">
+            Add Children’s Museum tickets to your visit. One ticket per person.
+          </p>
+
+          <!-- See more information -->
+          <button
+            type="button"
+            class="addon-more-btn"
+            data-details-target="addon-details-children"
+          >
+            See more information
+          </button>
+          <ul class="addon-details hidden" id="addon-details-children">
+            <li>Hands-on activities designed for children aged 4–12.</li>
+            <li>Interactive zones introducing ancient Egypt through play.</li>
+            <li>Average visit time: 60–90 minutes.</li>
+            <li>Children must be accompanied by an adult at all times.</li>
+          </ul>
+
+          <div class="addon-main-row">
+            <div class="addon-price">
+              <span class="label">Price</span>
+              <strong>EGP 150</strong>
+              <span class="per">per person</span>
+            </div>
+            <div class="counter addon-counter" data-addon="GEM Children Museum">
+              <button type="button" class="btn-dec">−</button>
+              <span class="count">0</span>
+              <button type="button" class="btn-inc">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- GEM Discovery Challenge -->
+    <article class="addon-card" data-addon="gem-discovery">
+      <div class="addon-card-layout">
+        <figure class="addon-image">
+          <img src="childaddon.jpg" alt="GEM Discovery Challenge" loading="lazy" />
+        </figure>
+
+        <div class="addon-content">
+          <h3>GEM Discovery Challenge</h3>
+          <p class="addon-text">
+            Interactive treasure hunt suitable for families and friends.
+          </p>
+
+          <!-- See more information -->
+          <button
+            type="button"
+            class="addon-more-btn"
+            data-details-target="addon-details-discovery"
+          >
+            See more information
+          </button>
+          <ul class="addon-details hidden" id="addon-details-discovery">
+            <li>Self-guided challenge using clues across selected galleries.</li>
+            <li>Ideal for families, school groups, and small teams.</li>
+            <li>Includes printed or digital challenge booklet.</li>
+            <li>Average duration: 60 minutes.</li>
+          </ul>
+
+          <div class="addon-main-row">
+            <div class="addon-price">
+              <span class="label">Price</span>
+              <strong>EGP 125</strong>
+              <span class="per">per person</span>
+            </div>
+            <div class="counter addon-counter" data-addon="gem-discovery">
+              <button type="button" class="btn-dec">−</button>
+              <span class="count">0</span>
+              <button type="button" class="btn-inc">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Audio guide -->
+    <article class="addon-card" data-addon="audio-guide">
+      <div class="addon-card-layout">
+        <figure class="addon-image">
+          <img src="ag.webp" alt="Audio guide" loading="lazy" />
+        </figure>
+
+        <div class="addon-content">
+          <h3>GEM Audio Guide</h3>
+          <p class="addon-text">
+            Explore the galleries with a multilingual audio guide.
+          </p>
+
+          <!-- See more information -->
+          <button
+            type="button"
+            class="addon-more-btn"
+            data-details-target="addon-details-audio"
+          >
+            See more information
+          </button>
+          <ul class="addon-details hidden" id="addon-details-audio">
+            <li>Available in multiple languages (subject to availability).</li>
+            <li>Includes highlights from the Main and Tutankhamun Galleries.</li>
+            <li>Rental period covers the duration of your visit.</li>
+            <li>Headphones provided or use your own (3.5mm jack required).</li>
+          </ul>
+
+          <div class="addon-main-row">
+            <div class="addon-price">
+              <span class="label">Price</span>
+              <strong>EGP 200</strong>
+              <span class="per">per device</span>
+            </div>
+            <div class="counter addon-counter" data-addon="audio-guide">
+              <button type="button" class="btn-dec">−</button>
+              <span class="count">0</span>
+              <button type="button" class="btn-inc">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Mixed reality -->
+    <article class="addon-card" data-addon="mixed-reality">
+      <div class="addon-card-layout">
+        <figure class="addon-image">
+          <img src="MR.jpeg" alt="Mixed reality experience" loading="lazy" />
+        </figure>
+
+        <div class="addon-content">
+          <h3>Mixed Reality Experience</h3>
+          <p class="addon-text">
+            Immerse yourself in a mixed reality journey through ancient Egypt.
+          </p>
+
+          <!-- See more information -->
+          <button
+            type="button"
+            class="addon-more-btn"
+            data-details-target="addon-details-mr"
+          >
+            See more information
+          </button>
+          <ul class="addon-details hidden" id="addon-details-mr">
+            <li>Guided mixed reality sequence in a dedicated experience space.</li>
+            <li>Combines real objects with digital storytelling and effects.</li>
+            <li>Recommended for ages 8+; may not be suitable for guests
+                sensitive to flashing lights.</li>
+            <li>Approximate duration: 20–30 minutes.</li>
+          </ul>
+
+          <div class="addon-main-row">
+            <div class="addon-price">
+              <span class="label">Price</span>
+              <strong>EGP 200</strong>
+              <span class="per">per person</span>
+            </div>
+            <div class="counter addon-counter" data-addon="mixed-reality">
+              <button type="button" class="btn-dec">−</button>
+              <span class="count">0</span>
+              <button type="button" class="btn-inc">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <footer class="step-footer">
+    <button
+      type="button"
+      class="secondary-btn"
+      data-addons-action="skip"
+    >
+      Skip for now
+    </button>
+
+    <button
+      type="button"
+      class="primary-btn"
+      id="addons-next"
+      data-addons-action="confirm"
+      disabled
+    >
+      Add to booking
+    </button>
+  </footer>
+</section>
+
+
+
+        <!-- STEP 2 = CONTACT -->
+        <section class="panel hidden" id="step-3">
+          <div class="panel-header">
+            <h3>Contact details</h3>
+            <button class="ghost-btn" type="button" id="back-to-2">← Edit Add-Ons</button>
+          </div>
+          <p class="panel-subtitle">
+            We’ll send your booking confirmation and tickets to these details.
+          </p>
+
+          <div class="fields-grid">
+            <div class="field-group">
+              <div class="field-label">Full name</div>
+              <input type="text" id="contact-name" placeholder="Name as it appears on ID" />
+              <div class="error-text hidden" data-error="name">Please enter your name.</div>
+            </div>
+            <div class="field-group">
+              <div class="field-label">Email address</div>
+              <input type="email" id="contact-email" placeholder="you@example.com" />
+              <div class="error-text hidden" data-error="email">Please enter a valid email.</div>
+            </div>
+<div class="field-group">
+  <div class="field-label">Mobile number</div>
+
+  <div class="phone-field">
+    <!-- Country code -->
+    <div class="phone-country">
+      <select id="phone-country" name="phone-country">
+        <option value="EG" selected>EG +20 Egypt</option>
+        <option value="US">US +1 United States</option>
+        <option value="GB">GB +44 United Kingdom</option>
+        <!-- …rest of your countries… -->
+      </select>
+    </div>
+
+    <!-- Local number -->
+    <input
+      type="tel"
+      id="contact-phone"
+      class="phone-input"
+      placeholder="123 456 789"
+    />
+  </div>
+
+  <div class="error-text hidden" data-error="phone">
+    Please enter your phone number.
+  </div>
+</div>
+
+
+            
+            <div class="field-group">
+  <label class="field-label" for="select_country">
+    Nationality
+  </label>
+<select required name="select_country"  id="select_country">
+  <option value="" disabled selected hidden>Select country…</option>
+                                            <option value="Egypt" >Egypt (‫مصر‬‎)</option><option value="Afghanistan" >Afghanistan (‫افغانستان‬‎)</option><option value="Albania" >Albania (Shqipëri)</option><option value="Algeria" >Algeria (‫الجزائر‬‎)</option><option value="American Samoa" >American Samoa</option><option value="Andorra" >Andorra</option><option value="Angola" >Angola</option><option value="Anguilla" >Anguilla</option><option value="Antigua and Barbuda" >Antigua and Barbuda</option><option value="Argentina" >Argentina</option><option value="Armenia" >Armenia (Հայաստան)</option><option value="Aruba" >Aruba</option><option value="Ascension Island" >Ascension Island</option><option value="Australia" >Australia</option><option value="Austria" >Austria (Österreich)</option><option value="Azerbaijan" >Azerbaijan (Azərbaycan)</option><option value="Bahamas" >Bahamas</option><option value="Bahrain" >Bahrain (‫البحرين‬‎)</option><option value="Bangladesh" >Bangladesh (বাংলাদেশ)</option><option value="Barbados" >Barbados</option><option value="Belarus" >Belarus (Беларусь)</option><option value="Belgium" >Belgium (België)</option><option value="Belize" >Belize</option><option value="Benin" >Benin (Bénin)</option><option value="Bermuda" >Bermuda</option><option value="Bhutan" >Bhutan (འབྲུག)</option><option value="Bolivia" >Bolivia</option><option value="Bosnia and Herzegovina" >Bosnia and Herzegovina (Босна и Херцеговина)</option><option value="Botswana" >Botswana</option><option value="Brazil" >Brazil (Brasil)</option><option value="British Indian Ocean Territory" >British Indian Ocean Territory</option><option value="British Virgin Islands" >British Virgin Islands</option><option value="Brunei" >Brunei</option><option value="Bulgaria" >Bulgaria (България)</option><option value="Burkina Faso" >Burkina Faso</option><option value="Burundi" >Burundi (Uburundi)</option><option value="Cambodia" >Cambodia (កម្ពុជា)</option><option value="Cameroon" >Cameroon (Cameroun)</option><option value="Canada" >Canada</option><option value="Cape Verde" >Cape Verde (Kabu Verdi)</option><option value="Caribbean Netherlands" >Caribbean Netherlands</option><option value="Cayman Islands" >Cayman Islands</option><option value="Central African Republic" >Central African Republic (République centrafricaine)</option><option value="Chad" >Chad (Tchad)</option><option value="Chile" >Chile</option><option value="China" >China (中国)</option><option value="Czech Republic" >Czech Republic (Česká republika)</option><option value="Denmark" >Denmark (Danmark)</option><option value="Djibouti" >Djibouti</option><option value="Dominica" >Dominica</option><option value="Dominican Republic" >Dominican Republic (República Dominicana)</option><option value="Ecuador" >Ecuador</option><option value="El Salvador" >El Salvador</option><option value="Equatorial Guinea" >Equatorial Guinea (Guinea Ecuatorial)</option><option value="Eritrea" >Eritrea</option><option value="Estonia" >Estonia (Eesti)</option><option value="Eswatini" >Eswatini</option><option value="Ethiopia" >Ethiopia</option><option value="Falkland Islands" >Falkland Islands (Islas Malvinas)</option><option value="Faroe Islands" >Faroe Islands (Føroyar)</option><option value="Fiji" >Fiji</option><option value="Finland" >Finland (Suomi)</option><option value="France" >France</option><option value="French Guiana" >French Guiana (Guyane française)</option><option value="French Polynesia" >French Polynesia (Polynésie française)</option><option value="Gabon" >Gabon</option><option value="Gambia" >Gambia</option><option value="Georgia" >Georgia (საქართველო)</option><option value="Germany" >Germany (Deutschland)</option><option value="Ghana" >Ghana (Gaana)</option><option value="Gibraltar" >Gibraltar</option><option value="Greece" >Greece (Ελλάδα)</option><option value="Greenland" >Greenland (Kalaallit Nunaat)</option><option value="Grenada" >Grenada</option><option value="Guadeloupe" >Guadeloupe</option><option value="Guam" >Guam</option><option value="Guatemala" >Guatemala</option><option value="Guernsey" >Guernsey</option><option value="Guinea" >Guinea (Guinée)</option><option value="Guinea-Bissau" >Guinea-Bissau (Guiné Bissau)</option><option value="Guyana" >Guyana</option><option value="Haiti" >Haiti</option><option value="Honduras" >Honduras</option><option value="Hungary" >Hungary (Magyarország)</option><option value="Iceland" >Iceland (Ísland)</option><option value="India" >India (भारत)</option><option value="Indonesia" >Indonesia</option><option value="Iran" >Iran (‫ایران‬‎)</option><option value="Iraq" >Iraq (‫العراق‬‎)</option><option value="Ireland" >Ireland</option><option value="Isle of Man" >Isle of Man</option><option value="Israel" >Israel (‫ישראל‬‎)</option><option value="Italy" >Italy (Italia)</option><option value="Jamaica" >Jamaica</option><option value="Japan" >Japan (日本)</option><option value="Jersey" >Jersey</option><option value="Jordan" >Jordan (‫الأردن‬‎)</option><option value="Kazakhstan" >Kazakhstan (Казахстан)</option><option value="Kenya" >Kenya</option><option value="Kiribati" >Kiribati</option><option value="Kosovo" >Kosovo</option><option value="Kuwait" >Kuwait (‫الكويت‬‎)</option><option value="Kyrgyzstan" >Kyrgyzstan (Кыргызстан)</option><option value="Laos" >Laos (ລາວ)</option><option value="Latvia" >Latvia (Latvija)</option><option value="Lebanon" >Lebanon (‫لبنان‬‎)</option><option value="Lesotho" >Lesotho</option><option value="Liberia" >Liberia</option><option value="Libya" >Libya (‫ليبيا‬‎)</option><option value="Liechtenstein" >Liechtenstein</option><option value="Lithuania" >Lithuania (Lietuva)</option><option value="Luxembourg" >Luxembourg</option><option value="North Macedonia" >North Macedonia (Македонија)</option><option value="Madagascar" >Madagascar (Madagasikara)</option><option value="Malawi" >Malawi</option><option value="Malaysia" >Malaysia</option><option value="Maldives" >Maldives</option><option value="Mali" >Mali</option><option value="Malta" >Malta</option><option value="Marshall Islands" >Marshall Islands</option><option value="Martinique" >Martinique</option><option value="Mauritania" >Mauritania (‫موريتانيا‬‎)</option><option value="Mauritius" >Mauritius (Moris)</option><option value="Mayotte" >Mayotte</option><option value="Mexico" >Mexico (México)</option><option value="Micronesia" >Micronesia</option><option value="Moldova" >Moldova (Republica Moldova)</option><option value="Monaco" >Monaco</option><option value="Mongolia" >Mongolia (Монгол)</option><option value="Montenegro" >Montenegro (Crna Gora)</option><option value="Montserrat" >Montserrat</option><option value="Morocco" >Morocco (‫المغرب‬‎)</option><option value="Mozambique" >Mozambique (Moçambique)</option><option value="Myanmar" >Myanmar (Burma) (မြန်မာ)</option><option value="Namibia" >Namibia (Namibië)</option><option value="Nauru" >Nauru</option><option value="Nepal" >Nepal (नेपाल)</option><option value="Netherlands" >Netherlands (Nederland)</option><option value="New Caledonia" >New Caledonia (Nouvelle-Calédonie)</option><option value="New Zealand" >New Zealand</option><option value="Nicaragua" >Nicaragua</option><option value="Niger" >Niger (Nijar)</option><option value="Nigeria" >Nigeria</option><option value="Niue" >Niue</option><option value="Norfolk Island" >Norfolk Island</option><option value="North Korea" >North Korea (조선 민주주의 인민 공화국)</option><option value="Northern Mariana Islands" >Northern Mariana Islands</option><option value="Norway" >Norway (Norge)</option><option value="Oman" >Oman (‫عُمان‬‎)</option><option value="Pakistan" >Pakistan (‫پاکستان‬‎)</option><option value="Palau" >Palau</option><option value="Palestine" >Palestine (‫فلسطين‬‎)</option><option value="Panama" >Panama (Panamá)</option><option value="Papua New Guinea" >Papua New Guinea</option><option value="Paraguay" >Paraguay</option><option value="Peru" >Peru (Perú)</option><option value="Philippines" >Philippines</option><option value="Poland" >Poland (Polska)</option><option value="Portugal" >Portugal</option><option value="Puerto Rico" >Puerto Rico</option><option value="Qatar" >Qatar (‫قطر‬‎)</option><option value="Réunion" >Réunion (La Réunion)</option><option value="Romania" >Romania (România)</option><option value="Russia" >Russia (Россия)</option><option value="Rwanda" >Rwanda</option><option value="Saint Barthélemy" >Saint Barthélemy</option><option value="Saint Helena" >Saint Helena</option><option value="Saint Kitts and Nevis" >Saint Kitts and Nevis</option><option value="Saint Lucia" >Saint Lucia</option><option value="Saint Martin" >Saint Martin (Saint-Martin (partie française))</option><option value="Saint Pierre and Miquelon" >Saint Pierre and Miquelon (Saint-Pierre-et-Miquelon)</option><option value="Saint Vincent and the Grenadines" >Saint Vincent and the Grenadines</option><option value="Samoa" >Samoa</option><option value="San Marino" >San Marino</option><option value="São Tomé and Príncipe" >São Tomé and Príncipe (São Tomé e Príncipe)</option><option value="Saudi Arabia" >Saudi Arabia (‫المملكة العربية السعودية‬‎)</option><option value="Senegal" >Senegal (Sénégal)</option><option value="Serbia" >Serbia (Србија)</option><option value="Seychelles" >Seychelles</option><option value="Sierra Leone" >Sierra Leone</option><option value="Singapore" >Singapore</option><option value="Sint Maarten" >Sint Maarten</option><option value="Slovakia" >Slovakia (Slovensko)</option><option value="Slovenia" >Slovenia (Slovenija)</option><option value="Solomon Islands" >Solomon Islands</option><option value="Somalia" >Somalia (Soomaaliya)</option><option value="South Africa" >South Africa</option><option value="South Korea" >South Korea (대한민국)</option><option value="South Sudan" >South Sudan (‫جنوب السودان‬‎)</option><option value="Spain" >Spain (España)</option><option value="Sri Lanka" >Sri Lanka (ශ්‍රී ලංකාව)</option><option value="Sudan" >Sudan (‫السودان‬‎)</option><option value="Suriname" >Suriname</option><option value="Svalbard and Jan Mayen" >Svalbard and Jan Mayen</option><option value="Sweden" >Sweden (Sverige)</option><option value="Switzerland" >Switzerland (Schweiz)</option><option value="Syria" >Syria (‫سوريا‬‎)</option><option value="Tajikistan" >Tajikistan</option><option value="Tanzania" >Tanzania</option><option value="Thailand" >Thailand (ไทย)</option><option value="Timor-Leste" >Timor-Leste</option><option value="Togo" >Togo</option><option value="Tokelau" >Tokelau</option><option value="Tonga" >Tonga</option><option value="Trinidad and Tobago" >Trinidad and Tobago</option><option value="Tunisia" >Tunisia (‫تونس‬‎)</option><option value="Turkey" >Turkey (Türkiye)</option><option value="Turkmenistan" >Turkmenistan</option><option value="Turks and Caicos Islands" >Turks and Caicos Islands</option><option value="Tuvalu" >Tuvalu</option><option value="U.S. Virgin Islands" >U.S. Virgin Islands</option><option value="Uganda" >Uganda</option><option value="Ukraine" >Ukraine (Україна)</option><option value="United Arab Emirates" >United Arab Emirates (‫الإمارات العربية المتحدة‬‎)</option><option value="United Kingdom" >United Kingdom</option><option value="United States" >United States</option><option value="Uruguay" >Uruguay</option><option value="Uzbekistan (Oʻzbekiston)" >Uzbekistan (Oʻzbekiston)</option><option value="Vanuatu" >Vanuatu</option><option value="Vatican City (Città del Vaticano)" >Vatican City (Città del Vaticano)</option><option value="Venezuela" >Venezuela</option><option value="Vietnam (Việt Nam)" >Vietnam (Việt Nam)</option><option value="Wallis and Futuna (Wallis-et-Futuna)" >Wallis and Futuna (Wallis-et-Futuna)</option><option value="Western Sahara (‫الصحراء الغربية‬‎)" >Western Sahara (‫الصحراء الغربية‬‎)</option><option value="Yemen (‫اليمن‬‎)" >Yemen (‫اليمن‬‎)</option><option value="Zambia" >Zambia</option><option value="Zimbabwe" >Zimbabwe</option><option value="Åland Islands" >Åland Islands</option><option value="Other" >Other</option>                                        </select>
+              <div class="error-text hidden" data-error="phone">Please select a nationality</div>
+
+                                        <p id="select_country_error" class="text-danger mb-3 d-none error-message"></p>            </div>
+          </div>
+
+          <div class="actions-row" style="margin-top:18px;">
+            <span class="muted">
+              You’ll review your booking on the next screen before paying.
+            </span>
+            <button class="primary-btn" id="open-terms">
+              Next →
+            </button>
+          </div>
+        </section>
+
+        <!-- STEP 3 = REVIEW & PAY -->
+<section class="panel hidden" id="step-4">
+  <div class="panel-header">
+    <h3>Review &amp; payment</h3>
+    <button class="ghost-btn" type="button" id="back-to-3">← Edit contact details</button>
+  </div>
+  <p class="panel-subtitle">
+    Please confirm that all details are correct before proceeding to payment.
+  </p>
+
+  <ul class="summary-list" id="summary-basic"></ul>
+
+  <!-- 🔹 Promo code block (NEW) -->
+  <div class="promo-box">
+    <label for="promo-code">Promo code (optional)</label>
+    <div class="promo-input-row">
+      <input
+        type="text"
+        id="promo-code"
+        placeholder="Enter code"
+        autocomplete="off"
+      />
+      <button type="button" class="secondary-btn" id="promo-apply">
+        Apply
+      </button>
+    </div>
+    <p class="promo-message" id="promo-message"></p>
+  </div>
+  <!-- 🔹 End promo block -->
+
+  <div class="summary-table" id="summary-tickets"></div>
+
+
+  <div class="actions-row" style="margin-top:16px;">
+
+    <button class="primary-btn" type="button" id="pay-btn">
+      Proceed to payment (prototype)
+    </button>
+  </div>
+</section>
+
+      </div>
+
+      <!-- RIGHT CART -->
+      <aside>
+        <div class="cart-panel">
+          <div class="cart-header">
+            <h3>Your selection</h3>
+            <span class="badge" id="cart-badge">No tickets yet</span>
+          </div>
+          <div class="cart-main">
+
+            <div class="cart-row">
+              <span>Date</span>
+              <span id="cart-date">—</span>
+            </div>
+<div class="cart-row">
+  <span class="cart-label" id="cart-time-label">Entry Time</span>
+  <span class="cart-value" id="cart-time">—</span>
+</div>
+
+            <div class="cart-row">
+              <span>Tickets</span>
+              <span id="cart-count">0</span>
+            </div>
+<div class="cart-row cart-row-addon hidden" id="cart-addon-row">
+  <span id="cart-addon-summary" class="cart-addon-summary"></span>
+</div>
+
+            <div class="cart-row">
+              <span>Total</span>
+              <strong id="cart-total">EGP 0</strong>
+            </div>
+          </div>
+          <div class="cart-footer">
+            <div class="cart-note">
+              This is a prototype interface. Prices and details shown here are illustrative only.
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- MOBILE MINI CART -->
+    <div id="mobile-cart-bar" class="mobile-cart-bar">
+      <button type="button" id="mobile-cart-btn">
+        <div class="mobile-cart-text">
+          <div class="mobile-cart-title">Your selection</div>
+          <div class="mobile-cart-summary">
+            <span id="mobile-cart-count">0</span> ticket(s) ·
+            <span id="mobile-cart-total">EGP 0</span>
+
+          </div>
+        </div>
+        <div class="mobile-cart-cta">
+          View
+        </div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ADD-ONS MODAL (true popup, same pattern as Terms) -->
+<!-- OTP modal (simulation only) -->
+<div class="modal-backdrop hidden" id="otp-modal">
+  <div class="modal otp-modal">
+    <header class="modal-header">
+      <h3>Enter verification code</h3>
+      <button type="button" class="modal-close" id="otp-close">×</button>
+    </header>
+
+    <div class="modal-body">
+      <p>
+        We’ve sent a 4-digit verification code to your mail.
+        Please enter it below to continue.
+      </p>
+
+      <div class="otp-inputs">
+        <input type="text" class="otp-digit" inputmode="numeric" maxlength="1" />
+        <input type="text" class="otp-digit" inputmode="numeric" maxlength="1" />
+        <input type="text" class="otp-digit" inputmode="numeric" maxlength="1" />
+        <input type="text" class="otp-digit" inputmode="numeric" maxlength="1" />
+      </div>
+
+      <p class="otp-error hidden" id="otp-error">
+        The code you entered is incorrect. Please try again.
+      </p>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="button" class="secondary-btn" id="otp-cancel">Cancel</button>
+      <button type="button" class="primary-btn" id="otp-confirm">Confirm</button>
+    </footer>
+  </div>
+</div>
+
+
+<!-- ADD-ONS MODAL -->
+<div class="modal-backdrop hidden" id="addons-modal">
+  <div class="modal">
+    <header class="modal-header">
+      <h3>Optional add-ons</h3>
+      <button type="button" class="modal-close" data-close="addons">×</button>
+    </header>
+
+    <div class="modal-body addons-modal-body">
+      <!-- Children’s Museum -->
+      <article class="addon-card">
+        <div class="addon-card-layout">
+          <figure class="addon-image">
+            <img
+              src="cm.JPG"
+              alt="Children’s Museum"
+              loading="lazy"
+            />
+          </figure>
+
+          <div class="addon-content">
+            <h3>Children’s Museum</h3>
+            <p class="addon-text">
+              Add Children’s Museum tickets to your visit. One ticket per person.
+            </p>
+            
+
+            <div class="addon-main-row">
+              <div class="addon-price">
+                <span class="label">Price</span>
+                <strong>EGP 150</strong>
+                <span class="per">per person</span>
+              </div>
+              <div class="counter addon-counter" data-addon="gem-discovery">
+                <button type="button" class="btn-dec">−</button>
+                <span class="count">0</span>
+                <button type="button" class="btn-inc">+</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </article>
+
+      <!-- GEM Discovery Challenge -->
+      <article class="addon-card" data-addon="gem-discovery">
+        <div class="addon-card-layout">
+          <figure class="addon-image">
+            <img
+              src="childaddon.jpg"
+              alt="GEM Discovery Challenge"
+              loading="lazy"
+            />
+          </figure>
+
+          <div class="addon-content">
+            <h3>GEM Discovery Challenge</h3>
+            <p class="addon-text">
+              Interactive treasure hunt suitable for families and friends.
+            </p>
+
+            <div class="addon-main-row">
+              <div class="addon-price">
+                <span class="label">Price</span>
+                <strong>EGP 125</strong>
+                <span class="per">per person</span>
+              </div>
+              <div class="counter addon-counter" data-addon="gem-discovery">
+                <button type="button" class="btn-dec">−</button>
+                <span class="count">0</span>
+                <button type="button" class="btn-inc">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Audio guide -->
+      <article class="addon-card" data-addon="audio-guide">
+        <div class="addon-card-layout">
+          <figure class="addon-image">
+            <img
+              src="audio-guide.jpg"
+              alt="Audio guide"
+              loading="lazy"
+            />
+          </figure>
+
+          <div class="addon-content">
+            <h3>Audio guide</h3>
+            <p class="addon-text">
+              Explore the galleries with a multilingual audio guide.
+            </p>
+
+            <div class="addon-main-row">
+              <div class="addon-price">
+                <span class="label">Price</span>
+                <strong>EGP 200</strong>
+                <span class="per">per device</span>
+              </div>
+              <div class="counter addon-counter" data-addon="audio-guide">
+                <button type="button" class="btn-dec">−</button>
+                <span class="count">0</span>
+                <button type="button" class="btn-inc">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Mixed reality -->
+      <article class="addon-card" data-addon="mixed-reality">
+        <div class="addon-card-layout">
+          <figure class="addon-image">
+            <img
+              src="MR.jpeg"
+              alt="Mixed reality experience"
+              loading="lazy"
+            />
+          </figure>
+
+          <div class="addon-content">
+            <h3>Mixed reality experience</h3>
+            <p class="addon-text">
+              Immerse yourself in a mixed reality journey through ancient Egypt.
+            </p>
+
+            <div class="addon-main-row">
+              <div class="addon-price">
+                <span class="label">Price</span>
+                <strong>EGP 200</strong>
+                <span class="per">per person</span>
+              </div>
+              <div class="counter addon-counter" data-addon="mixed-reality">
+                <button type="button" class="btn-dec">−</button>
+                <span class="count">0</span>
+                <button type="button" class="btn-inc">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="button" class="secondary-btn" data-addons-action="skip">
+        Skip for now
+      </button>
+      <button type="button" class="primary-btn" data-addons-action="confirm">
+        Add to booking
+      </button>
+    </footer>
+  </div>
+</div>
+
+
+
+<!-- ADD-ONS MODAL -->
+
+
+  <!-- DISCOUNTS MODAL -->
+  <div class="modal-backdrop hidden" id="discounts-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Discounts &amp; Free Admission</h3>
+      <button class="modal-close" type="button" data-close="discounts">×</button>
+    </div>
+
+    <div class="modal-body">
+      <p>
+        A valid form of identification is required to verify eligibility for free admission
+        or discounted tickets.
+      </p>
+
+      <h4>Free admission (excluding Fridays and public holidays)</h4>
+      <ul>
+        <li>Egyptian students at public universities in the faculty of Antiquities</li>
+        <li>Egyptian faculty members and support staff at public universities in the faculty of Antiquities</li>
+      </ul>
+
+      <h4>Free admission (all week)</h4>
+      <ul>
+        <li>Children under the age of six</li>
+        <li>Visitors with disabilities</li>
+        <li>Egyptian tour guides accompanying a group</li>
+        <li>Members of the International Council of Museums (ICOM)</li>
+      </ul>
+
+      <h4>Free admission (excluding weekends and public holidays)</h4>
+      <ul>
+        <li>Egyptian tour guides</li>
+        <li>Egyptian military veterans</li>
+        <li>Family members of Egyptian martyrs</li>
+        <li>Employees of the Ministry of Tourism and Antiquities</li>
+        <li>
+          Authorised journalists for the Ministry of Tourism and Antiquities
+          (prior coordination required)
+        </li>
+        <li>
+          Egyptian students at public universities in the faculties of History, Civilisation,
+          Heritage, Museums, Tourism, Tourism Guidance, Architecture, Fine Arts, Applied Arts,
+          and Arts Education
+        </li>
+        <li>
+          Egyptian faculty members and support staff at public universities in the faculties of
+          History, Civilisation, Heritage, Museums, Tourism, Tourism Guidance, Architecture,
+          Fine Arts, Applied Arts, and Arts Education
+        </li>
+        <li>
+          Egyptian students at public primary and preparatory schools, upon submission of a formal
+          letter from the school at least one month prior to the visit
+        </li>
+        <li>
+          Orphans, upon submission of a formal letter from an orphanage association or organisation
+          at least one month prior to the visit
+        </li>
+      </ul>
+
+      <h4>Egyptian-rate admission</h4>
+      <p>
+        Foreign spouses of Egyptians and their children are eligible to buy the Egyptian admission
+        pass. Proof of relationship is required (ID/birth certificate for children and a marriage
+        certificate for spouses).
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button class="secondary-btn" type="button" data-close="discounts">Close</button>
+    </div>
+  </div>
+</div>
+
+
+  <!-- TERMS MODAL -->
+  <div class="modal-backdrop hidden" id="terms-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Terms &amp; Conditions (Prototype)</h3>
+        <button class="modal-close" type="button" data-close="terms">×</button>
+      </div>
+      <div class="modal-body" id="terms-body">
+        <p class="scroll-hint" id="terms-hint">
+          Please scroll to the end of this text to enable the “Accept” button.
+        </p>
+<p><strong>The following rules and regulations are established to ensure the safety of visitors, staff, and artefacts, and to maintain a respectful and enjoyable environment for all at the Grand Egyptian Museum (GEM).</strong></p>
+
+<p>By entering the premises, visitors agree to abide by these regulations and to follow any additional instructions issued by GEM staff.</p>
+
+<p><strong>General Policies</strong></p>
+<p>Outside food and beverages are not permitted on the premises.</p>
+<p>The consumption of alcohol or drugs is strictly prohibited within the GEM.</p>
+<p>Smoking is prohibited throughout the museum, except in specifically designated outdoor areas.</p>
+<p>Visitors must behave respectfully at all times. Disorderly, aggressive, or offensive behaviour—including loud, disruptive, or abusive language—will not be tolerated and may result in removal from the premises without refund.</p>
+<p>Appropriate attire is required at all times.</p>
+<p>Visitors are not permitted to remove their shoes, lie down on benches or the floor, or engage in conduct inconsistent with the dignity of the museum environment.</p>
+<p>Visitors must not litter, damage, or deface any part of the GEM’s facilities, furniture, or landscaping.</p>
+<p>Visitors must follow all posted signs and the instructions of GEM staff.</p>
+<p>Visitors consent to being photographed or filmed during their visit. The GEM reserves the right to use such images for marketing and promotional purposes.</p>
+
+<p><strong>Prohibited Items</strong></p>
+<p>Large bags, backpacks, luggage, or parcels exceeding 40 × 40 cm. These must be stored in designated areas before entering.</p>
+<p>Weapons, sharp objects, or hazardous materials (e.g., knives, scissors, firearms, screwdrivers).</p>
+<p>Musical instruments.</p>
+<p>Animals or pets.</p>
+<p>Advertising banners, placards, or signs, unless expressly approved by GEM management.</p>
+<p>Folding seats or personal seating, unless permission has been granted by GEM security.</p>
+<p>Umbrellas and similar items, which must be left in designated areas.</p>
+<p>All bags and belongings may be subject to inspection at any time by GEM security.</p>
+
+<p><strong>Inside the Galleries</strong></p>
+<p>Do not touch any artefacts, displays, or showcases.</p>
+<p>Food and drinks (except small water bottles) are not permitted.</p>
+<p>Flashlights, laser pointers, and flash photography are prohibited.</p>
+<p>Live streaming and the use of audio devices are not permitted.</p>
+<p>Please speak quietly and avoid obstructing pathways or other visitors’ views.</p>
+
+<p><strong>Families with Children</strong></p>
+<p>Children must be accompanied by an adult at all times while inside the GEM.</p>
+<p>Running, rough play, or any activity that may cause disturbance, injury, or damage to exhibits is strictly prohibited.</p>
+
+<p><strong>Photography &amp; Filming</strong></p>
+<p>Personal, non-commercial photography and videography are permitted within the GEM.</p>
+<p>The following equipment is prohibited: tripods, monopods, selfie sticks, drones, external lighting, and live-streaming devices.</p>
+<p>Flash photography is not permitted.</p>
+<p>Please refrain from photographing other visitors or GEM staff without their consent.</p>
+<p>Commercial photography or videography (including for television, cinema, advertising, or documentary purposes) requires prior written approval from the GEM and payment of applicable fees.</p>
+<p>Only mobile photography is permitted inside areas where cameras are restricted.</p>
+
+<p><strong>Sketching Regulations</strong></p>
+<p>Only pencils may be used; pens and markers are prohibited.</p>
+<p>Sketchbooks must not exceed 45 × 60 cm (18 × 24 inches).</p>
+<p>Visitors must not obstruct pathways or disrupt the movement of other guests.</p>
+<p>Care must be taken to avoid contact with display cases or artefacts.</p>
+
+<p><strong>Emergency Procedures</strong></p>
+<p>In the event of an emergency, visitors must follow the instructions of GEM staff immediately.</p>
+<p>In the event of an earthquake, move away from large sculptures, display cases, and any unsecured objects.</p>
+<p>In the event of fire or other emergencies, follow the designated evacuation routes and await staff guidance.</p>
+
+<p><strong>Disclaimer of Liability</strong></p>
+<p>The GEM is not responsible for the loss or damage of personal belongings, or for any injuries sustained during a visit to the premises.</p>
+<p>Visitors are responsible for their own safety and conduct throughout their time at the GEM.</p>
+
+<p><strong>Ticketing Terms &amp; Conditions</strong></p>
+<p>Tickets may not be refunded after purchase, regardless of the sales channel used (online platform, self-service machine, or on-site purchase), except in cases of force majeure as determined by the GEM.</p>
+<p>Tickets are valid only for the date and time specified. Failure to use a ticket within its validity period does not entitle the holder to a refund or exchange.</p>
+<p>Each ticket permits single entry only. Re-entry to the GEM is not allowed once the visitor exits the premises.</p>
+<p>Tickets are non-transferable and may only be used by the individual whose name is associated with the booking.</p>
+<p>The GEM reserves the right to cancel, postpone, or reschedule events or tours at its discretion and without prior notice.</p>
+<p>The GEM reserves the right to refuse entry or remove any visitor who fails to comply with these Rules and Regulations, without entitlement to a refund.</p>
+<p>In the event of cancellation or postponement, ticket holders may be offered a voucher for a future visit or guided tour.</p>
+<p>By purchasing or using a ticket, visitors acknowledge and agree to abide by all GEM Rules and Regulations in effect at the time of their visit.</p>
+
+      </div>
+      <div class="modal-footer">
+        <button class="secondary-btn" type="button" data-close="terms">Close</button>
+        <button class="primary-btn" type="button" id="terms-accept" disabled>
+          I have read and accept
+        </button>
+      </div>
+    </div>
+  </div>
+<!-- IMPORTANT INFORMATION MODAL -->
+<div class="modal-backdrop hidden" id="info-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Important Information</h3>
+      <button class="modal-close" type="button" data-close="info">×</button>
+    </div>
+
+    <div class="modal-body" id="info-body">
+      <p>• For corporate and travel agency bookings, contact <strong>booking@legacy.com.eg</strong>.</p>
+            <p>• For groups bookings, contact <strong>groupbooking@legacy.com.eg</strong>.</p>
+
+      <p>• For school & universities bookings, contact <strong>learning@gem.eg</strong>.</p>
+      <p>• Personal photography and videography (mobile or camera) are allowed except in the Tutankhamun Galleries, where only mobile photography is permitted. Guests must not use flash, tripods, selfie sticks, drones, or livestream inside the museum.</p>
+      <p>• All photos and videos are for personal use only. Commercial use is prohibited without prior written permission.</p>
+      <p>• All tickets are non-transferable and non-refundable.</p>
+    </div>
+
+    <div class="modal-footer">
+      <button class="primary-btn" type="button" id="info-accept">
+        Continue
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Change ticket type confirmation -->
+<div class="modal-backdrop hidden" id="ticket-type-modal">
+  <div class="modal">
+    <header class="modal-header">
+      <h3>Change ticket type?</h3>
+      <button type="button" class="modal-close" id="ticket-type-cancel-x">×</button>
+    </header>
+    <div class="modal-body">
+      <p>
+        Changing the ticket type will reset your selected tickets, add-ons,
+        and your chosen date & time.
+      </p>
+      <p>Do you want to continue?</p>
+    </div>
+    <footer class="modal-footer">
+      <button type="button" class="secondary-btn" id="ticket-type-cancel">
+        Cancel
+      </button>
+      <button type="button" class="primary-btn" id="ticket-type-confirm">
+        Confirm change
+      </button>
+    </footer>
+  </div>
+</div>
+
+  <!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container footer-main">
+    <!-- logo + tagline + socials -->
+<div class="footer-logo-block">
+  <div class="footer-logo-row">
+    <img src="GEM Logo Hi-Res white.png" alt="Grand Egyptian Museum logo" />
+    <span class="footer-logo-text">
+      OFFICIAL TICKETING WEBSITE
+    </span>
+ <!--    <div class="footer-social">
+    <span class="footer-social-title">FOLLOW US</span>
+    <div class="footer-social-icons">
+      <a href="https://www.facebook.com/GrandEgyptianMuseum/" target="_blank" class="social-icon social-facebook" aria-label="Facebook">
+        <i class="fa-brands fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/grandegyptianmuseum" target="_blank" class="social-icon social-instagram" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="https://www.tiktok.com/@grandegyptianmuseum" target="_blank" class="social-icon social-tiktok" aria-label="TikTok">
+        <i class="fa-brands fa-tiktok"></i>
+      </a>
+      <a href="https://www.youtube.com/@GrandEgyptianMuseum" target="_blank" class="social-icon social-youtube" aria-label="YouTube">
+        <i class="fa-brands fa-youtube"></i>
+      </a>
+    </div>
+  </div>-->
+  </div>
+
+  <!-- Social icons directly under the tagline -->
+  <div class="footer-social">
+    <span class="footer-social-title">FOLLOW US</span>
+    <div class="footer-social-icons">
+      <a href="https://www.facebook.com/GrandEgyptianMuseum/" target="_blank" class="social-icon social-facebook" aria-label="Facebook">
+        <i class="fa-brands fa-facebook-f white"></i>
+      </a>
+      <a href="https://www.instagram.com/grandegyptianmuseum" target="_blank" class="social-icon social-instagram" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="https://www.tiktok.com/@grandegyptianmuseum" target="_blank" class="social-icon social-tiktok" aria-label="TikTok">
+        <i class="fa-brands fa-tiktok"></i>
+      </a>
+      <a href="https://www.youtube.com/@GrandEgyptianMuseum" target="_blank" class="social-icon social-youtube" aria-label="YouTube">
+        <i class="fa-brands fa-youtube"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+    <!-- visit info -->
+    <div>
+      <div class="footer-block-title">PLAN YOUR VISIT</div>
+      <ul>
+        <li>Open daily except Saturdays & Wednesdays</li>
+        <li>Complex: 8:30 AM – 7:00 PM</li>
+        <li>Galleries: 9:00 AM – 6:00 PM</li>
+        <li>Sat & Wed extended hours for the complex and galleries</li>
+      </ul>
+    </div>
+
+    <!-- contact only (social moved) -->
+    <div>
+      <div class="footer-block-title">CONTACT</div>
+      <ul>
+        <li>Phone: +20235317344</li>
+        <li>Email: tourism_info@efinance.com.eg</li>
+
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <span class="footer-pill-note">
+        This interface is a design prototype for the Grand Egyptian Museum
+        ticketing website and does not represent the live booking system.
+      </span>
+      <span>© 2025 Grand Egyptian Museum · Prototype for demonstration only</span>
+    </div>
+  </div>
+</footer>
+
+
+<script src="script.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  new Swiper(".card-slider", {
+    // performance-friendly basics
+    loop: true,
+    centeredSlides: true,
+    speed: 500,
+    grabCursor: true,
+    slidesPerView: 3,
+    spaceBetween: 24,
+
+    breakpoints: {
+      0:    { slidesPerView: 1.1, spaceBetween: 16 },
+      768:  { slidesPerView: 2.1, spaceBetween: 20 },
+      1200: { slidesPerView: 3,   spaceBetween: 24 },
+    },
+
+    // optional autoplay; remove this whole block if you want max smoothness
+    autoplay: {
+      delay: 4500,
+      disableOnInteraction: true,
+    },
+
+    // lazy-load backgrounds
+    preloadImages: false,
+    lazy: {
+      loadPrevNext: true,
+      loadPrevNextAmount: 2,
+    },
+
+    watchSlidesProgress: true,
+
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+});
+
+</script>
+
+
+</body>
+</html>
