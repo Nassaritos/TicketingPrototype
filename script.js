@@ -690,14 +690,6 @@ if (navBookBtn) {
 }
 
 const heroGalleriesBtn = document.getElementById("hero-book-galleries");
-if (heroGalleriesBtn) {
-  heroGalleriesBtn.addEventListener("click", () => {
-    setExperience("galleries");
-    showBookingSection();
-    showStep(1);
-    scrollToBooking();
-  });
-}
 
 
 document.querySelectorAll("[data-book]").forEach((btn) => {
@@ -1469,8 +1461,11 @@ const infoCloseBtns = document.querySelectorAll('[data-close="info"]');
 const infoAccept  = document.getElementById("info-accept");
 
 // Open modal
-if (infoOpenBtn) {
+if (infoOpenBtn || heroGalleriesBtn) {
   infoOpenBtn.addEventListener("click", () => {
+    infoModal.classList.remove("hidden");
+  });
+    heroGalleriesBtn.addEventListener("click", () => {
     infoModal.classList.remove("hidden");
   });
 }
