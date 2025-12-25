@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <title>Grand Egyptian Museum – Ticketing Prototype</title>
+  <title>المتحف المصري الكبير – حجز التذاكر</title>
     <link rel="icon" type="image/x-icon" href="GEM Logo Hi-Res white.png">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1594,47 +1594,109 @@
   })();
 </script>
 
+
 <script>
-(function () {
-  // Arabic-only guard
+(() => {
+  // Arabic page only
   if ((document.documentElement.lang || "").toLowerCase() !== "ar") return;
 
   const monthsAr = {
-    January: "يناير",
-    February: "فبراير",
-    March: "مارس",
-    April: "أبريل",
-    May: "مايو",
-    June: "يونيو",
-    July: "يوليو",
-    August: "أغسطس",
-    September: "سبتمبر",
-    October: "أكتوبر",
-    November: "نوفمبر",
-    December: "ديسمبر"
+    January: "يناير", February: "فبراير", March: "مارس", April: "أبريل",
+    May: "مايو", June: "يونيو", July: "يوليو", August: "أغسطس",
+    September: "سبتمبر", October: "أكتوبر", November: "نوفمبر", December: "ديسمبر"
   };
 
-  const monthLabel = document.getElementById("cal-month-label");
-  if (!monthLabel) return;
+  const weekdaysAr = {
+    Sunday: "الأحد", Monday: "الاثنين", Tuesday: "الثلاثاء", Wednesday: "الأربعاء",
+    Thursday: "الخميس", Friday: "الجمعة", Saturday: "السبت"
+  };
 
-  function replaceMonthOnly() {
-    const txt = monthLabel.textContent.trim(); // e.g. "December 2025"
-    const m = txt.match(/^([A-Za-z]+)(.*)$/);  // month + rest (year/anything)
-    if (!m) return;
+  const toArabicDigits = (s) => String(s).replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
 
-    const enMonth = m[1];
-    const rest = m[2] || "";
+  function formatISOToArabicLabel(iso) {
+    // iso: "YYYY-MM-DD"
+    if (!iso || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return "";
 
-    if (monthsAr[enMonth]) {
-      monthLabel.textContent = monthsAr[enMonth] + rest; // keep year unchanged
-    }
+    const [y, m, d] = iso.split("-").map(Number);
+    const date = new Date(y, m - 1, d);
+    if (Number.isNaN(date.getTime())) return "";
+
+    // Get English names then map to Arabic (no locale dependency)
+    const weekdayEn = date.toLocaleDateString("en-US", { weekday: "long" });
+    const monthEn   = date.toLocaleDateString("en-US", { month: "long" });
+
+    const weekday = weekdaysAr[weekdayEn] || weekdayEn;
+    const month   = monthsAr[monthEn] || monthEn;
+
+    return `${weekday}، ${toArabicDigits(d)} ${month} ${toArabicDigits(y)}`;
   }
 
-  // run now + whenever calendar rerenders
-  replaceMonthOnly();
-  new MutationObserver(replaceMonthOnly).observe(monthLabel, { childList: true, characterData: true, subtree: true });
+  // 1) Fix the selected date label (the pill text)
+  const hiddenInput = document.getElementById("visit-date");
+  const labelEl = document.getElementById("visit-date-text");
+
+  function applySelectedLabel() {
+    if (!hiddenInput || !labelEl) return;
+
+    const iso = (hiddenInput.value || "").trim();
+    if (!iso) return;
+
+    const arabic = formatISOToArabicLabel(iso);
+    if (arabic) labelEl.textContent = arabic;
+  }
+
+  if (hiddenInput) {
+    hiddenInput.addEventListener("change", () => {
+      // let your calendar code set the label first, then overwrite cleanly
+      setTimeout(applySelectedLabel, 0);
+    });
+  }
+
+  // run once in case date is already set
+  setTimeout(applySelectedLabel, 0);
+
+  // 2) Translate ONLY the month name in the calendar header (e.g., "December 2025")
+  const monthLabelEl = document.getElementById("cal-month-label");
+
+  function translateMonthHeaderOnce() {
+    if (!monthLabelEl) return;
+
+    const txt = (monthLabelEl.textContent || "").trim();
+    if (!txt) return;
+
+    // expects like: "December 2025"
+    const m = txt.match(/^([A-Za-z]+)\s+(\d{4}|[٠-٩]{4})$/);
+    if (!m) return;
+
+    const monthEn = m[1];
+    const yearRaw = m[2];
+
+    // already arabic month? skip
+    if (/[اأإآء-ي]/.test(monthEn)) return;
+
+    const monthAr = monthsAr[monthEn] || monthEn;
+
+    // keep year digits as-is, but if western digits, convert to Arabic digits
+    const yearFixed = /[0-9]/.test(yearRaw) ? toArabicDigits(yearRaw) : yearRaw;
+
+    const next = `${monthAr} ${yearFixed}`;
+    if (next !== txt) monthLabelEl.textContent = next;
+  }
+
+  // Observe month label changes safely (this will NOT loop)
+  if (monthLabelEl) {
+    const obs = new MutationObserver(() => {
+      // schedule to avoid rapid sync loops
+      requestAnimationFrame(translateMonthHeaderOnce);
+    });
+    obs.observe(monthLabelEl, { childList: true, characterData: true, subtree: true });
+
+    // initial
+    requestAnimationFrame(translateMonthHeaderOnce);
+  }
 })();
 </script>
+
 
 </body>
 </html>

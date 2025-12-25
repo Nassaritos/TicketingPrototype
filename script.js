@@ -1601,6 +1601,17 @@ if (infoAccept) {
 
   if (!hiddenInput || !popup || !textSpan || !monthLabel || !grid) return;
 
+  const isArabicPage = (document.documentElement.lang || "").toLowerCase() === "ar";
+
+  const AR_DIGITS = "٠١٢٣٤٥٦٧٨٩";
+  const toArabicDigits = (s) => String(s).replace(/\d/g, (d) => AR_DIGITS[d]);
+
+  const AR_MONTHS = [
+    "يناير","فبراير","مارس","أبريل","مايو","يونيو",
+    "يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"
+  ];
+  const AR_WEEKDAYS = ["الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -1616,40 +1627,60 @@ if (infoAccept) {
   }
 
   function formatLabel(date) {
-    return date.toLocaleDateString("en-GB", {
-      weekday: "short",
-      day: "numeric",
-      month: "long",
-      year: "numeric"
-    });
+    if (!isArabicPage) {
+      return date.toLocaleDateString("en-GB", {
+        weekday: "short",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+    }
+
+    // مثال: الخميس، ٢٥ ديسمبر ٢٠٢٥
+    const wd = AR_WEEKDAYS[date.getDay()];
+    const d = toArabicDigits(date.getDate());
+    const m = AR_MONTHS[date.getMonth()];
+    const y = toArabicDigits(date.getFullYear());
+    return `${wd}، ${d} ${m} ${y}`;
+  }
+
+  function formatMonthHeader(year, monthIndex) {
+    if (!isArabicPage) {
+      return new Date(year, monthIndex, 1).toLocaleString("en-GB", {
+        month: "long",
+        year: "numeric"
+      });
+    }
+    return `${AR_MONTHS[monthIndex]} ${toArabicDigits(year)}`;
   }
 
   function sameDay(a, b) {
-    return a && b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+    return a && b &&
+      a.getFullYear() === b.getFullYear() &&
+      a.getMonth() === b.getMonth() &&
+      a.getDate() === b.getDate();
   }
 
   window.resetVisitCalendar = function () {
     selectedDate = null;
     hiddenInput.value = "";
     hiddenInput.dispatchEvent(new Event("change", { bubbles: true }));
-    textSpan.textContent = "Select a Date";
+
+    textSpan.textContent = isArabicPage ? "اختر تاريخًا" : "Select a Date";
     popup.classList.remove("is-hidden");
     renderCalendar();
   };
 
-  // allow re-render from outside (e.g. when guided language changes)
   window.reRenderVisitCalendar = function () {
     renderCalendar();
   };
 
   function renderCalendar() {
-    const monthName = new Date(currentYear, currentMonth, 1).toLocaleString("en-GB", { month: "long", year: "numeric" });
-    monthLabel.textContent = monthName;
-
+    monthLabel.textContent = formatMonthHeader(currentYear, currentMonth);
     grid.innerHTML = "";
 
     const firstDay = new Date(currentYear, currentMonth, 1);
-    const startWeek = firstDay.getDay();
+    const startWeek = firstDay.getDay(); // 0 Sun
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
     for (let i = 0; i < startWeek; i++) {
@@ -1663,43 +1694,42 @@ if (infoAccept) {
     for (let d = 1; d <= daysInMonth; d++) {
       const btn = document.createElement("button");
       btn.type = "button";
-      btn.textContent = d;
+      btn.textContent = isArabicPage ? toArabicDigits(d) : String(d);
       btn.className = "cal-day";
 
       const dateObj = new Date(currentYear, currentMonth, d);
       dateObj.setHours(0, 0, 0, 0);
       const iso = formatISO(dateObj);
 
-      // past dates
       if (dateObj < today) {
         btn.disabled = true;
         btn.classList.add("is-disabled");
       }
 
-      // sold out date (hard)
       if (isDateSoldOut(iso)) {
         btn.disabled = true;
         btn.classList.add("is-disabled", "is-soldout");
       }
 
-      // full-day sold out based on all slots sold out → strike-through number
       if (!btn.disabled && isFullDaySoldOut(iso)) {
         btn.classList.add("is-fullday-soldout");
-        btn.title = "Sold out";
+        btn.title = isArabicPage ? "نفدت التذاكر" : "Sold out";
       }
 
       if (selectedDate && sameDay(dateObj, selectedDate)) btn.classList.add("is-selected");
 
       btn.addEventListener("click", () => {
-        // block if disabled OR full-day sold out
         if (btn.disabled || btn.classList.contains("is-fullday-soldout")) {
-          showSoldOut("This date is sold out. Please select another date.");
+          showSoldOut(isArabicPage ? "هذا التاريخ ممتلئ. يُرجى اختيار تاريخ آخر." : "This date is sold out. Please select another date.");
           return;
         }
         selectedDate = dateObj;
         hiddenInput.value = iso;
         hiddenInput.dispatchEvent(new Event("change", { bubbles: true }));
+
+        // ✅ This is what fixes your “December ,Thu” issue
         textSpan.textContent = formatLabel(dateObj);
+
         popup.classList.add("is-hidden");
         renderCalendar();
       });
@@ -1734,17 +1764,14 @@ if (infoAccept) {
     });
   }
 
+  // initial UI label
+  if (!hiddenInput.value) {
+    textSpan.textContent = isArabicPage ? "اختر تاريخًا" : "Select a Date";
+  }
+
   renderCalendar();
 })();
 
-const sliderCtaBtn = document.getElementById("slider-cta-btn");
-if (sliderCtaBtn) {
-  sliderCtaBtn.addEventListener("click", () => {
-    showBookingSection();
-    showStep(1);
-    scrollToBooking();
-  });
-}
 
 document.querySelectorAll('.radio-pill input[type="radio"]').forEach((radio) => {
   radio.addEventListener("change", () => {
