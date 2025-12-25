@@ -1594,6 +1594,47 @@
   })();
 </script>
 
+<script>
+(function () {
+  // Arabic-only guard
+  if ((document.documentElement.lang || "").toLowerCase() !== "ar") return;
+
+  const monthsAr = {
+    January: "يناير",
+    February: "فبراير",
+    March: "مارس",
+    April: "أبريل",
+    May: "مايو",
+    June: "يونيو",
+    July: "يوليو",
+    August: "أغسطس",
+    September: "سبتمبر",
+    October: "أكتوبر",
+    November: "نوفمبر",
+    December: "ديسمبر"
+  };
+
+  const monthLabel = document.getElementById("cal-month-label");
+  if (!monthLabel) return;
+
+  function replaceMonthOnly() {
+    const txt = monthLabel.textContent.trim(); // e.g. "December 2025"
+    const m = txt.match(/^([A-Za-z]+)(.*)$/);  // month + rest (year/anything)
+    if (!m) return;
+
+    const enMonth = m[1];
+    const rest = m[2] || "";
+
+    if (monthsAr[enMonth]) {
+      monthLabel.textContent = monthsAr[enMonth] + rest; // keep year unchanged
+    }
+  }
+
+  // run now + whenever calendar rerenders
+  replaceMonthOnly();
+  new MutationObserver(replaceMonthOnly).observe(monthLabel, { childList: true, characterData: true, subtree: true });
+})();
+</script>
 
 </body>
 </html>
