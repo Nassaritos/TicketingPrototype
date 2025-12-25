@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ar-EG" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>المتحف المصري الكبير – حجز التذاكر (نموذج تجريبي)</title>
+    <link rel="icon" type="image/x-icon" href="GEM Logo Hi-Res white.png">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="style.css">
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
+<style>
+    /* ========== Greta Arabic font family ========== */
+@font-face {
+  font-family: "GretaArabic";
+  src: url("fonts/GretaArabic-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GretaArabic";
+  src: url("fonts/GretaArabic-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GretaArabic";
+  src: url("fonts/GretaArabic-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GretaArabic";
+  src: url("fonts/GretaArabic-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+</style>
+</head>
+<body class="is-ar">
+  <!-- NAVBAR -->
+   <header class="site-header">
+  <div class="container nav-inner">
+    <!-- Logo -->
+    <a href="index.html" class="nav-logo">
+      <!-- TODO: change src to your real logo file -->
+      <img src="GEM Logo Hi-Res.png" alt="Grand Egyptian Museum logo" />
+      <span class="nav-logo-text">
+          الموقع الرسمي لحجز تذاكر المتحف المصري الكبير
+      </span>
+    </a>
+
+    <!-- Right side actions -->
+   <nav class="nav-actions">
+  <div class="nav-lang-switch">
+    <button class="nav-lang" type="button" data-lang="en" onclick="window.location.href='confirmation.html'">EN</button>
+    <span class="nav-lang-sep">|</span>
+    <button class="nav-lang is-active" type="button" onclick="window.location.href='confirmation-ar.html'" data-lang="ar">عربي</button>
+  </div>
+</nav>
+
+  </div>
+</header>
+
+
+<section class="confirm-wrap">
+  <div class="confirm-card">
+    <div class="confirm-icon" aria-hidden="true">
+      <!-- check icon -->
+      <svg viewBox="0 0 24 24" width="26" height="26">
+        <path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1 class="confirm-title">تم تأكيد الحجز</h1>
+
+    <p class="confirm-sub">
+      يرجى التحقق من البريد الإلكتروني للحصول على التذاكر.
+    </p>
+    <p class="confirm-sub subtle">في انتظار زيارتكم!</p>
+
+    <div class="confirm-actions">
+      <a class="btn btn-primary" href="index.html" id="btn-home">الرجوع للصفحة الرئيسية</a>
+
+      <!-- replace href with your real file/link -->
+      <a class="btn btn-outline" href="#" id="btn-download" download>
+        تحميل التذكرة/التذاكر
+      </a>
+    </div>
+
+    <hr class="confirm-divider" />
+
+    <h2 class="confirm-block-title">استمتع بتجربة متحفية فريدة!</h2>
+
+    <p class="confirm-block-text">
+      احجز رحلتك مع خدمة <strong>GoLimo</strong> لتصل بسهولة ورفاهية إلى المتحف المصري الكبير.
+    </p>
+
+
+    <a class="btn btn-primary w-full" href="#" id="btn-golimo" target="_blank" rel="noopener">
+      GoLimo
+    </a>
+  </div>
+</section>
+
+
+  <footer class="site-footer">
+  <div class="container footer-main">
+    <!-- logo + tagline -->
+    <div class="footer-logo-block">
+      <div class="footer-logo-row">
+        <img src="GEM Logo Hi-Res white.png" alt="شعار المتحف المصري الكبير" />
+        <span class="footer-logo-text">الموقع الرسمي لحجز تذاكر المتحف المصري الكبير</span>
+      </div>
+    </div>
+    <!-- visit info -->
+    <div>
+      <div class="footer-block-title">خطط زيارتك</div>
+      <ul>
+        <li>ساعات العمل: يومياً عدا السبت ولأربعاء</li>
+                <li>مجمع المتحف: ٨:٣٠ صباحًا – ٧:٠٠ مساءً</li>
+
+<li>قاعات العرض: ٩:٠٠ صباحًا – ٦:٠٠ مساءً
+</li>
+        <li>تمديد ساعات العمل في أيام السبت ولأربعاء</li>
+      </ul>
+    </div>
+
+    <!-- contact + socials -->
+    <div>
+      <div class="footer-block-title">تواصل معنا</div>
+      <ul>
+        <li>هاتف: ‎+٢٠ ٢٣٣ ٥٥٧ ٧٤٤‎ (تجريبي)</li>
+        <li>بريد إلكتروني: tourism_info@example.com</li>
+
+      </ul>
+              <div class="footer-social">
+    <span class="footer-social-title">تابعنا على</span>
+    <div class="footer-social-icons">
+      <a href="https://www.facebook.com/GrandEgyptianMuseum/" target="_blank" class="social-icon social-facebook" aria-label="Facebook">
+        <i class="fa-brands fa-facebook-f white"></i>
+      </a>
+      <a href="https://www.instagram.com/grandegyptianmuseum" target="_blank" class="social-icon social-instagram" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="https://www.tiktok.com/@grandegyptianmuseum" target="_blank" class="social-icon social-tiktok" aria-label="TikTok">
+        <i class="fa-brands fa-tiktok"></i>
+      </a>
+      <a href="https://www.youtube.com/@GrandEgyptianMuseum" target="_blank" class="social-icon social-youtube" aria-label="YouTube">
+        <i class="fa-brands fa-youtube"></i>
+      </a>
+    </div>
+  </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <span class="footer-pill-note">
+        هذه واجهة تصميم تجريبية لحجز تذاكر المتحف المصري الكبير، ولا تمثِّل نظام الحجز الفعلي.
+      </span>
+      <span>© ٢٠٢٥ المتحف المصري الكبير · نموذج أولي للاختبار والعرض فقط</span>
+    </div>
+  </div>
+</footer>
+
+
+<script src="script.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  new Swiper(".card-slider", {
+    // performance-friendly basics
+    loop: true,
+    centeredSlides: true,
+    speed: 500,
+    grabCursor: true,
+    slidesPerView: 3,
+    spaceBetween: 24,
+
+    breakpoints: {
+      0:    { slidesPerView: 1.1, spaceBetween: 16 },
+      768:  { slidesPerView: 2.1, spaceBetween: 20 },
+      1200: { slidesPerView: 3,   spaceBetween: 24 },
+    },
+
+    // optional autoplay; remove this whole block if you want max smoothness
+    autoplay: {
+      delay: 4500,
+      disableOnInteraction: true,
+    },
+
+    // lazy-load backgrounds
+    preloadImages: false,
+    lazy: {
+      loadPrevNext: true,
+      loadPrevNextAmount: 2,
+    },
+
+    watchSlidesProgress: true,
+
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+});
+
+</script>
+
+
+</body>
+</html>

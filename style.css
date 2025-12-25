@@ -1,3 +1,101 @@
+    /* =========================
+   Arabic Font: GretaArabic
+   Put this near the TOP of your main CSS
+   ========================= */
+
+@font-face {
+  font-family: "GretaArabic";
+  src: url("fonts/GretaArabic-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GretaArabic";
+  src: url("fonts/GretaArabic-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GretaArabic";
+  src: url("fonts/GretaArabic-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GretaArabic";
+  src: url("fonts/GretaArabic-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================
+   Apply Arabic font only when Arabic
+   ========================= */
+
+/* If your HTML tag uses lang="ar" */
+html[lang="ar"], html[lang="ar"] body {
+  font-family: "GretaArabic", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  direction: rtl;
+}
+
+/* If you prefer using a class (recommended for toggling) */
+.is-ar, .is-ar * {
+  font-family: "GretaArabic", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+
+.is-ar {
+  direction: rtl;
+}
+
+/* Optional: better Arabic numerals/spacing */
+.is-ar, html[lang="ar"] body {
+  letter-spacing: 0;
+}
+/* ===========================
+   Arabic (RTL) working hours layout fix
+   =========================== */
+
+html[dir="rtl"] .hours-header{
+  display: flex;
+  flex-direction: row-reverse;   /* title on the right, pill on the left */
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Flip the two columns inside each li: label <-> time */
+html[dir="rtl"] .hours-list li{
+  display: flex;
+  flex-direction: row-reverse;   /* puts the time on the left */
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Ensure the label (first span in your HTML) stays right-aligned */
+html[dir="rtl"] .hours-list li span:first-child{
+  text-align: right;
+}
+
+/* Ensure the time (second span in your HTML) aligns nicely on the left */
+html[dir="rtl"] .hours-list li span:last-child{
+  text-align: left;
+  direction: ltr;                /* keeps 8:30 AM etc readable */
+  unicode-bidi: plaintext;
+}
+
+html[dir="rtl"] .hours-block-title, .hours-note{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
     :root {
       --gem-orange: #f57c00;
       --gem-orange-deep: #d05a00;
@@ -4505,6 +4603,7 @@ body.rtl .banner-cta {
   gap: 10px;
 }
 
+
 /* Icon pill */
 .social-icon {
   width: 25px;
@@ -4586,4 +4685,243 @@ body.rtl .banner-cta {
 
 .time-slot.is-hidden {
   display: none;
+}
+
+.soldout-alert{
+  border: 1px solid rgba(220, 38, 38, .35);
+  background: rgba(220, 38, 38, .08);
+  color: #991b1b;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  margin: 10px 0 12px;
+}
+.soldout-alert.hidden{ display:none; }
+
+
+
+.btn-inc.is-disabled,
+.btn-dec.is-disabled{
+  pointer-events: none;
+}
+
+/* ---------- SOLD OUT: hover tooltip ---------- */
+
+/* time-slot + category-tab will show a tooltip when they have is-soldout 
+.time-slot.is-soldout,
+.category-tab.is-soldout {
+  position: relative;
+  cursor: not-allowed;
+}
+
+/* Tooltip bubble 
+.time-slot.is-soldout::after,
+.category-tab.is-soldout::after {
+    color: white;
+  background-color: rgb(184, 0, 0);
+  content: "Sold out";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 4px);
+  transform: translateX(-50%);
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 9999;
+  /* no colors specified per your rule? remove if you want default.
+     If you want a clean look, uncomment these:
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  
+}*/
+
+
+
+
+/* Optional: make sold out look disabled (keep subtle) */
+
+
+/* ---------- CALENDAR: sold out full-day strike-through ---------- */
+.cal-day.is-soldout {
+  text-decoration: line-through;
+  /* keep your existing disabled look */
+}
+.cal-day.is-soldout {
+  position: relative;
+  cursor: not-allowed;
+}
+
+.cal-day.is-soldout::after {
+  color: white;
+  background-color: rgb(184, 0, 0);
+  content: "Sold out";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 4px);
+  transform: translateX(-50%);
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 9999;
+}
+
+.cal-day.is-soldout:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+/* strike-through the number for whole-day sold out */
+.cal-day.is-soldout-day{
+  text-decoration: line-through;
+  opacity: .6;
+}
+
+/* optional: show "Sold out" on hover (tickets/slots/tabs) */
+/* Not available counter: show "not allowed" cursor */
+.counter.is-soldout{
+  cursor: not-allowed;
+}
+.counter.is-soldout *{
+  cursor: not-allowed !important;
+}
+
+
+
+/* Optional: a bit more "disabled" feeling when sold out */
+.counter.is-soldout span.count{
+  background: #e5e7eb;   /* grey */
+  color: #111827; 
+opacity: 0.8; }
+
+.counter.is-soldout:hover::after{
+  content:"Sold out";
+  position:absolute;
+  transform: translateY(-140%);
+  padding:6px 10px;
+  border-radius:10px;
+  background-color: rgb(184, 0, 0);
+    color:#fff;
+  font-size:12px;
+  white-space:nowrap;
+  z-index:99;
+  cursor: not-allowed;
+}
+
+.counter{ position:relative; }
+
+.confirm-wrap{
+  min-height: calc(100vh - 120px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 40px 16px;
+}
+
+.confirm-card{
+  width: min(560px, 100%);
+  background:#fff;
+  border-radius: 16px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.08);
+  border: 1px solid rgba(0,0,0,.06);
+  padding: 28px 22px;
+  text-align:center;
+}
+
+.confirm-icon{
+  width:56px;
+  height:56px;
+  border-radius: 999px;
+  margin: 0 auto 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: #1eb22d; /* red circle */
+  color:#fff;
+}
+
+.confirm-title{
+  margin: 0 0 10px;
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+.confirm-sub{
+  margin: 6px 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(0,0,0,.75);
+}
+
+.confirm-sub.subtle{
+  color: rgba(0,0,0,.6);
+}
+
+.confirm-actions{
+  display:flex;
+  gap: 12px;
+  justify-content:center;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.confirm-divider{
+  margin: 22px 0 18px;
+  border: none;
+  height: 1px;
+  background: rgba(0,0,0,.08);
+}
+
+.confirm-block-title{
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.confirm-block-text{
+  margin: 8px 0;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: rgba(0,0,0,.72);
+}
+
+/* Buttons (align with your simple UI style) */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration:none;
+  border: 1px solid transparent;
+  transition: transform .06s ease, opacity .2s ease;
+  user-select:none;
+}
+
+.btn:active{ transform: translateY(1px); }
+
+.btn-primary{
+  background: #d17a00; /* GEM-ish orange */
+  color:#fff;
+}
+
+.btn-outline{
+  background: transparent;
+  color: #d17a00;
+  border-color: rgba(209,122,0,.55);
+}
+
+.btn:hover{ opacity: .95; }
+
+.w-full{
+  width: 100%;
+  margin-top: 10px;
 }

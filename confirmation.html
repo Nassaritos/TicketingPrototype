@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Grand Egyptian Museum – Ticketing Prototype</title>
+    <link rel="icon" type="image/x-icon" href="GEM Logo Hi-Res white.png">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="style.css">
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
+
+</head>
+<body>
+  <!-- NAVBAR -->
+   <header class="site-header">
+  <div class="container nav-inner">
+    <!-- Logo -->
+    <a href="index.html" class="nav-logo">
+      <!-- TODO: change src to your real logo file -->
+      <img src="GEM Logo Hi-Res.png" alt="Grand Egyptian Museum logo" />
+      <span class="nav-logo-text">
+        Official Ticketing Website
+      </span>
+    </a>
+
+    <!-- Right side actions -->
+   <nav class="nav-actions">
+  <div class="nav-lang-switch">
+   <button class="nav-lang is-active" type="button" data-lang="en" onclick="window.location.href='confirmation.html'">EN</button>
+    <span class="nav-lang-sep">|</span>
+    <button class="nav-lang" type="button" onclick="window.location.href='confirmation-ar.html'" data-lang="ar">عربي</button>
+  </div>
+</nav>
+
+  </div>
+</header>
+
+
+<section class="confirm-wrap">
+  <div class="confirm-card">
+    <div class="confirm-icon" aria-hidden="true">
+      <!-- check icon -->
+      <svg viewBox="0 0 24 24" width="26" height="26">
+        <path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1 class="confirm-title">Booking Confirmed</h1>
+
+    <p class="confirm-sub">
+      Please check your email for your ticket(s), or download them below.
+    </p>
+    <p class="confirm-sub subtle">We can’t wait to welcome you at GEM!</p>
+
+    <div class="confirm-actions">
+      <a class="btn btn-primary" href="index.html" id="btn-home">Go to Home</a>
+
+      <!-- replace href with your real file/link -->
+      <a class="btn btn-outline" href="#" id="btn-download" download>
+        Download Ticket(s)
+      </a>
+    </div>
+
+    <hr class="confirm-divider" />
+
+    <h2 class="confirm-block-title">Elevate your museum experience!</h2>
+
+    <p class="confirm-block-text">
+      We’ve partnered with <strong>GoLimo</strong> to offer you a convenient and hassle-free way to get to the Grand Egyptian Museum.
+    </p>
+
+    <p class="confirm-block-text">
+      Book your ride now and enjoy a comfortable journey to this iconic landmark.
+    </p>
+
+    <a class="btn btn-primary w-full" href="#" id="btn-golimo" target="_blank" rel="noopener">
+      GoLimo
+    </a>
+  </div>
+</section>
+
+  <!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container footer-main">
+    <!-- logo + tagline + socials -->
+<div class="footer-logo-block">
+  <div class="footer-logo-row">
+    <img src="GEM Logo Hi-Res white.png" alt="Grand Egyptian Museum logo" />
+    <span class="footer-logo-text">
+      OFFICIAL TICKETING WEBSITE
+    </span>
+ <!--    <div class="footer-social">
+    <span class="footer-social-title">FOLLOW US</span>
+    <div class="footer-social-icons">
+      <a href="https://www.facebook.com/GrandEgyptianMuseum/" target="_blank" class="social-icon social-facebook" aria-label="Facebook">
+        <i class="fa-brands fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/grandegyptianmuseum" target="_blank" class="social-icon social-instagram" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="https://www.tiktok.com/@grandegyptianmuseum" target="_blank" class="social-icon social-tiktok" aria-label="TikTok">
+        <i class="fa-brands fa-tiktok"></i>
+      </a>
+      <a href="https://www.youtube.com/@GrandEgyptianMuseum" target="_blank" class="social-icon social-youtube" aria-label="YouTube">
+        <i class="fa-brands fa-youtube"></i>
+      </a>
+    </div>
+  </div>-->
+  </div>
+
+  <!-- Social icons directly under the tagline -->
+
+</div>
+
+    <!-- visit info -->
+    <div>
+      <div class="footer-block-title">PLAN YOUR VISIT</div>
+      <ul>
+        <li>Open daily except Saturdays & Wednesdays</li>
+        <li>Complex: 8:30 AM – 7:00 PM</li>
+        <li>Galleries: 9:00 AM – 6:00 PM</li>
+        <li>Sat & Wed extended hours for the complex and galleries</li>
+      </ul>
+    </div>
+
+    <!-- contact only (social moved) -->
+    <div>
+      <div class="footer-block-title">CONTACT</div>
+      <ul>
+        <li>Phone: +20235317344</li>
+        <li>Email: tourism_info@efinance.com.eg</li>
+
+      </ul>
+        <div class="footer-social">
+    <span class="footer-social-title">FOLLOW US</span>
+    <div class="footer-social-icons">
+      <a href="https://www.facebook.com/GrandEgyptianMuseum/" target="_blank" class="social-icon social-facebook" aria-label="Facebook">
+        <i class="fa-brands fa-facebook-f white"></i>
+      </a>
+      <a href="https://www.instagram.com/grandegyptianmuseum" target="_blank" class="social-icon social-instagram" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="https://www.tiktok.com/@grandegyptianmuseum" target="_blank" class="social-icon social-tiktok" aria-label="TikTok">
+        <i class="fa-brands fa-tiktok"></i>
+      </a>
+      <a href="https://www.youtube.com/@GrandEgyptianMuseum" target="_blank" class="social-icon social-youtube" aria-label="YouTube">
+        <i class="fa-brands fa-youtube"></i>
+      </a>
+    </div>
+  </div>
+    </div>
+    
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <span class="footer-pill-note">
+        This interface is a design prototype for the Grand Egyptian Museum
+        ticketing website and does not represent the live booking system.
+      </span>
+      <span>© 2025 Grand Egyptian Museum · Prototype for demonstration only</span>
+    </div>
+    
+  </div>
+</footer>
+
+
+<script src="script.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  new Swiper(".card-slider", {
+    // performance-friendly basics
+    loop: true,
+    centeredSlides: true,
+    speed: 500,
+    grabCursor: true,
+    slidesPerView: 3,
+    spaceBetween: 24,
+
+    breakpoints: {
+      0:    { slidesPerView: 1.1, spaceBetween: 16 },
+      768:  { slidesPerView: 2.1, spaceBetween: 20 },
+      1200: { slidesPerView: 3,   spaceBetween: 24 },
+    },
+
+    // optional autoplay; remove this whole block if you want max smoothness
+    autoplay: {
+      delay: 4500,
+      disableOnInteraction: true,
+    },
+
+    // lazy-load backgrounds
+    preloadImages: false,
+    lazy: {
+      loadPrevNext: true,
+      loadPrevNextAmount: 2,
+    },
+
+    watchSlidesProgress: true,
+
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+});
+
+</script>
+
+
+</body>
+</html>

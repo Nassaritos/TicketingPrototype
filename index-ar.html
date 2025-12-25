@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Grand Egyptian Museum – Ticketing Prototype</title>
+    <link rel="icon" type="image/x-icon" href="GEM Logo Hi-Res white.png">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="style.css">
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
+
+</head>
+<body class="is-ar is-ar">
+  <!-- NAVBAR -->
+   <header class="site-header">
+  <div class="container nav-inner">
+    <!-- Logo -->
+    <a href="index.html" class="nav-logo">
+      <!-- TODO: change src to your real logo file -->
+      <img src="GEM Logo Hi-Res.png" alt="Grand Egyptian Museum logo" />
+      <span class="nav-logo-text">
+ الموقع الرسمي لحجز تذاكر المتحف المصري الكبير      </span>
+    </a>
+
+    <!-- Right side actions -->
+   <nav class="nav-actions">
+  <div class="nav-lang-switch">
+    <button class="nav-lang" type="button" onclick="window.location.href='index.html'" data-lang="en">EN</button>
+    <span class="nav-lang-sep">|</span>
+    <button class="nav-lang is-active" type="button" onclick="window.location.href='index-ar.html'" data-lang="ar">عربي</button>
+  </div>
+</nav>
+
+  </div>
+</header>
+
+
+  <section class="hero" >
+  <!-- background image + overlay -->
+  <div class="hero-bg">
+    <!-- TODO: replace src with your real GEM hero photo -->
+    <img src= "202302011917Home-Banner.jpg"
+         alt="Grand Egyptian Museum entrance (placeholder)" />
+  </div>
+
+  <!-- overlayed content -->
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="hero-badge">مرحبًا بكم في</div>
+      <h1>المتحف المصري الكبير</h1>
+              <h2>أكبر متحف في العالم مخصص لحضارة واحدة</h2>
+
+      <p>
+            هذا هو الموقع الرسمي الوحيد لحجز تذاكر المتحف المصري الكبير.
+            يُرجى تجنب شراء التذاكر من منصات غير معتمدة.      </p>
+      <div class="hero-actions">
+        <button class="nav-cta" type="button" id="hero-book-galleries">
+احجز التذاكر        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <section class="section">
+    <div class="container intro-grid">
+      <div class="intro-card">
+        <h3>مرحبًا بكم في الموقع الرسمي لحجز تذاكر المتحف المصري الكبير
+</h3>
+        <p>
+يُرحّب بكم المتحف المصري الكبير بعد افتتاحه الكامل، لاكتشاف أكبر متحف في العالم مخصص لحضارة واحدة.
+        </p>
+        <p>
+تشمل زيارتكم قاعات الملك توت عنخ آمون، قاعات العرض الرئيسية، البهو العظيم، الدرج العظيم، متحف مراكب خوفو، المنطقة التجارية، والحدائق الخارجية، لتعيشوا تجربة استثنائية تجمع بين عراقة التاريخ وروعة التصميم المعاصر.
+        </p>
+      <!--  <p class="alert-text">
+          This is the only official website for purchasing tickets to the Grand Egyptian Museum.
+          The museum is not responsible for tickets purchased through any other platform.
+        </p>-->
+      </div>
+
+     <div class="hours-card">
+  <div class="hours-header">
+    <h4>ساعات العمل</h4>
+    <span class="hours-pill">خطط زيارتك</span>
+  </div>
+
+  <div class="hours-grid">
+    <!-- Standard days -->
+    <div class="hours-block">
+      <div class="hours-block-title">
+        <span class="hours-dot"></span>
+        <span>يوميًا (عدا أيام السبت والأربعاء)</span>
+      </div>
+      <ul class="hours-list">
+        <li><span>مجمع المتحف</span><span>8:30 AM – 7:00 PM</span></li>
+        <li><span>قاعات العرض</span><span>9:00 AM – 6:00 PM</span></li>
+      </ul>
+    </div>
+
+    <!-- Extended days -->
+    <div class="hours-block">
+      <div class="hours-block-title">
+        <span class="hours-dot hours-dot--highlight"></span>
+        <span>السبت والأربعاء</span>
+      </div>
+      <ul class="hours-list">
+        <li><span>مجمع المتحف</span><span>8:30 AM – 10:00 PM</span></li>
+        <li><span>قاعات العرض</span><span>9:00 AM – 9:00 PM</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="hours-note">
+.آخر موعد للدخول هو قبل ساعة واحدة من موعد إغلاق قاعات العرض</p>
+</div>
+
+    </div>
+  </section> 
+
+<section class="cta-ticket-section">
+  <div class="cta-ticket-inner">
+    <button type="button" class="cta-ticket-btn" id="open-info">
+احجز تذكرتك    </button>
+  </div>
+</section>
+
+  <!-- BOOKING SECTION -->
+<section id="booking-section" class="booking-hidden">
+  <div class="container">
+    <div class="booking-header">
+      <h2>حجز التذاكر</h2>
+    </div>
+
+    <div class="layout">
+      <!-- LEFT FLOW -->
+      <div>
+        <div class="stepper">
+          <div class="step-pill is-active" data-step-pill="1">
+            <span class="number">1</span><span>الموعد وعدد التذاكر</span>
+          </div>
+                    <div class="step-pill" data-step-pill="2">
+            <span class="number">2</span><span>الإضافات</span>
+          </div>
+          <div class="step-pill" data-step-pill="3">
+            <span class="number">3</span><span>بيانات الزائر</span>
+          </div>
+          
+          <div class="step-pill" data-step-pill="4">
+            <span class="number">4</span><span>ملخص الطلب</span>
+          </div>
+        </div>
+
+        <!-- STEP 1 (LOGICAL) = DATE & TICKETS -->
+        <section class="panel" id="step-2">
+          <div class="panel-header">
+            <h3>التاريخ، الوقت، وعدد التذاكر</h3>
+          </div>
+          <p class="panel-subtitle" id="step-2-subtitle"></p>
+
+          <div class="two-col">
+            <!-- Left: type + date/time -->
+            <div>
+              <div class="field-group">
+                <div class="field-label">نوع التذكرة</div>
+                <div class="field-row">
+                  <label class="radio-pill is-active">
+                    <input type="radio" name="ticketType" value="admission" checked />
+                    <span>تذكرة دخول</span>
+                  </label>
+                  <label class="radio-pill">
+                    <input type="radio" name="ticketType" value="guided" />
+                    <span>تذكرة جولة إرشادية</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Tour language (guided only) -->
+             
+
+              <!-- Visit date + custom calendar -->
+              <div class="field-group">
+                <div class="field-label">تاريخ الزيارة</div>
+
+                <div class="calendar-field">
+                  <button type="button" class="calendar-display" id="visit-date-display">
+                    <span id="visit-date-text">اختر يوم</span>
+                    <span class="calendar-icon">📅</span>
+                  </button>
+
+                  <div class="calendar-popup" id="visit-calendar">
+                    <div class="calendar-header">
+                      <button type="button" class="cal-nav" id="cal-prev">‹</button>
+                      <div class="cal-month-label" id="cal-month-label"></div>
+                      <button type="button" class="cal-nav" id="cal-next">›</button>
+                    </div>
+
+                    <div class="calendar-weekdays">
+                      <span>الأحد</span><span>الاثنين</span><span>الثلاثاء</span><span>الأربعاء</span>
+                      <span>الخميس</span><span>الجمعة</span><span>السبت</span>
+                    </div>
+
+                    <div class="calendar-grid" id="cal-days"></div>
+                  </div>
+                </div>
+
+                <!-- hidden input used by JS -->
+                <input type="hidden" id="visit-date" />
+              </div>
+ <div class="field-group hidden" id="tour-language-group">
+                <div class="field-label">اختر اللغة</div>
+                <div class="field-row">
+                  <label class="radio-pill">
+                    <input type="radio" name="tourLanguage" value="ar" />
+                    <span>العربية</span>
+                  </label>
+                  <label class="radio-pill">
+                    <input type="radio" name="tourLanguage" value="en" />
+                    <span>الإنجليزية</span>
+                  </label>
+                </div>
+              </div>
+              <div class="soldout-alert hidden" id="soldout-alert" role="alert" aria-live="polite"></div>
+
+              <!-- Time slots -->
+<div class="field-group" id="time-slot-wrapper">
+  <div class="field-label-row">
+    <span class="field-label" id="time-slot-title">
+اختر المواعيد الزمنية للدخول
+    </span>
+  </div>
+
+  <div class="time-slot-group" id="time-slot-group">
+
+                  <button type="button" class="time-slot" data-time="08:30 AM - 11:00 AM">08:30 AM - 11:00 AM</button>
+                  <button type="button" class="time-slot" data-time="11:00 AM - 01:00 PM">11:00 AM - 01:00 PM</button>
+                  <button type="button" class="time-slot" data-time="01:00 PM - 03:00 PM">01:00 PM - 03:00 PM</button>
+                  <button type="button" class="time-slot" data-time="03:00 PM - 05:00 PM">03:00 PM - 05:00 PM</button>
+                  <button
+  type="button"
+  class="time-slot extra-evening-slot is-hidden"
+  data-time="05:00 PM - 08:00 PM"
+  data-extra-slot="evening"
+>
+  05:00 PM - 08:00 PM
+</button>
+
+                </div>
+              </div>
+
+              <p class="discount-inline">
+                <a href="#" id="open-discounts" class="discount-link">
+قائمة الإعفاءات من رسوم الدخول                </a>
+              </p>
+
+              <!-- Inline add-ons trigger under time slot -->
+              <p class="addons-inline">
+                <a href="#" class="addons-link" data-open="addons">
+اختر الإضافات (اختيارية)                </a>
+              </p>
+            </div>
+
+            <!-- Right: ticket categories (tabbed) -->
+<div>
+  <!-- GALLERIES TICKETS -->
+  <div id="ticket-categories-galleries" class="ticket-categories">
+    <div class="field-label" style="margin-bottom: 6px;">
+اختر التذاكر    </div>
+
+    <!-- Tabs -->
+    <div class="category-tabs">
+      <button
+        type="button"
+        class="category-tab is-active"
+        data-group-tab="Egyptians"
+      >
+        <span class="label">مصري</span>
+      </button>
+
+      <button
+        type="button"
+        class="category-tab"
+        data-group-tab="Arabs"
+      >
+        <span class="label">عربي أو أجنبي</span>
+      </button>
+
+      <button
+        type="button"
+        class="category-tab"
+        data-group-tab="Expatriates"
+      >
+        <span class="label">عربي أو أجنبي مقيم</span>
+      </button>
+    </div>
+
+    <div class="category-panels">
+      <!-- Egyptians -->
+      <div class="category-panel is-active" data-group-panel="Egyptians">
+        <div class="category-panel-header">مصري</div>
+
+        <!-- Adult + tooltip -->
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">بالغ</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                فوق 25 سنة - يطلب وثيقة تحقيق شخصية عند الدخول
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Egyptians"
+            data-type="Adult"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Egyptians"
+            data-type="Adult"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+
+        <!-- Child -->
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">طفل</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                من 6 إلى 12 سنة
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Egyptians"
+            data-type="Child"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Egyptians"
+            data-type="Child"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+
+        <!-- Student -->
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">طالب</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                من 13 إلى 25 سنة - يطلب كارنيه دراسة ساري عند الدخول
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Egyptians"
+            data-type="Student"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Egyptians"
+            data-type="Student"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+
+        <!-- Senior -->
+        <div class="ticket-row">
+<div class="ticket-label">
+            <span class="ticket-label-main">كبير السن</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                فوق 60 سنة - يطلب وثيقة تحقيق شخصية عند الدخول
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Egyptians"
+            data-type="Senior"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Egyptians"
+            data-type="Senior"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arabs / Other Nationalities -->
+      <div class="category-panel" data-group-panel="Arabs">
+        <div class="category-panel-header">عربي أو أجنبي</div>
+
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">بالغ</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                فوق 25 سنة - يطلب وثيقة تحقيق شخصية عند الدخول
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Arabs"
+            data-type="Adult"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Arabs"
+            data-type="Adult"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">طفل</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                من 6 إلى 12 سنة
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Arabs"
+            data-type="Child"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Arabs"
+            data-type="Child"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">طالب</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                من 13 إلى 25 سنة - يطلب كارنيه دراسة ساري عند الدخول
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Arabs"
+            data-type="Student"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Arabs"
+            data-type="Student"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expatriates -->
+      <div class="category-panel" data-group-panel="Expatriates">
+        <div class="category-panel-header">عربي أو أجنبي مقيم</div>
+
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">بالغ</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                فوق 25 سنة - يطلب وثيقة تحقيق شخصية عند الدخول
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Expatriates"
+            data-type="Adult"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Expatriates"
+            data-type="Adult"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">طفل</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                من 6 إلى 12 سنة
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Expatriates"
+            data-type="Child"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Expatriates"
+            data-type="Child"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+
+        <div class="ticket-row">
+          <div class="ticket-label">
+            <span class="ticket-label-main">طالب</span>
+
+            <span class="ticket-info-wrap">
+              <button
+                type="button"
+                class="ticket-info-btn"
+                aria-label="Adult ticket information"
+              >
+                i
+              </button>
+
+              <span class="ticket-info-tooltip">
+                من 13 إلى 25 سنة - يطلب كارنيه دراسة ساري عند الدخول
+              </span>
+            </span>
+          </div>
+
+          <div
+            class="ticket-price"
+            data-group="Expatriates"
+            data-type="Student"
+          ></div>
+
+          <div
+            class="counter"
+            data-group="Expatriates"
+            data-type="Student"
+          >
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">0</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional add-ons summary box (same step, only a teaser) 
+  <section class="addons-summary-panel">
+    <div class="addons-summary-body">
+      <h4>Optional add-ons</h4>
+      <p class="addons-tagline">
+        Enhance your visit with Children’s Museum, Discovery Challenge, audio guide,
+        and mixed reality experiences.
+      </p>
+    </div>
+
+    <div class="addons-summary-action">
+      <button
+        type="button"
+        class="btn-secondary"
+        data-open="addons"
+      >
+        Choose add-ons (optional)
+      </button>
+    </div>
+  </section>-->
+</div>
+
+          </div>
+
+          <div class="actions-row" style="margin-top:16px;">
+            <span class="muted">
+يلزم وجود تذكرة واحدة على الأقل. ستقوم بإدخال بيانات الزائر في الخطوة التالية.            </span>
+            <button class="primary-btn" id="go-step-3" disabled>
+              التالي ←
+            </button>
+          </div>
+        </section>
+
+<section id="step-addons" class="panel">
+  <div class="panel-header">
+    <h3>الإضافات</h3>
+    <button class="ghost-btn" type="button" id="back-to-1">
+تعديل الموعد والتذاكر →    </button>
+  </div>
+
+  <p class="panel-subtitle">
+أضف المزيد من المتعة إلى زيارتك مع متحف الأطفال، وتحدي اكتشاف المتحف، والدليل الصوتي، وتجربة الواقع المختلط.
+  </p>
+
+<div class="addons-modal-body">
+  <!-- متحف الطفل -->
+  <article class="addon-card">
+    <div class="addon-card-layout">
+      <figure class="addon-image">
+        <img src="cm.JPG" alt="متحف الطفل" loading="lazy" />
+      </figure>
+
+      <div class="addon-content">
+        <h3>متحف الطفل</h3>
+        <p class="addon-text">
+دعوة لجميع المستكشفين الصغار إلى مغامرة في مصر القديمة في محتف الأطفال بالمتحف المصري الكبير. تجربة مصممة لتُنمي شغف أطفالكم حول الحضارة المصرية القديمة، من خلال أنشطة تعليمية عملية تناسب أعمارهم.        </p>
+
+        <!-- عرض المزيد من المعلومات -->
+        <button
+          type="button"
+          class="addon-more-btn"
+          data-details-target="addon-details-children"
+        >
+          عرض المزيد من المعلومات
+        </button>
+        <ul class="addon-details hidden" id="addon-details-children">
+          <li>أنشطة تفاعلية مصممة للأطفال من عمر ٦ إلى ١٢ سنة.</li>
+          <li>مناطق تفاعلية تُعرّف الأطفال بالحضارة المصرية القديمة من خلال اللعب.</li>
+          <li>دليل تفاعلي لتحسين تجربة الزيارة.</li>
+          <li>يجب مرافقة الأطفال من قبل شخص بالغ في جميع الأوقات.</li>
+        </ul>
+
+        <div class="addon-main-row">
+          <div class="addon-price">
+            <span class="label">السعر</span>
+            <strong>١٥٠ جنيه مصري</strong>
+            <span class="per">للشخص الواحد</span>
+          </div>
+          <div class="counter addon-counter" data-addon="GEM Children Museum">
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">٠</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- تحدي اكتشاف المتحف المصري الكبير -->
+  <article class="addon-card" data-addon="gem-discovery">
+    <div class="addon-card-layout">
+      <figure class="addon-image">
+        <img src="childaddon.jpg" alt="تحدي اكتشاف المتحف المصري الكبير" loading="lazy" />
+      </figure>
+
+      <div class="addon-content">
+        <h3>رحلة البحث في المتحف المصري الكبير</h3>
+        <p class="addon-text">
+أضف متعة لزيارتك للمتحف المصري الكبير واشترك في رحلة البحث مع أصدقائك وعائلتك. تعرّف على مجموعة مختارة من القطع الأثرية التي تعرض حالياً في المتحف من خلال البحث عن أدلة، وحل الألغاز، وفك شفرة الكنز المخبأ. الفائزون يحصلون على هدية تذكارية من المتجر الرسمي للمتحف المصري الكبير.
+
+اللعبة متاحة يوميًا في الأوقات التالية : 12 ظهرًا، 2 عصرًا، 4 عصرًا، مع موعد إضافي في الساعة 6 مساءً يومي السبت والأربعاء.        </p>
+
+        <!-- عرض المزيد من المعلومات -->
+        <button
+          type="button"
+          class="addon-more-btn"
+          data-details-target="addon-details-discovery"
+        >
+          عرض المزيد من المعلومات
+        </button>
+        <ul class="addon-details hidden" id="addon-details-discovery">
+          <li>يجب أن يكون لكل مشارك تذكرته الخاصة</li>
+          <li>اللعبة مناسبة لجميع الأعمار</li>
+          <li>للأطفال أقل من 12 سنة يشترط وجود مرافق فوق 16 سنة او ولي امر معهم</li>
+          <li>المدة التقريبية: ٦٠ دقيقة.</li>
+                    <li>يحتاج المشاركون إلى هاتف ذكي للمشاركة في اللعبة
+</li>
+
+        </ul>
+
+        <div class="addon-main-row">
+          <div class="addon-price">
+            <span class="label">السعر</span>
+            <strong>١٢٥ جنيه مصري</strong>
+            <span class="per">للشخص الواحد</span>
+          </div>
+          <div class="counter addon-counter" data-addon="gem-discovery">
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">٠</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- الدليل الصوتي -->
+  <article class="addon-card" data-addon="audio-guide">
+    <div class="addon-card-layout">
+      <figure class="addon-image">
+        <img src="ag.webp" alt="الدليل الصوتي" loading="lazy" />
+      </figure>
+
+      <div class="addon-content">
+        <h3>الدليل الصوتي للمتحف المصري الكبير</h3>
+        <p class="addon-text">
+          استكشف قاعات العرض باستخدام دليل صوتي متعدد اللغات.
+        </p>
+
+        <!-- عرض المزيد من المعلومات -->
+        <button
+          type="button"
+          class="addon-more-btn"
+          data-details-target="addon-details-audio"
+        >
+          عرض المزيد من المعلومات
+        </button>
+        <ul class="addon-details hidden" id="addon-details-audio">
+          <li>متوفر بعدة لغات (حسب التوافر).</li>
+          <li>يشمل أبرز محطات قاعات العرض الرئيسية وقاعات توت عنخ آمون.</li>
+          <li>مدة الإيجار تغطي كامل فترة زيارتك.</li>
+          <li>تتوفر سماعات رأس، أو يمكنك استخدام سماعاتك الخاصة (مدخل ٣.٥ مم).</li>
+        </ul>
+
+        <div class="addon-main-row">
+          <div class="addon-price">
+            <span class="label">السعر</span>
+            <strong>٢٠٠ جنيه مصري</strong>
+            <span class="per">للجهاز الواحد</span>
+          </div>
+          <div class="counter addon-counter" data-addon="audio-guide">
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">٠</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- تجربة الواقع المختلط -->
+  <article class="addon-card" data-addon="mixed-reality">
+    <div class="addon-card-layout">
+      <figure class="addon-image">
+        <img src="MR.jpeg" alt="تجربة الواقع المختلط" loading="lazy" />
+      </figure>
+
+      <div class="addon-content">
+        <h3>تجربة الواقع المختلط</h3>
+        <p class="addon-text">
+          انغمس في رحلة واقع مختلط عبر الحضارة المصرية القديمة.
+        </p>
+
+        <!-- عرض المزيد من المعلومات -->
+        <button
+          type="button"
+          class="addon-more-btn"
+          data-details-target="addon-details-mr"
+        >
+          عرض المزيد من المعلومات
+        </button>
+        <ul class="addon-details hidden" id="addon-details-mr">
+          <li>تجربة واقع مختلط موجهة داخل مساحة مخصصة.</li>
+          <li>تمزج بين القطع الحقيقية والسرد الرقمي والمؤثرات البصرية.</li>
+          <li>موصى بها للأعمار من ٨ سنوات فأكثر؛ وقد لا تكون مناسبة للأشخاص
+              الحساسين للأضواء الوميضية.</li>
+          <li>المدة التقريبية: من ٢٠ إلى ٣٠ دقيقة.</li>
+        </ul>
+
+        <div class="addon-main-row">
+          <div class="addon-price">
+            <span class="label">السعر</span>
+            <strong>٢٠٠ جنيه مصري</strong>
+            <span class="per">للشخص الواحد</span>
+          </div>
+          <div class="counter addon-counter" data-addon="mixed-reality">
+            <button type="button" class="btn-dec">−</button>
+            <span class="count">٠</span>
+            <button type="button" class="btn-inc">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+
+  <footer class="step-footer">
+    <button
+      type="button"
+      class="secondary-btn"
+      data-addons-action="skip"
+    >
+      Skip for now
+    </button>
+
+    <button
+      type="button"
+      class="primary-btn"
+      id="addons-next"
+      data-addons-action="confirm"
+      disabled
+    >
+      Add to booking
+    </button>
+  </footer>
+</section>
+
+
+
+        <!-- STEP 2 = CONTACT -->
+<section class="panel hidden" id="step-3">
+  <div class="panel-header">
+    <h3>بيانات التواصل</h3>
+    <button class="ghost-btn" type="button" id="back-to-2">→ تعديل الإضافات</button>
+  </div>
+  <p class="panel-subtitle">
+    سنرسل تأكيد الحجز والتذاكر إلى هذه البيانات.
+  </p>
+
+  <div class="fields-grid">
+    <div class="field-group">
+      <div class="field-label">الاسم بالكامل</div>
+      <input type="text" id="contact-name" placeholder="الاسم كما هو مكتوب في الهوية" />
+      <div class="error-text hidden" data-error="name">يرجى إدخال اسمك.</div>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">البريد الإلكتروني</div>
+      <input type="email" id="contact-email" placeholder="you@example.com" />
+      <div class="error-text hidden" data-error="email">يرجى إدخال بريد إلكتروني صحيح.</div>
+    </div>
+
+    <div class="field-group">
+      <div class="field-label">رقم الموبايل</div>
+
+      <div class="phone-field">
+        <!-- كود الدولة -->
+        <div class="phone-country">
+          <select id="phone-country" name="phone-country">
+            <option value="EG" selected>EG +20 مصر</option>
+            <option value="US">US +1 الولايات المتحدة</option>
+            <option value="GB">GB +44 المملكة المتحدة</option>
+            <!-- …باقي الدول… -->
+          </select>
+        </div>
+
+        <!-- الرقم المحلي -->
+        <input
+          type="tel"
+          id="contact-phone"
+          class="phone-input"
+          placeholder="١٢٣ ٤٥٦ ٧٨٩"
+        />
+      </div>
+
+      <div class="error-text hidden" data-error="phone">
+        يرجى إدخال رقم الهاتف.
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label" for="select_country">
+        الجنسية
+      </label>
+      <select required name="select_country" id="select_country">
+        <option value="" disabled selected hidden>اختر الدولة…</option>
+        <option value="Egypt">مصر (‫مصر‬‎)</option><option value="Afghanistan">أفغانستان (‫افغانستان‬‎)</option><option value="Albania">ألبانيا (Shqipëri)</option><option value="Algeria">الجزائر (‫الجزائر‬‎)</option><option value="American Samoa">ساموا الأمريكية</option><option value="Andorra">أندورا</option><option value="Angola">أنغولا</option><option value="Anguilla">أنغويلا</option><option value="Antigua and Barbuda">أنتيغوا وبربودا</option><option value="Argentina">الأرجنتين</option><option value="Armenia">أرمينيا (Հայաստան)</option><option value="Aruba">أروبا</option><option value="Ascension Island">جزيرة أسينشين</option><option value="Australia">أستراليا</option><option value="Austria">النمسا (Österreich)</option><option value="Azerbaijan">أذربيجان (Azərbaycan)</option><option value="Bahamas">جزر البهاما</option><option value="Bahrain">البحرين (‫البحرين‬‎)</option><option value="Bangladesh">بنغلاديش (বাংলাদেশ)</option><option value="Barbados">باربادوس</option><option value="Belarus">بيلاروسيا (Беларусь)</option><option value="Belgium">بلجيكا (België)</option><option value="Belize">بليز</option><option value="Benin">بنين (Bénin)</option><option value="Bermuda">برمودا</option><option value="Bhutan">بوتان (འབྲུག)</option><option value="Bolivia">بوليفيا</option><option value="Bosnia and Herzegovina">البوسنة والهرسك (Босна и Херцеговина)</option><option value="Botswana">بوتسوانا</option><option value="Brazil">البرازيل (Brasil)</option><option value="British Indian Ocean Territory">إقليم المحيط الهندي البريطاني</option><option value="British Virgin Islands">جزر العذراء البريطانية</option><option value="Brunei">بروناي</option><option value="Bulgaria">بلغاريا (България)</option><option value="Burkina Faso">بوركينا فاسو</option><option value="Burundi">بوروندي (Uburundi)</option><option value="Cambodia">كمبوديا (កម្ពុជា)</option><option value="Cameroon">الكاميرون (Cameroun)</option><option value="Canada">كندا</option><option value="Cape Verde">الرأس الأخضر (Kabu Verdi)</option><option value="Caribbean Netherlands">هولندا الكاريبية</option><option value="Cayman Islands">جزر كايمان</option><option value="Central African Republic">جمهورية أفريقيا الوسطى (République centrafricaine)</option><option value="Chad">تشاد (Tchad)</option><option value="Chile">تشيلي</option><option value="China">الصين (中国)</option><option value="Czech Republic">التشيك (Česká republika)</option><option value="Denmark">الدنمارك (Danmark)</option><option value="Djibouti">جيبوتي</option><option value="Dominica">دومينيكا</option><option value="Dominican Republic">جمهورية الدومينيكان (República Dominicana)</option><option value="Ecuador">الإكوادور</option><option value="El Salvador">السلفادور</option><option value="Equatorial Guinea">غينيا الاستوائية (Guinea Ecuatorial)</option><option value="Eritrea">إريتريا</option><option value="Estonia">إستونيا (Eesti)</option><option value="Eswatini">إسواتيني</option><option value="Ethiopia">إثيوبيا</option><option value="Falkland Islands">جزر فوكلاند (Islas Malvinas)</option><option value="Faroe Islands">جزر فارو (Føroyar)</option><option value="Fiji">فيجي</option><option value="Finland">فنلندا (Suomi)</option><option value="France">فرنسا</option><option value="French Guiana">غويانا الفرنسية (Guyane française)</option><option value="French Polynesia">بولينيزيا الفرنسية (Polynésie française)</option><option value="Gabon">الغابون</option><option value="Gambia">غامبيا</option><option value="Georgia">جورجيا (საქართველო)</option><option value="Germany">ألمانيا (Deutschland)</option><option value="Ghana">غانا (Gaana)</option><option value="Gibraltar">جبل طارق</option><option value="Greece">اليونان (Ελλάδα)</option><option value="Greenland">غرينلاند (Kalaallit Nunaat)</option><option value="Grenada">غرينادا</option><option value="Guadeloupe">غوادلوب</option><option value="Guam">غوام</option><option value="Guatemala">غواتيمالا</option><option value="Guernsey">غيرنزي</option><option value="Guinea">غينيا (Guinée)</option><option value="Guinea-Bissau">غينيا بيساو (Guiné Bissau)</option><option value="Guyana">غيانا</option><option value="Haiti">هايتي</option><option value="Honduras">هندوراس</option><option value="Hungary">المجر (Magyarország)</option><option value="Iceland">آيسلندا (Ísland)</option><option value="India">الهند (भारत)</option><option value="Indonesia">إندونيسيا</option><option value="Iran">إيران (‫ایران‬‎)</option><option value="Iraq">العراق (‫العراق‬‎)</option><option value="Ireland">أيرلندا</option><option value="Isle of Man">جزيرة مان</option><option value="Israel">إسرائيل (‫ישראל‬‎)</option><option value="Italy">إيطاليا (Italia)</option><option value="Jamaica">جامايكا</option><option value="Japan">اليابان (日本)</option><option value="Jersey">جيرسي</option><option value="Jordan">الأردن (‫الأردن‬‎)</option><option value="Kazakhstan">كازاخستان (Казахстан)</option><option value="Kenya">كينيا</option><option value="Kiribati">كيريباس</option><option value="Kosovo">كوسوفو</option><option value="Kuwait">الكويت (‫الكويت‬‎)</option><option value="Kyrgyzstan">قيرغيزستان (Кыргызстан)</option><option value="Laos">لاوس (ລາວ)</option><option value="Latvia">لاتفيا (Latvija)</option><option value="Lebanon">لبنان (‫لبنان‬‎)</option><option value="Lesotho">ليسوتو</option><option value="Liberia">ليبيريا</option><option value="Libya">ليبيا (‫ليبيا‬‎)</option><option value="Liechtenstein">ليختنشتاين</option><option value="Lithuania">ليتوانيا (Lietuva)</option><option value="Luxembourg">لوكسمبورغ</option><option value="North Macedonia">مقدونيا الشمالية (Македонија)</option><option value="Madagascar">مدغشقر (Madagasikara)</option><option value="Malawi">مالاوي</option><option value="Malaysia">ماليزيا</option><option value="Maldives">المالديف</option><option value="Mali">مالي</option><option value="Malta">مالطا</option><option value="Marshall Islands">جزر مارشال</option><option value="Martinique">مارتينيك</option><option value="Mauritania">موريتانيا (‫موريتانيا‬‎)</option><option value="Mauritius">موريشيوس (Moris)</option><option value="Mayotte">مايوت</option><option value="Mexico">المكسيك (México)</option><option value="Micronesia">ميكرونيزيا</option><option value="Moldova">مولدوفا (Republica Moldova)</option><option value="Monaco">موناكو</option><option value="Mongolia">منغوليا (Монгол)</option><option value="Montenegro">الجبل الأسود (Crna Gora)</option><option value="Montserrat">مونتسرات</option><option value="Morocco">المغرب (‫المغرب‬‎)</option><option value="Mozambique">موزمبيق (Moçambique)</option><option value="Myanmar">ميانمار (بورما) (မြန်မာ)</option><option value="Namibia">ناميبيا (Namibië)</option><option value="Nauru">ناورو</option><option value="Nepal">نيبال (नेपाल)</option><option value="Netherlands">هولندا (Nederland)</option><option value="New Caledonia">كاليدونيا الجديدة (Nouvelle-Calédonie)</option><option value="New Zealand">نيوزيلندا</option><option value="Nicaragua">نيكاراغوا</option><option value="Niger">النيجر (Nijar)</option><option value="Nigeria">نيجيريا</option><option value="Niue">نيوي</option><option value="Norfolk Island">جزيرة نورفولك</option><option value="North Korea">كوريا الشمالية (조선 민주주의 인민 공화국)</option><option value="Northern Mariana Islands">جزر ماريانا الشمالية</option><option value="Norway">النرويج (Norge)</option><option value="Oman">عُمان (‫عُمان‬‎)</option><option value="Pakistan">باكستان (‫پاکستان‬‎)</option><option value="Palau">بالاو</option><option value="Palestine">فلسطين (‫فلسطين‬‎)</option><option value="Panama">بنما (Panamá)</option><option value="Papua New Guinea">بابوا غينيا الجديدة</option><option value="Paraguay">باراغواي</option><option value="Peru">بيرو (Perú)</option><option value="Philippines">الفلبين</option><option value="Poland">بولندا (Polska)</option><option value="Portugal">البرتغال</option><option value="Puerto Rico">بورتوريكو</option><option value="Qatar">قطر (‫قطر‬‎)</option><option value="Réunion">ريونيون (La Réunion)</option><option value="Romania">رومانيا (România)</option><option value="Russia">روسيا (Россия)</option><option value="Rwanda">رواندا</option><option value="Saint Barthélemy">سان بارتيليمي</option><option value="Saint Helena">سانت هيلينا</option><option value="Saint Kitts and Nevis">سانت كيتس ونيفيس</option><option value="Saint Lucia">سانت لوسيا</option><option value="Saint Martin">سان مارتن (Saint-Martin (partie française))</option><option value="Saint Pierre and Miquelon">سان بيير وميكلون (Saint-Pierre-et-Miquelon)</option><option value="Saint Vincent and the Grenadines">سانت فنسنت والغرينادين</option><option value="Samoa">ساموا</option><option value="San Marino">سان مارينو</option><option value="São Tomé and Príncipe">ساو تومي وبرينسيبي (São Tomé e Príncipe)</option><option value="Saudi Arabia">المملكة العربية السعودية (‫المملكة العربية السعودية‬‎)</option><option value="Senegal">السنغال (Sénégal)</option><option value="Serbia">صربيا (Србија)</option><option value="Seychelles">سيشل</option><option value="Sierra Leone">سيراليون</option><option value="Singapore">سنغافورة</option><option value="Sint Maarten">سينت مارتن</option><option value="Slovakia">سلوفاكيا (Slovensko)</option><option value="Slovenia">سلوفينيا (Slovenija)</option><option value="Solomon Islands">جزر سليمان</option><option value="Somalia">الصومال (Soomaaliya)</option><option value="South Africa">جنوب أفريقيا</option><option value="South Korea">كوريا الجنوبية (대한민국)</option><option value="South Sudan">جنوب السودان (‫جنوب السودان‬‎)</option><option value="Spain">إسبانيا (España)</option><option value="Sri Lanka">سريلانكا (ශ්‍රී ලංකාව)</option><option value="Sudan">السودان (‫السودان‬‎)</option><option value="Suriname">سورينام</option><option value="Svalbard and Jan Mayen">سفالبارد ويان ماين</option><option value="Sweden">السويد (Sverige)</option><option value="Switzerland">سويسرا (Schweiz)</option><option value="Syria">سوريا (‫سوريا‬‎)</option><option value="Tajikistan">طاجيكستان</option><option value="Tanzania">تنزانيا</option><option value="Thailand">تايلاند (ไทย)</option><option value="Timor-Leste">تيمور الشرقية</option><option value="Togo">توغو</option><option value="Tokelau">توكيلاو</option><option value="Tonga">تونغا</option><option value="Trinidad and Tobago">ترينيداد وتوباغو</option><option value="Tunisia">تونس (‫تونس‬‎)</option><option value="Turkey">تركيا (Türkiye)</option><option value="Turkmenistan">تركمانستان</option><option value="Turks and Caicos Islands">جزر توركس وكايكوس</option><option value="Tuvalu">توفالو</option><option value="U.S. Virgin Islands">جزر العذراء الأمريكية</option><option value="Uganda">أوغندا</option><option value="Ukraine">أوكرانيا (Україна)</option><option value="United Arab Emirates">الإمارات العربية المتحدة (‫الإمارات العربية المتحدة‬‎)</option><option value="United Kingdom">المملكة المتحدة</option><option value="United States">الولايات المتحدة</option><option value="Uruguay">أوروغواي</option><option value="Uzbekistan (Oʻzbekiston)">أوزبكستان (Oʻzbekiston)</option><option value="Vanuatu">فانواتو</option><option value="Vatican City (Città del Vaticano)">مدينة الفاتيكان (Città del Vaticano)</option><option value="Venezuela">فنزويلا</option><option value="Vietnam (Việt Nam)">فيتنام (Việt Nam)</option><option value="Wallis and Futuna (Wallis-et-Futuna)">واليس وفوتونا (Wallis-et-Futuna)</option><option value="Western Sahara (‫الصحراء الغربية‬‎)">الصحراء الغربية (‫الصحراء الغربية‬‎)</option><option value="Yemen (‫اليمن‬‎)">اليمن (‫اليمن‬‎)</option><option value="Zambia">زامبيا</option><option value="Zimbabwe">زيمبابوي</option><option value="Åland Islands">جزر أولاند</option><option value="Other">أخرى</option>
+      </select>
+
+      <div class="error-text hidden" data-error="phone">يرجى اختيار الجنسية</div>
+
+      <p id="select_country_error" class="text-danger mb-3 d-none error-message"></p>
+    </div>
+  </div>
+
+  <div class="actions-row" style="margin-top:18px;">
+    <span class="muted">
+      ستراجع حجزك في الشاشة التالية قبل الدفع.
+    </span>
+    <button class="primary-btn" id="open-terms">
+      التالي ←
+    </button>
+  </div>
+</section>
+
+<!-- STEP 3 = REVIEW & PAY -->
+<section class="panel hidden" id="step-4">
+  <div class="panel-header">
+    <h3>مراجعة الحجز والدفع</h3>
+    <button class="ghost-btn" type="button" id="back-to-3">→ تعديل بيانات التواصل</button>
+  </div>
+  <p class="panel-subtitle">
+    يرجى التأكد من صحة جميع البيانات قبل المتابعة إلى الدفع.
+  </p>
+
+  <ul class="summary-list" id="summary-basic"></ul>
+
+  <!-- 🔹 Promo code block (NEW) -->
+  <div class="promo-box">
+    <label for="promo-code">كود الخصم (اختياري)</label>
+    <div class="promo-input-row">
+      <input
+        type="text"
+        id="promo-code"
+        placeholder="أدخل الكود"
+        autocomplete="off"
+      />
+      <button type="button" class="secondary-btn" id="promo-apply">
+        تطبيق
+      </button>
+    </div>
+    <p class="promo-message" id="promo-message"></p>
+  </div>
+  <!-- 🔹 End promo block -->
+
+  <div class="summary-table" id="summary-tickets"></div>
+
+  <div class="actions-row" style="margin-top:16px;">
+    <button class="primary-btn" type="button" id="pay-btn">
+      المتابعة إلى الدفع (نسخة تجريبية)
+    </button>
+  </div>
+</section>
+
+
+      </div>
+
+      <!-- RIGHT CART -->
+<aside>
+  <div class="cart-panel">
+    <div class="cart-header">
+      <h3>اختياراتك</h3>
+      <span class="badge" id="cart-badge">لم يتم اختيار أي تذاكر بعد</span>
+    </div>
+
+    <div class="cart-main">
+      <div class="cart-row">
+        <span>التاريخ</span>
+        <span id="cart-date">—</span>
+      </div>
+
+      <div class="cart-row">
+        <span class="cart-label" id="cart-time-label">وقت الدخول</span>
+        <span class="cart-value" id="cart-time">—</span>
+      </div>
+
+      <div class="cart-row">
+        <span>التذاكر</span>
+        <span id="cart-count">0</span>
+      </div>
+
+      <div class="cart-row cart-row-addon hidden" id="cart-addon-row">
+        <span id="cart-addon-summary" class="cart-addon-summary"></span>
+      </div>
+
+      <div class="cart-row">
+        <span>الإجمالي</span>
+        <strong id="cart-total">0 EGP</strong>
+      </div>
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-note">
+        هذه واجهة تجريبية. الأسعار والتفاصيل المعروضة هنا لأغراض توضيحية فقط.
+      </div>
+    </div>
+  </div>
+</aside>
+
+    </div>
+
+    <!-- MOBILE MINI CART -->
+    <div id="mobile-cart-bar" class="mobile-cart-bar">
+      <button type="button" id="mobile-cart-btn">
+        <div class="mobile-cart-text">
+          <div class="mobile-cart-title">Your selection</div>
+          <div class="mobile-cart-summary">
+            <span id="mobile-cart-count">0</span> ticket(s) ·
+            <span id="mobile-cart-total">0 EGP</span>
+
+          </div>
+        </div>
+        <div class="mobile-cart-cta">
+          View
+        </div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ADD-ONS MODAL (true popup, same pattern as Terms) -->
+<!-- OTP modal (simulation only) -->
+<div class="modal-backdrop hidden" id="otp-modal">
+  <div class="modal otp-modal">
+    <header class="modal-header">
+      <h3>إدخال رمز التحقق</h3>
+      <button type="button" class="modal-close" id="otp-close">×</button>
+    </header>
+
+    <div class="modal-body">
+      <p>
+        لقد قمنا بإرسال رمز تحقق مكوّن من 4 أرقام إلى بريدك الإلكتروني.
+        يرجى إدخاله أدناه للمتابعة.
+      </p>
+
+      <div class="otp-inputs">
+        <input type="text" class="otp-digit" inputmode="numeric" maxlength="1" />
+        <input type="text" class="otp-digit" inputmode="numeric" maxlength="1" />
+        <input type="text" class="otp-digit" inputmode="numeric" maxlength="1" />
+        <input type="text" class="otp-digit" inputmode="numeric" maxlength="1" />
+      </div>
+
+      <p class="otp-error hidden" id="otp-error">
+        الرمز الذي أدخلته غير صحيح. يرجى المحاولة مرة أخرى.
+      </p>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="button" class="secondary-btn" id="otp-cancel">إلغاء</button>
+      <button type="button" class="primary-btn" id="otp-confirm">تأكيد</button>
+    </footer>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- ADD-ONS MODAL -->
+
+
+  <!-- DISCOUNTS MODAL -->
+<div class="modal-backdrop hidden" id="discounts-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>قائمة الإعفاءات من رسوم الدخول</h3>
+      <button class="modal-close" type="button" data-close="discounts">×</button>
+    </div>
+
+    <div class="modal-body">
+      <p>
+        يجب تقديم بطاقة هوية سارية للتحقق من أهلية الحصول على إعفاء من رسوم الدخول أو خصومات.
+      </p>
+
+      <h4>الدخول مجاني للفئات التالية طوال أيام الأسبوع:</h4>
+      <ul>
+        <li>الأطفال دون سن السادسة</li>
+        <li>الزوار من ذوي الاحتياجات الخاصة</li>
+        <li>المرشدون السياحيون المصريون المرافقون لمجموعة</li>
+        <li>أعضاء المجلس الدولي للمتاحف (ICOM)</li>
+      </ul>
+
+      <h4>الدخول مجاني للفئات التالية باستثناء يوم الجمعة والعطلات الرسمية:</h4>
+      <ul>
+        <li>الطلاب المصريون بالجامعات الحكومية في كلية الآثار</li>
+        <li>أعضاء هيئة التدريس المصريون والهيئة المعاونة بالجامعات الحكومية في كلية الآثار</li>
+      </ul>
+
+      <h4>الدخول مجاني للفئات التالية باستثناء العطلات الأسبوعية والرسمية:</h4>
+      <ul>
+        <li>المرشدون السياحيون المصريون</li>
+        <li>المحاربون القدامى المصريون</li>
+        <li>أفراد أسر الشهداء المصريين</li>
+        <li>موظفو وزارة السياحة والآثار</li>
+        <li>
+          الصحفيون المعتمدون لدى وزارة السياحة والآثار
+          (يشترط التنسيق المسبق مع هيئة الآثار)
+        </li>
+        <li>
+          الطلاب المصريون بالجامعات الحكومية في كليات التاريخ والحضارة والتراث والمتاحف
+          والسياحة والإرشاد السياحي والعمارة والفنون الجميلة والفنون التطبيقية والتربية الفنية
+        </li>
+        <li>
+          أعضاء هيئة التدريس المصريون والهيئة المعاونة بالجامعات الحكومية في كليات التاريخ
+          والحضارة والتراث والمتاحف والسياحة والإرشاد السياحي والعمارة والفنون الجميلة
+          والفنون التطبيقية والتربية الفنية
+        </li>
+        <li>
+          الطلاب المصريون بالمدارس الحكومية الابتدائية والإعدادية، بعد تقديم خطاب رسمي
+          من المدرسة قبل موعد الزيارة بشهر على الأقل
+        </li>
+        <li>
+          الأيتام، عند تقديم خطاب رسمي من جمعية أو مؤسسة رعاية الأيتام
+          قبل موعد الزيارة بشهر على الأقل
+        </li>
+      </ul>
+
+      <h4>تذكرة الدخول بالسعر المصري</h4>
+      <p>
+        غير المصري المتزوج بمصرية وأبناؤهم، وكذلك المصرية المتزوجة من غير مصري وأبناؤها،
+        مؤهلون لشراء تذكرة الدخول المصرية. يجب تقديم ما يثبت العلاقة:
+        بطاقة هوية أو شهادة ميلاد للأطفال، وشهادة زواج للزوج أو الزوجة.
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button class="secondary-btn" type="button" data-close="discounts">إغلاق</button>
+    </div>
+  </div>
+</div>
+
+  <!-- TERMS MODAL -->
+<div class="modal-backdrop hidden" id="terms-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>قواعد وتعليمات الزيارة</h3>
+      <button class="modal-close" type="button" data-close="terms">×</button>
+    </div>
+
+    <div class="modal-body" id="terms-body">
+      <p class="scroll-hint" id="terms-hint">
+        يرجى التمرير حتى نهاية النص لتفعيل زر «موافقة».
+      </p>
+
+      <p>
+        تم وضع القواعد والتعليمات التالية لضمان سلامة الزوار والعاملين والمقتنيات الأثرية، والحفاظ على بيئة آمنة ومحترمة وممتعة للجميع داخل المتحف المصري الكبير.
+      </p>
+      <p>
+        بشرائكم تذكرة الزيارة وبدخولكم المتحف، فإنكم توافقون على الالتزام بهذه القواعد والتعليمات، واتباع أي توجيهات إضافية تصدر عن موظفي المتحف.
+      </p>
+
+      <p><strong>السياسات العامة</strong></p>
+      <p>• يُمنع إحضار الأطعمة والمشروبات من الخارج إلى داخل المتحف.</p>
+      <p>• يُحظر تمامًا تناول المشروبات الكحولية داخل المتحف.</p>
+      <p>• يُمنع التدخين بجميع انواعه في جميع أرجاء المتحف، باستثناء المناطق الخارجية المخصصة لذلك.</p>
+      <p>• يجب على الزائرين التحلي بالسلوك اللائق في جميع الأوقات، ولن يتم التسامح مع أي سلوك عدواني أو غير لائق أو مهين، بما في ذلك الضوضاء المفرطة أو الألفاظ المسيئة، ويحتفظ المتحف بحقه في إخراج أي زائر من الموقع دون استرداد قيمة التذكر فضلاً عن اتخاذ الإجراءات القانونية إذا اقتضى الامر.</p>
+      <p>• يجب ارتداء الملابس المناسبة في جميع الأوقات.</p>
+      <p>• لا يُسمح للزائرين بخلع الأحذية أو الاستلقاء على المقاعد أو الأرض أو القيام بتصرفات لا تليق ببيئة المتحف.</p>
+      <p>• يُمنع إلقاء القمامة أو إلحاق أي ضرر بمرافق المتحف أو أثاثه أو حدائقه.</p>
+      <p>• يجب على الزائرين الالتزام بجميع اللوحات الإرشادية وتعليمات موظفي المتحف.</p>
+      <p>• يوافق الزائر على إمكانية تصويره أثناء الزيارة، ويحتفظ المتحف بحقه في استخدام هذه الصور والمقاطع لأغراض تسويقية أو دعائية.</p>
+      <p>• يوافق الزائر على إمكانية استخدام بياناته الشخصية للأغراض الترويجية والتسويقية والتجارية الخاصة بالمتحف وبما لا يخالف احكام القوانين واللوائح المطبقة.</p>
+      <p>• يخضع الزوار ومتعلقاتهم للتفتيش قبل دخول المتحف.</p>
+      <p>• لا يجوز للزائرين البقاء في المتحف خارج مواعيد العمل الرسمية بدون تصريح من إدارة المتحف.</p>
+      <p>• يحظر على الزائرين القيام باي أنشطة تجارية، او تسويقية، او إعلانية، او دعائية، او جمع تبرعات، او جمع توقيعات، الا بتصريح مسبق من إدارة المتحف.</p>
+      <p>• يتم وقف عملية بيع التذاكر قبل ساعة من مواعيد الغلق الرسمية للمتحف او قبل ذلك حال الوصول للطاقة الاستيعابية القصوى للمتحف.</p>
+      <p>• يحق لموظفي المتحف طلب الاطلاع على تذكرة الزيارة في أي وقت اثناء الزيارة.</p>
+
+      <p><strong>المواد المحظور إدخالها</strong></p>
+      <p>حرصًا على سلامة الزائرين وحماية المقتنيات، يُمنع إدخال المواد أو الأدوات التالية إلى داخل المتحف:</p>
+      <p>• الحقائب أو الأمتعة أو الطرود التي يتجاوز حجمها ٤٠ × ٤٠ سم. يجب إيداعها في المناطق المخصصة قبل الدخول.</p>
+      <p>• يجب استعادة الحقائب والأمتعة او الطرود التي يتم ايداعها في المناطق المخصصة لذلك خلال نفس يوم الزيارة وقبل موعد اغلاق المتحف. ولن تكون إدارة المتحف مسؤولة عن أي من الحقائب او الامتعة او الطرود التي تترك لمدة أطول.</p>
+      <p>• الأسلحة أو الأدوات الحادة أو المواد الخطرة (مثل السكاكين، أو المقصات، أو المفكات أو الأسلحة النارية).</p>
+      <p>• الآلات الموسيقية.</p>
+      <p>• الحيوانات الأليفة.</p>
+      <p>• اللافتات أو اللوحات الدعائية أو الأعلام، إلا بعد الحصول على موافقة إدارة المتحف.</p>
+      <p>• المقاعد القابلة للطي أو أي وسيلة جلوس شخصية، إلا بإذن من أمن المتحف.</p>
+      <p>• المظلات وما يشابهها، ويجب تركها في المناطق المخصصة قبل الدخول.</p>
+      <p>• تخضع جميع الحقائب والممتلكات الشخصية للتفتيش الأمني في أي وقت.</p>
+      <p>• يجب إضافة بخاخات الدهان الملونة او بخاخات الطلاء بالرذاذ مثل (الصبغة، والاسبراي) والتي قد تستخدم لإتلاف المقتنيات.</p>
+
+      <p><strong>داخل قاعات العرض</strong></p>
+      <p>يُرجى من الزائرين التحلي بالاحترام والحرص أثناء التجوّل داخل قاعات العرض:</p>
+      <p>• يُمنع لمس القطع الأثرية أو واجهات العرض أو الخزائن الزجاجية.</p>
+      <p>• يُمنع تناول الأطعمة والمشروبات داخل القاعات، باستثناء زجاجات المياه الصغيرة.</p>
+      <p>• يُحظر استخدام الكشافات أو مؤشرات الليزر أو التصوير بالفلاش.</p>
+      <p>• يُمنع البث المباشر واستخدام الأجهزة الصوتية.</p>
+      <p>• يتعين التحدث بصوت منخفض وتجنّب الوقوف في الممرات أو إعاقة حركة الزوار الآخرين.</p>
+
+      <p><strong>العائلات والأطفال</strong></p>
+      <p>• يجب أن يكون الأطفال من دون الخامسة عشر عاماً برفقة شخص بالغ في جميع الأوقات أثناء التواجد داخل المتحف.</p>
+      <p>• يُمنع الجري أو اللعب أو القيام بأي تصرف قد يسبب إزعاجًا أو ضررًا للمعروضات أو الزائرين.</p>
+
+      <p><strong>التصوير والتصوير المرئي</strong></p>
+      <p>• يُسمح بالتصوير الفوتوغرافي أو المرئي الشخصي وغير التجاري داخل المتحف.</p>
+      <p>• يُمنع استخدام الأدوات التالية: الحوامل الثلاثية (الترايبود)، الحوامل الأحادية، عصيّ السيلفي، الطائرات المسيّرة، وحدات الإضاءة الخارجية، وأجهزة البث المباشر.</p>
+      <p>• يُمنع التصوير بالفلاش او أي الية اضاءة.</p>
+      <p>• لا يجوز تصوير الزائرين الآخرين أو موظفي المتحف دون الحصول على موافقتهم.</p>
+      <p>• يتطلب التصوير أو التصوير المرئي لأغراض تجارية (التلفزيون، السينما، الإعلانات، الأفلام الوثائقية وغيرها) الحصول على: موافقة خطية مسبقة من إدارة المتحف ودفع الرسوم المقررة.</p>
+      <p>• يُسمح بالتصوير باستخدام الهواتف المحمولة فقط في المناطق التي يُحظر فيها استخدام الكاميرات.</p>
+
+      <p><strong>قواعد الرسم داخل القاعات</strong></p>
+      <p>يُسمح للزائرين الذين يرغبون في الرسم داخل القاعات بالالتزام بالقواعد التالية:</p>
+      <p>• يُسمح باستخدام الأقلام الرصاص فقط، ويُمنع استخدام الأقلام الجافة أو الماركر.</p>
+      <p>• يجب ألا تتجاوز دفاتر الرسم مقاس ٤٥ × ٦٠ سم (١٨ × ٢٤ بوصة).</p>
+      <p>• يجب عدم إعاقة حركة الزوار أو الوقوف في الممرات.</p>
+      <p>• يجب توخي الحذر لتجنّب ملامسة واجهات العرض أو القطع الأثرية.</p>
+
+      <p><strong>إجراءات الطوارئ</strong></p>
+      <p>في حال وقوع حدث طارئ، يجب على الزائرين اتباع تعليمات موظفي المتحف فورًا:</p>
+      <p>• في حال حدوث زلزال، يُرجى الابتعاد عن التماثيل الكبيرة وخزائن العرض وأي أجسام غير ثابتة.</p>
+      <p>• في حال نشوب حريق أو أي طارئ آخر، يُرجى اتباع مسارات الإخلاء المحددة وانتظار تعليمات موظفي المتحف.</p>
+
+      <p><strong>إخلاء المسؤولية</strong></p>
+      <p>• لا يتحمّل المتحف أي مسؤولية عن فقدان أو تلف الممتلكات الشخصية، أو عن أي إصابات قد يتعرض لها الزوار أثناء الزيارة.</p>
+      <p>• يتحمل الزائر كامل المسؤولية عن سلامته الشخصية وسلوكه أثناء التواجد داخل المتحف.</p>
+
+      <p><strong>شروط وأحكام التذاكر</strong></p>
+      <p>• لا يمكن استرداد قيمة التذاكر بعد شرائها، بغض النظر عن وسيلة الشراء (المنصة الإلكترونية، ماكينات الخدمة الذاتية، أو الشراء المباشر)، إلا في حالات الضرورة والتي تقدرها إدارة المتحف.</p>
+      <p>• التذاكر غير قابلة للتحويل، ويُسمح باستخدامها فقط من قبل الشخص المسجّل اسمه في الحجز.</p>
+      <p>• تكون التذاكر صالحة فقط في التاريخ والوقت المحددين عليها. عدم استخدام التذكرة في موعدها لا يخول صاحبها استرداد قيمتها أو استبدالها. يتحمل الزائر مسؤولية الالتزام بمواعيد العمل الرسمية للمتحف.</p>
+      <p>• التذكرة صالحة لدخول واحد فقط. لا يُسمح بإعادة الدخول إلى المتحف بعد مغادرة الزائر للموقع.</p>
+      <p>• يحتفظ المتحف بحقه في إلغاء أو تأجيل أو إعادة جدولة أي فعالية أو جولة دون إشعار مسبق.</p>
+      <p>• يحتفظ المتحف بحقه في رفض دخول أي زائر أو إخراجه في حال مخالفته للوائح المتحف دون استرداد قيمة التذكرة.</p>
+      <p>• في حال الإلغاء أو التأجيل، يمكن منح حاملي التذاكر قسيمة لزيارة أو جولة مستقبلية.</p>
+      <p>• بشراء التذكرة أو استخدامها، يُقرّ الزائر بموافقته على جميع القواعد والتعليمات المعمول بها في المتحف وقت الزيارة.</p>
+
+      <p>⸻</p>
+    </div>
+
+    <div class="modal-footer">
+      <button class="secondary-btn" type="button" data-close="terms">إغلاق</button>
+      <button class="primary-btn" type="button" id="terms-accept" disabled>
+        قرأت وأوافق
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- IMPORTANT INFORMATION MODAL -->
+<div class="modal-backdrop hidden" id="info-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>معلومات هامة</h3>
+      <button class="modal-close" type="button" data-close="info">×</button>
+    </div>
+
+    <div class="modal-body" id="info-body">
+      <p>• لحجوزات الشركات ووكالات السفر، يُرجى التواصل عبر البريد الإلكتروني <strong>booking@legacy.com.eg</strong>.</p>
+      <p>• للاستفسارات أو حجوزات الفعاليات، يُرجى التواصل عبر البريد الإلكتروني <strong>events@legacy.com.eg</strong>.</p>
+      <p>• لحجوزات المدارس والجامعات، يُرجى التواصل عبر البريد الإلكتروني <strong>learning@gem.eg</strong>.</p>
+      <p>• يُسمح بالتصوير الفوتوغرافي والمرئي الشخصي (باستخدام الهاتف المحمول أو الكاميرا) باستثناء قاعات توت عنخ آمون، حيث يُسمح بالتصوير باستخدام الهاتف المحمول فقط. ويُحظر استخدام الفلاش، أو الحوامل الثلاثية، أو عصيّ السيلفي، أو الطائرات المسيّرة، أو البث المباشر داخل المتحف.</p>
+      <p>• جميع الصور ومقاطع الفيديو للاستخدام الشخصي فقط. يُحظر الاستخدام التجاري دون الحصول على موافقة خطية مسبقة.</p>
+      <p>• جميع التذاكر غير قابلة للتحويل وغير قابلة للاسترداد.</p>
+    </div>
+
+    <div class="modal-footer">
+      <button class="primary-btn" type="button" id="info-accept">
+        متابعة
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Change ticket type confirmation -->
+<div class="modal-backdrop hidden" id="ticket-type-modal">
+  <div class="modal">
+    <header class="modal-header">
+      <h3>Change ticket type?</h3>
+      <button type="button" class="modal-close" id="ticket-type-cancel-x">×</button>
+    </header>
+    <div class="modal-body">
+      <p>
+سيؤدي تغيير نوع التذكرة إلى إعادة تعيين اختياراتك، بما في ذلك التذاكر المختارة وموعد الزيارة.
+      </p>
+      <p>هل تريد الاستمرار؟</p>
+    </div>
+    <footer class="modal-footer">
+      <button type="button" class="secondary-btn" id="ticket-type-cancel">
+        إلغاء
+      </button>
+      <button type="button" class="primary-btn" id="ticket-type-confirm">
+موافق      </button>
+    </footer>
+  </div>
+</div>
+<div class="modal-backdrop hidden" id="max-tickets-modal">
+  <div class="modal">
+    <header class="modal-header">
+      <h3>الحد الأقصى للتذاكر</h3>
+      <button type="button" class="modal-close" id="max-tickets-cancel-x">×</button>
+    </header>
+
+    <div class="modal-body">
+      <p>
+       هذا الموقع مخصّص للأفراد والعائلات فقط، وبحد أقصى
+        <strong><span id="max-tickets-limit-text">10</span> تذاكر</strong>.
+      </p>
+      <p>
+يُرجى العلم أنّ إجراء حجوزات متعدّدة للمدرسة نفسها لتجاوز هذا الحدّ غير مسموح.
+
+      </p>
+      <p>
+ولحجوزات المدارس والجامعات، نرجو التواصل على        <a href="mailto:learning@gem.eg" style="color: blue; text-decoration: underline;">learning@gem.eg</a>.
+      </p>
+    </div>
+  </div>
+</div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+  <div class="container footer-main">
+    <!-- logo + tagline -->
+    <div class="footer-logo-block">
+      <div class="footer-logo-row">
+        <img src="GEM Logo Hi-Res white.png" alt="شعار المتحف المصري الكبير" />
+        <span class="footer-logo-text">الموقع الرسمي لحجز تذاكر المتحف المصري الكبير</span>
+      </div>
+    </div>
+    <!-- visit info -->
+    <div>
+      <div class="footer-block-title">خطط زيارتك</div>
+      <ul>
+        <li>ساعات العمل: يومياً عدا السبت ولأربعاء</li>
+                <li>مجمع المتحف: ٨:٣٠ صباحًا – ٧:٠٠ مساءً</li>
+
+<li>قاعات العرض: ٩:٠٠ صباحًا – ٦:٠٠ مساءً
+</li>
+        <li>تمديد ساعات العمل في أيام السبت ولأربعاء</li>
+      </ul>
+    </div>
+
+    <!-- contact + socials -->
+    <div>
+      <div class="footer-block-title">تواصل معنا</div>
+      <ul>
+        <li>هاتف: ‎+٢٠ ٢٣٣ ٥٥٧ ٧٤٤‎ (تجريبي)</li>
+        <li>بريد إلكتروني: tourism_info@example.com</li>
+
+      </ul>
+              <div class="footer-social">
+    <span class="footer-social-title">تابعنا على</span>
+    <div class="footer-social-icons">
+      <a href="https://www.facebook.com/GrandEgyptianMuseum/" target="_blank" class="social-icon social-facebook" aria-label="Facebook">
+        <i class="fa-brands fa-facebook-f white"></i>
+      </a>
+      <a href="https://www.instagram.com/grandegyptianmuseum" target="_blank" class="social-icon social-instagram" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="https://www.tiktok.com/@grandegyptianmuseum" target="_blank" class="social-icon social-tiktok" aria-label="TikTok">
+        <i class="fa-brands fa-tiktok"></i>
+      </a>
+      <a href="https://www.youtube.com/@GrandEgyptianMuseum" target="_blank" class="social-icon social-youtube" aria-label="YouTube">
+        <i class="fa-brands fa-youtube"></i>
+      </a>
+    </div>
+  </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <span class="footer-pill-note">
+        هذه واجهة تصميم تجريبية لحجز تذاكر المتحف المصري الكبير، ولا تمثِّل نظام الحجز الفعلي.
+      </span>
+      <span>© ٢٠٢٥ المتحف المصري الكبير · نموذج أولي للاختبار والعرض فقط</span>
+    </div>
+  </div>
+</footer>
+
+
+<script src="script.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  new Swiper(".card-slider", {
+    // performance-friendly basics
+    loop: true,
+    centeredSlides: true,
+    speed: 500,
+    grabCursor: true,
+    slidesPerView: 3,
+    spaceBetween: 24,
+
+    breakpoints: {
+      0:    { slidesPerView: 1.1, spaceBetween: 16 },
+      768:  { slidesPerView: 2.1, spaceBetween: 20 },
+      1200: { slidesPerView: 3,   spaceBetween: 24 },
+    },
+
+    // optional autoplay; remove this whole block if you want max smoothness
+    autoplay: {
+      delay: 4500,
+      disableOnInteraction: true,
+    },
+
+    // lazy-load backgrounds
+    preloadImages: false,
+    lazy: {
+      loadPrevNext: true,
+      loadPrevNextAmount: 2,
+    },
+
+    watchSlidesProgress: true,
+
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+});
+
+</script>
+<script>
+  // Convert Western digits -> Arabic-Indic digits, AM/PM -> صباحًا/مساءً, EGP -> جنيه مصري
+  (function () {
+    const digitMap = { "0":"٠","1":"١","2":"٢","3":"٣","4":"٤","5":"٥","6":"٦","7":"٧","8":"٨","9":"٩" };
+
+    function toHindiDigits(str) {
+      return String(str).replace(/\d/g, d => digitMap[d]);
+    }
+
+    function convertAmPm(str) {
+      let s = String(str);
+      s = s.replace(/\b(p\.?\s*m\.?)\b/gi, "مساءً");
+      s = s.replace(/\b(a\.?\s*m\.?)\b/gi, "صباحًا");
+      return s;
+    }
+
+    function convertCurrency(str) {
+      let s = String(str);
+
+      // Handle "EGP 150", "EGP150", "150 EGP"
+      s = s.replace(/\bEGP\s*(\d+(?:[.,]\d+)?)\b/gi, "جنيه $1");
+      s = s.replace(/\b(\d+(?:[.,]\d+)?)\s*EGP\b/gi, "$1 جنيه");
+
+      // Also replace standalone "EGP"
+      s = s.replace(/\bEGP\b/gi, "جنيه مصري");
+
+      return s;
+    }
+
+    function convertText(str) {
+      // Order matters: currency first (keeps numbers intact), then AM/PM, then digits
+      return toHindiDigits(convertAmPm(convertCurrency(str)));
+    }
+
+    function convertTextNodes(root) {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          if (!node.nodeValue) return NodeFilter.FILTER_REJECT;
+          if (!/(\d|\b(a\.?\s*m\.?|p\.?\s*m\.?|EGP)\b)/i.test(node.nodeValue)) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          const p = node.parentNode && node.parentNode.nodeName;
+          if (p && /^(SCRIPT|STYLE|NOSCRIPT)$/.test(p)) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+
+      for (const n of nodes) {
+        n.nodeValue = convertText(n.nodeValue);
+      }
+    }
+
+    function convertInputs(root) {
+      const inputs = root.querySelectorAll("input, textarea");
+      inputs.forEach(el => {
+        if (el.placeholder && /(\d|\b(a\.?\s*m\.?|p\.?\s*m\.?|EGP)\b)/i.test(el.placeholder)) {
+          el.placeholder = convertText(el.placeholder);
+        }
+        if (typeof el.value === "string" && /(\d|\b(a\.?\s*m\.?|p\.?\s*m\.?|EGP)\b)/i.test(el.value)) {
+          el.value = convertText(el.value);
+        }
+      });
+    }
+
+    function runAll() {
+      convertTextNodes(document.body);
+      convertInputs(document.body);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", runAll);
+    } else {
+      runAll();
+    }
+
+    const observer = new MutationObserver(() => runAll());
+    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+  })();
+</script>
+
+
+</body>
+</html>

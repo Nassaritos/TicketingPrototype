@@ -35,7 +35,7 @@
   <div class="nav-lang-switch">
     <button class="nav-lang is-active" type="button" data-lang="en">EN</button>
     <span class="nav-lang-sep">|</span>
-    <button class="nav-lang" type="button" onclick="window.location.href='#'" data-lang="ar">عربي</button>
+    <button class="nav-lang" type="button" onclick="window.location.href='index-ar.html'" data-lang="ar">عربي</button>
   </div>
 </nav>
 
@@ -404,6 +404,8 @@
                   </label>
                 </div>
               </div>
+              <div class="soldout-alert hidden" id="soldout-alert" role="alert" aria-live="polite"></div>
+
               <!-- Time slots -->
 <div class="field-group" id="time-slot-wrapper">
   <div class="field-label-row">
@@ -1667,6 +1669,8 @@
     </div>
   </div>
 </div>
+
+
 <!-- Change ticket type confirmation -->
 <div class="modal-backdrop hidden" id="ticket-type-modal">
   <div class="modal">
@@ -1689,6 +1693,28 @@
         Confirm change
       </button>
     </footer>
+  </div>
+</div>
+<div class="modal-backdrop hidden" id="max-tickets-modal">
+  <div class="modal">
+    <header class="modal-header">
+      <h3>Ticket limit</h3>
+      <button type="button" class="modal-close" id="max-tickets-cancel-x">×</button>
+    </header>
+
+    <div class="modal-body">
+      <p>
+        This portal is intended for individuals and families only, with a maximum of
+        <strong><span id="max-tickets-limit-text">10</span> tickets</strong>.
+      </p>
+      <p>
+        Please note that making multiple bookings for the same school to bypass this limit is strictly prohibited.
+      </p>
+      <p>
+        For school and university bookings, please contact
+        <a href="mailto:learning@gem.eg" style="color: blue; text-decoration: underline;">learning@gem.eg</a>.
+      </p>
+    </div>
   </div>
 </div>
 
