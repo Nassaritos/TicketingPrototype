@@ -1,4 +1,134 @@
-// ---------- PRICES ----------
+/* =========================================================
+   GEM Ticketing Prototype — Single script.js (EN + AR)
+   - Arabic-only UI text/labels/messages (no impact on English)
+   - Arabic-Indic digits (٠١٢٣٤٥٦٧٨٩) display on Arabic page
+   - AM/PM -> صباحًا / مساءً on Arabic page
+   - EGP -> جنيه on Arabic page
+   - FIX: counters not working on Arabic page (parseInt on Arabic digits)
+   ========================================================= */
+
+const IS_AR = (document.documentElement.lang || "").toLowerCase() === "ar";
+
+// ---------- AR DIGITS HELPERS ----------
+const AR_DIGITS = "٠١٢٣٤٥٦٧٨٩";
+const EN_DIGITS = "0123456789";
+
+function toArabicDigits(input) {
+  return String(input).replace(/\d/g, (d) => AR_DIGITS[d]);
+}
+
+// Convert Arabic-Indic digits back to English digits (for parseInt/Number)
+function fromArabicDigits(input) {
+  const s = String(input);
+  let out = "";
+  for (const ch of s) {
+    const idx = AR_DIGITS.indexOf(ch);
+    out += idx >= 0 ? EN_DIGITS[idx] : ch;
+  }
+  return out;
+}
+
+function parseIntSafe(text) {
+  const t = fromArabicDigits(text || "").trim();
+  const n = parseInt(t, 10);
+  return Number.isFinite(n) ? n : 0;
+}
+
+// ---------- AR MONTH/DAY LABELS (calendar label only) ----------
+const AR_MONTHS = [
+  "يناير","فبراير","مارس","أبريل","مايو","يونيو",
+  "يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"
+];
+const AR_WEEKDAYS = ["الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
+
+// ---------- I18N STRINGS ----------
+const I18N = {
+  soldOut: IS_AR ? "نفدت التذاكر" : "Sold out",
+  selectDate: IS_AR ? "اختر تاريخًا" : "Select a Date",
+  dateSoldOut: IS_AR ? "هذا التاريخ ممتلئ. يُرجى اختيار تاريخ آخر." : "This date is sold out. Please select another date.",
+  slotSoldOut: IS_AR ? "هذه الفترة ممتلئة. يُرجى اختيار فترة أخرى." : "This time slot is sold out. Please choose another slot.",
+  groupSoldOut: IS_AR ? "إحدى الفئات المختارة ممتلئة في هذا التاريخ." : "One or more selected ticket categories are sold out for this date.",
+  typeSoldOut: IS_AR ? "أحد أنواع التذاكر المختارة ممتلئ في هذا التاريخ." : "One or more selected ticket types are sold out for this date.",
+  badgeEmpty: IS_AR ? "لا توجد تذاكر بعد" : "No tickets yet",
+  badgeSelected: (n) =>
+    IS_AR ? `تم اختيار ${toArabicDigits(n)} تذكرة` : `${n} ticket${n > 1 ? "s" : ""} selected`,
+  prototypeNote: IS_AR
+    ? "هذه واجهة تجريبية. الأسعار والتفاصيل المعروضة لغرض التوضيح فقط."
+    : "This is a prototype interface. Prices and details shown here are illustrative only.",
+  timeLabelEntry: IS_AR ? "الفترة الزمنية للدخول" : "Entry Time",
+  timeLabelTour: IS_AR ? "موعد الجولة الإرشادية" : "Tour time",
+  timeTitleEntry: IS_AR ? "الفترة الزمنية للدخول" : "Entry Time Slot",
+  timeTitleTour: IS_AR ? "موعد الجولة الإرشادية" : "Guided Tour Time",
+  seeMore: IS_AR ? "عرض المزيد من المعلومات" : "See more information",
+  hideInfo: IS_AR ? "إخفاء المعلومات" : "Hide information",
+  maxTicketsMsg: (n) => (IS_AR ? toArabicDigits(n) : String(n)),
+};
+// ---------- LABEL MAPS (Arabic page only) ----------
+const LABELS_AR = {
+  groups: {
+    Egyptians: "مصريون",
+    Arabs: "عرب",
+    Expatriates: "مقيمون",
+  },
+  types: {
+    Adult: "بالغ",
+    Child: "طفل",
+    Student: "طالب",
+    Senior: "كبار السن",
+    Admission: "دخول",
+  },
+};
+
+function labelGroup(groupKey) {
+  if (!IS_AR) return groupKey;
+  return LABELS_AR.groups[groupKey] || groupKey;
+}
+
+function labelType(typeKey) {
+  if (!IS_AR) return typeKey;
+  return LABELS_AR.types[typeKey] || typeKey;
+}
+
+// ---------- TIME FORMAT HELPERS (Arabic page only) ----------
+function ampmToArabic(s) {
+  return s
+    .replace(/\bAM\b/g, "صباحًا")
+    .replace(/\bPM\b/g, "مساءً");
+}
+
+function toArabicTimeLabel(label) {
+  // works for:
+  // "08:30 AM - 11:00 AM"
+  // "10:15 AM"
+  if (!IS_AR) return label;
+  const withDigits = toArabicDigits(label);
+  return ampmToArabic(withDigits);
+}
+
+function formatCurrency(amount) {
+  if (!IS_AR) return "EGP " + Number(amount || 0).toLocaleString("en-EG");
+  // Arabic: "٢٠٠ جنيه"
+  const n = Number(amount || 0);
+  const formatted = n.toLocaleString("en-EG");
+  return `${toArabicDigits(formatted)} جنيه`;
+}
+
+function formatISOToDisplayDate(iso) {
+  if (!iso) return "—";
+  if (!IS_AR) return iso;
+
+  // iso: YYYY-MM-DD
+  const [y, m, d] = iso.split("-").map((x) => parseInt(x, 10));
+  if (!y || !m || !d) return iso;
+
+  const dt = new Date(iso);
+  dt.setHours(0, 0, 0, 0);
+
+  // Example: الخميس، ٢٥ ديسمبر ٢٠٢٥
+  const wd = AR_WEEKDAYS[dt.getDay()];
+  return `${wd}، ${toArabicDigits(d)} ${AR_MONTHS[m - 1]} ${toArabicDigits(y)}`;
+}
+
 // ---------- TIME SLOTS ----------
 
 // Entry slots for Admission Ticket
@@ -35,13 +165,12 @@ const prices = {
 };
 
 const ADDONS = {
-  "gem-discovery": { label: "GEM Discovery Challenge", price: 125 },
-  "audio-guide": { label: "Audio guide", price: 200 },
-  "mixed-reality": { label: "Mixed reality experience", price: 350 }
+  "gem-discovery": { label: IS_AR ? "لعبة البحث في المتحف المصري الكبير" : "GEM Discovery Challenge", price: 125 },
+  "audio-guide": { label: IS_AR ? "الدليل الصوتي" : "Audio guide", price: 200 },
+  "mixed-reality": { label: IS_AR ? "تجربة الواقع المختلط" : "Mixed reality experience", price: 350 }
 };
 
 // ---------- STATE ----------
-
 const state = {
   tourLanguage: null,
   experience: "galleries",
@@ -56,21 +185,14 @@ const state = {
   },
 
   cmTickets: { Egyptians: 0, Arabs: 0, Expatriates: 0 },
-
   addons: { "gem-discovery": 0, "audio-guide": 0, "mixed-reality": 0 },
-
   promo: { code: null, percent: 0 },
 
   contact: { name: "", email: "", phone: "", country: "" },
   termsAccepted: false
 };
 
-const stepPanels = {
-  1: "step-2",
-  2: "step-addons",
-  3: "step-3",
-  4: "step-4"
-};
+const stepPanels = { 1: "step-2", 2: "step-addons", 3: "step-3", 4: "step-4" };
 
 const goStep3Btn = document.getElementById("go-step-3");
 const backTo1Btn = document.getElementById("back-to-1");
@@ -85,7 +207,7 @@ const ticketTypeModal = document.getElementById("ticket-type-modal");
 const ticketTypeConfirmBtn = document.getElementById("ticket-type-confirm");
 const ticketTypeCancelBtn = document.getElementById("ticket-type-cancel");
 const ticketTypeCancelX = document.getElementById("ticket-type-cancel-x");
-// =============================
+
 // =============================
 // MAX TICKETS MODAL + HARD CAP
 // =============================
@@ -96,17 +218,13 @@ const maxTicketsCancelX = document.getElementById("max-tickets-cancel-x");
 const maxTicketsLimitText = document.getElementById("max-tickets-limit-text");
 
 function openMaxTicketsModal() {
-  if (maxTicketsLimitText) maxTicketsLimitText.textContent = String(MAX_BASE_TICKETS);
+  if (maxTicketsLimitText) maxTicketsLimitText.textContent = I18N.maxTicketsMsg(MAX_BASE_TICKETS);
   if (maxTicketsModal) maxTicketsModal.classList.remove("hidden");
 }
-
 function closeMaxTicketsModal() {
   if (maxTicketsModal) maxTicketsModal.classList.add("hidden");
 }
-
-if (maxTicketsCancelX) {
-  maxTicketsCancelX.addEventListener("click", closeMaxTicketsModal);
-}
+if (maxTicketsCancelX) maxTicketsCancelX.addEventListener("click", closeMaxTicketsModal);
 
 // click outside closes
 if (maxTicketsModal) {
@@ -133,7 +251,7 @@ function bindTicketCounterButtonsOnce_() {
 
       // sold-out protection
       if (isCategorySoldOut(state.date, group) || isTicketTypeSoldOut(state.date, group, type)) {
-        showSoldOut(`${group} – ${type} is sold out for this date. Please choose another type/date.`);
+        showSoldOut(IS_AR ? "هذا النوع ممتلئ في هذا التاريخ. اختر نوعًا/تاريخًا آخر." : `${group} – ${type} is sold out for this date. Please choose another type/date.`);
         return;
       }
 
@@ -145,7 +263,7 @@ function bindTicketCounterButtonsOnce_() {
       }
 
       const span = counter.querySelector(".count");
-      const current = parseInt(span?.textContent || "0", 10) || 0;
+      const current = parseIntSafe(span?.textContent || "0");
 
       // extra safety (never cross max)
       if (currentTotal + 1 > MAX_BASE_TICKETS) {
@@ -153,7 +271,7 @@ function bindTicketCounterButtonsOnce_() {
         return;
       }
 
-      if (span) span.textContent = String(current + 1);
+      if (span) span.textContent = IS_AR ? toArabicDigits(current + 1) : String(current + 1);
 
       syncCountersFromDOM();
       updateCart();
@@ -172,10 +290,10 @@ function bindTicketCounterButtonsOnce_() {
       if (!counter) return;
 
       const span = counter.querySelector(".count");
-      const current = parseInt(span?.textContent || "0", 10) || 0;
+      const current = parseIntSafe(span?.textContent || "0");
       const next = Math.max(0, current - 1);
 
-      if (span) span.textContent = String(next);
+      if (span) span.textContent = IS_AR ? toArabicDigits(next) : String(next);
 
       syncCountersFromDOM();
       updateCart();
@@ -183,40 +301,20 @@ function bindTicketCounterButtonsOnce_() {
   });
 }
 
-
 // ---------- SOLD OUT (prototype) ----------
-// supports:
-// - full date sold out: SOLD_OUT.dates
-// - time slots sold out: entrySlotsByDate / guidedSlotsByDate
-// - whole group sold out OR a specific type inside group: categoriesByDate
 const SOLD_OUT = {
   dates: new Set(["2025-12-28"]),
-
-  entrySlotsByDate: {
-  },
-
-  guidedSlotsByDate: {
-  },
-
-  // IMPORTANT: values can be:
-  //  - "Egyptians"  (whole group sold out)
-  //  - {group:"Egyptians", type:"Child"} (only that type sold out)
-
-categoriesByDate: {
+  entrySlotsByDate: {},
+  guidedSlotsByDate: {},
+  categoriesByDate: {
     "2025-12-29": {
       admission: new Set([{ group: "Egyptians", type: "Child" }]),
-     
-      // guided_ar: new Set([...]) // optional
     },
-  "2025-12-30": {
-    admission: {
-      groupAll: new Set(["Egyptians"]), // means all types inside Egyptians are sold out
-      
+    "2025-12-30": {
+      admission: { groupAll: new Set(["Egyptians"]) }
     }
   }
-}
-
-}
+};
 
 function showSoldOut(msg) {
   const el = document.getElementById("soldout-alert");
@@ -250,13 +348,11 @@ function isCategorySoldOut(dateStr, groupName) {
   const pack = currentCategorySoldOutSet(dateStr);
   if (!pack) return false;
 
-  // Backward compatible: if it's a Set of strings/objects
   if (pack instanceof Set) {
     for (const item of pack) if (typeof item === "string" && item === groupName) return true;
     return false;
   }
 
-  // New format
   if (pack.groupAll && pack.groupAll.has(groupName)) return true;
   return false;
 }
@@ -265,7 +361,6 @@ function isTicketTypeSoldOut(dateStr, groupName, typeName) {
   const pack = currentCategorySoldOutSet(dateStr);
   if (!pack) return false;
 
-  // Backward compatible
   if (pack instanceof Set) {
     for (const item of pack) {
       if (item && typeof item === "object" && item.group === groupName && item.type === typeName) return true;
@@ -273,7 +368,6 @@ function isTicketTypeSoldOut(dateStr, groupName, typeName) {
     return false;
   }
 
-  // New format
   if (pack.groupAll && pack.groupAll.has(groupName)) return true;
   if (!pack.items) return false;
 
@@ -282,7 +376,6 @@ function isTicketTypeSoldOut(dateStr, groupName, typeName) {
   }
   return false;
 }
-
 
 function isSlotSoldOut(dateStr, slotLabel) {
   if (!dateStr || !slotLabel) return false;
@@ -304,7 +397,6 @@ function isFullDaySoldOut(dateStr) {
   if (!dateStr) return false;
   if (isDateSoldOut(dateStr)) return true;
 
-  // guided: need language selected to decide; if not selected, only respect SOLD_OUT.dates
   const slots = (function () {
     if (state.ticketType === "guided") {
       if (state.tourLanguage === "ar") return GUIDED_SLOTS_AR;
@@ -316,21 +408,17 @@ function isFullDaySoldOut(dateStr) {
 
   if (!slots.length) return false;
 
-  // if every slot is sold out -> full day
   return slots.every((s) => {
-    // ensure isSlotSoldOut checks correct mode/language
-    return (function () {
-      if (state.ticketType === "guided") {
-        const obj = SOLD_OUT.guidedSlotsByDate[dateStr];
-        if (!obj) return false;
-        const lang = state.tourLanguage;
-        if (!lang || !obj[lang]) return false;
-        return obj[lang].has(s);
-      } else {
-        const set = SOLD_OUT.entrySlotsByDate[dateStr];
-        return !!(set && set.has(s));
-      }
-    })();
+    if (state.ticketType === "guided") {
+      const obj = SOLD_OUT.guidedSlotsByDate[dateStr];
+      if (!obj) return false;
+      const lang = state.tourLanguage;
+      if (!lang || !obj[lang]) return false;
+      return obj[lang].has(s);
+    } else {
+      const set = SOLD_OUT.entrySlotsByDate[dateStr];
+      return !!(set && set.has(s));
+    }
   });
 }
 
@@ -360,14 +448,11 @@ function isExtendedDay(isoDate) {
 }
 
 function getCurrentSlotList() {
-  // GUIDED TOUR → use tour times, not entry slots
   if (state.ticketType === "guided") {
     if (state.tourLanguage === "ar") return GUIDED_SLOTS_AR;
     if (state.tourLanguage === "en") return GUIDED_SLOTS_EN;
-    return []; // guided but language not chosen yet → no buttons
+    return [];
   }
-
-  // ADMISSION → entry time slots
   return isExtendedDay(state.date) ? ENTRY_SLOTS_EXTENDED : ENTRY_SLOTS_DEFAULT;
 }
 
@@ -377,21 +462,19 @@ function renderTimeSlots() {
 
   clearSoldOut();
 
-  // If date is sold out -> block time slots
   if (isDateSoldOut(state.date)) {
     container.innerHTML = "";
     container.classList.add("hidden");
     state.time = null;
-    showSoldOut("This date is sold out. Please select another date.");
+    showSoldOut(I18N.dateSoldOut);
     updateCart();
     return;
   }
 
   const slots = getCurrentSlotList();
   container.innerHTML = "";
-  state.time = null; // reset when we rebuild
+  state.time = null;
 
-  // If guided & language not selected yet -> keep hidden
   if (!slots.length) {
     container.classList.add("hidden");
     updateCart();
@@ -400,29 +483,31 @@ function renderTimeSlots() {
 
   container.classList.remove("hidden");
 
-  slots.forEach((label) => {
+  slots.forEach((labelRaw) => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "time-slot";
-    btn.dataset.time = label;
-    btn.textContent = label;
+    btn.dataset.time = labelRaw;
 
-    const sold = isSlotSoldOut(state.date, label);
+    // Display label
+    btn.textContent = toArabicTimeLabel(labelRaw);
+
+    const sold = isSlotSoldOut(state.date, labelRaw);
     if (sold) {
       btn.classList.add("is-soldout");
       btn.disabled = true;
-      btn.title = "Sold out";
-      btn.setAttribute("aria-label", `${label} sold out`);
+      btn.title = I18N.soldOut;
+      btn.setAttribute("aria-label", `${btn.textContent} ${I18N.soldOut}`);
     }
 
     btn.addEventListener("click", () => {
       if (btn.disabled) {
-        showSoldOut("This time slot is sold out. Please choose another slot.");
+        showSoldOut(I18N.slotSoldOut);
         return;
       }
       document.querySelectorAll(".time-slot").forEach((b) => b.classList.remove("is-selected"));
       btn.classList.add("is-selected");
-      state.time = label;
+      state.time = labelRaw; // keep raw for logic
       clearSoldOut();
       updateCart();
     });
@@ -433,11 +518,7 @@ function renderTimeSlots() {
 
 function updateCartTimeLabel() {
   const isGuided = state.ticketType === "guided";
-  const isArabic = (document.documentElement.lang || "").toLowerCase() === "ar";
-
-  const labelText = isGuided
-    ? (isArabic ? "موعد الجولة الإرشادية" : "Tour time")
-    : (isArabic ? "الفترة الزمنية للدخول" : "Entry Time");
+  const labelText = isGuided ? I18N.timeLabelTour : I18N.timeLabelEntry;
 
   const desktopLabel = document.getElementById("cart-time-label");
   if (desktopLabel) desktopLabel.textContent = labelText;
@@ -446,26 +527,20 @@ function updateCartTimeLabel() {
   if (mobileLabel) mobileLabel.textContent = labelText;
 }
 
-
 function updateTimeSlotTitleAndVisibility() {
   const titleEl = document.getElementById("time-slot-title");
   const wrapperEl = document.getElementById("time-slot-wrapper");
   if (!titleEl || !wrapperEl) return;
 
-  const isArabic = (document.documentElement.lang || "").toLowerCase() === "ar";
-
   if (state.ticketType === "guided") {
-    titleEl.textContent = isArabic ? "موعد الجولة الإرشادية" : "Guided Tour Time";
-
-    // hide until language is picked
+    titleEl.textContent = I18N.timeTitleTour;
     if (!state.tourLanguage) wrapperEl.classList.add("hidden");
     else wrapperEl.classList.remove("hidden");
   } else {
-    titleEl.textContent = isArabic ? "الفترة الزمنية للدخول" : "Entry Time Slot";
+    titleEl.textContent = I18N.timeTitleEntry;
     wrapperEl.classList.remove("hidden");
   }
 }
-
 
 function updateCategoryAvailabilityUI() {
   document.querySelectorAll(".category-tab").forEach((tab) => {
@@ -488,7 +563,8 @@ function showBookingSection() {
 }
 
 function experienceLabel(key) {
-  return key === "children" ? "Children’s Museum" : "GEM Galleries";
+  if (!IS_AR) return key === "children" ? "Children’s Museum" : "GEM Galleries";
+  return key === "children" ? "متحف الطفل" : "قاعات المتحف";
 }
 
 function updateStepPills(activeStep) {
@@ -505,10 +581,6 @@ function showStep(step) {
   updateStepPills(step);
 }
 
-function formatCurrency(amount) {
-  return "EGP " + amount.toLocaleString("en-EG");
-}
-
 // ---------- TICKETS & TOTALS ----------
 function refreshTicketPrices() {
   let priceTable;
@@ -518,10 +590,12 @@ function refreshTicketPrices() {
   document.querySelectorAll(".ticket-price").forEach((el) => {
     const group = el.dataset.group;
     const type = el.dataset.type;
+
     if (!priceTable || !group || !type) {
       el.textContent = "—";
       return;
     }
+
     const groupPrices = priceTable[group];
     const value = groupPrices ? groupPrices[type] : null;
     el.textContent = value == null ? "—" : formatCurrency(value);
@@ -548,7 +622,7 @@ function initTicketState() {
 function resetTicketCountersUI() {
   document.querySelectorAll(".counter[data-group]").forEach((counter) => {
     const span = counter.querySelector(".count");
-    if (span) span.textContent = "0";
+    if (span) span.textContent = IS_AR ? "٠" : "0";
   });
 }
 
@@ -624,12 +698,12 @@ function hasAnyAddonsSelected() {
   let any = false;
 
   document.querySelectorAll(".cm-counter .count").forEach((el) => {
-    const v = parseInt(el.textContent, 10) || 0;
+    const v = parseIntSafe(el.textContent);
     if (v > 0) any = true;
   });
 
   document.querySelectorAll(".addon-counter .count").forEach((el) => {
-    const v = parseInt(el.textContent, 10) || 0;
+    const v = parseIntSafe(el.textContent);
     if (v > 0) any = true;
   });
 
@@ -643,41 +717,27 @@ function getSelectedAddonsSummaryLines() {
   document.querySelectorAll(".cm-counter").forEach((counter) => {
     const qtyEl = counter.querySelector(".count");
     if (!qtyEl) return;
-    const qty = parseInt(qtyEl.textContent, 10) || 0;
+    const qty = parseIntSafe(qtyEl.textContent);
     if (!qty) return;
 
     const group = counter.getAttribute("data-cm-group") || "";
-    let label = "Children’s Museum";
-    if (group) label += ` – ${group}`;
+    let label = IS_AR ? "متحف الطفل" : "Children’s Museum";
+    if (group) label += IS_AR ? ` – ${group}` : ` – ${group}`;
 
-    lines.push(`${label} × ${qty}`);
+    lines.push(`${label} × ${IS_AR ? toArabicDigits(qty) : qty}`);
   });
 
   // Other add-ons
   document.querySelectorAll(".addon-counter").forEach((counter) => {
     const qtyEl = counter.querySelector(".count");
     if (!qtyEl) return;
-    const qty = parseInt(qtyEl.textContent, 10) || 0;
+    const qty = parseIntSafe(qtyEl.textContent);
     if (!qty) return;
 
     const addonKey = counter.getAttribute("data-addon");
-    let label = "Add-on";
+    const def = ADDONS[addonKey] || { label: addonKey || (IS_AR ? "إضافة" : "Add-on") };
 
-    switch (addonKey) {
-      case "gem-discovery":
-        label = "GEM Discovery Challenge";
-        break;
-      case "audio-guide":
-        label = "Audio guide";
-        break;
-      case "mixed-reality":
-        label = "Mixed reality experience";
-        break;
-      default:
-        if (addonKey) label = addonKey;
-    }
-
-    lines.push(`${label} × ${qty}`);
+    lines.push(`${def.label} × ${IS_AR ? toArabicDigits(qty) : qty}`);
   });
 
   return lines;
@@ -689,8 +749,7 @@ function getBaseTicketCount() {
   document.querySelectorAll(".counter[data-group]").forEach((counter) => {
     const span = counter.querySelector(".count");
     if (!span) return;
-    const val = parseInt(span.textContent, 10) || 0;
-    total += val;
+    total += parseIntSafe(span.textContent);
   });
   return total;
 }
@@ -704,13 +763,23 @@ function getTicketBreakdownText() {
     for (const [type, qty] of Object.entries(types)) {
       const n = qty || 0;
       if (!n) continue;
-      typeParts.push(`${type} ${n}`);
+
+      const gLabel = labelGroup(group);
+      const tLabel = labelType(type);
+
+      typeParts.push(IS_AR ? `${tLabel} ${toArabicDigits(n)}` : `${tLabel} ${n}`);
+      // group label applied below
     }
-    if (typeParts.length) groupParts.push(`${group}: ${typeParts.join(", ")}`);
+
+    if (typeParts.length) {
+      const gLabel = labelGroup(group);
+      groupParts.push(IS_AR ? `${gLabel}: ${typeParts.join("، ")}` : `${gLabel}: ${typeParts.join(", ")}`);
+    }
   }
 
   return groupParts.join("\n");
 }
+
 
 function updateCart() {
   const { addonTotal, total } = computeTotals();
@@ -719,21 +788,25 @@ function updateCart() {
   // Date & Time
   const cartDate = document.getElementById("cart-date");
   const cartTime = document.getElementById("cart-time");
-  if (cartDate) cartDate.textContent = state.date || "—";
-  if (cartTime) cartTime.textContent = state.time || "—";
+
+  const displayDate = state.date ? formatISOToDisplayDate(state.date) : "—";
+  const displayTime = state.time ? toArabicTimeLabel(state.time) : "—";
+
+  if (cartDate) cartDate.textContent = state.date ? displayDate : "—";
+  if (cartTime) cartTime.textContent = state.time ? displayTime : "—";
 
   const mobileCartDate = document.getElementById("mobile-cart-date");
   const mobileCartTime = document.getElementById("mobile-cart-time");
-  if (mobileCartDate) mobileCartDate.textContent = state.date || "—";
-  if (mobileCartTime) mobileCartTime.textContent = state.time || "—";
+  if (mobileCartDate) mobileCartDate.textContent = state.date ? displayDate : "—";
+  if (mobileCartTime) mobileCartTime.textContent = state.time ? displayTime : "—";
 
   // Tickets breakdown
   const breakdownText = getTicketBreakdownText();
   const cartCount = document.getElementById("cart-count");
-  if (cartCount) cartCount.textContent = breakdownText || baseTickets;
+  if (cartCount) cartCount.textContent = breakdownText || (IS_AR ? toArabicDigits(baseTickets) : baseTickets);
 
   const mobileCount = document.getElementById("mobile-cart-count");
-  if (mobileCount) mobileCount.textContent = breakdownText || baseTickets;
+  if (mobileCount) mobileCount.textContent = breakdownText || (IS_AR ? toArabicDigits(baseTickets) : baseTickets);
 
   updateCartTimeLabel();
 
@@ -746,18 +819,13 @@ function updateCart() {
 
   // Badge (base tickets only)
   const badge = document.getElementById("cart-badge");
-  if (badge) {
-    badge.textContent = baseTickets === 0 ? "No tickets yet" : `${baseTickets} ticket${baseTickets > 1 ? "s" : ""} selected`;
-  }
+  if (badge) badge.textContent = baseTickets === 0 ? I18N.badgeEmpty : I18N.badgeSelected(baseTickets);
 
   // SOLD OUT validation gates
   const dateSold = isDateSoldOut(state.date);
   const slotSold = isSlotSoldOut(state.date, state.time);
 
-  // If user has quantities in a sold-out category -> block
   let categoryConflict = false;
-
-  // whole-group conflicts
   if (state.date) {
     for (const group of Object.keys(state.tickets || {})) {
       if (!isCategorySoldOut(state.date, group)) continue;
@@ -770,7 +838,6 @@ function updateCart() {
     }
   }
 
-  // per-type conflicts (Egyptians Child etc.)
   let typeConflict = false;
   if (!categoryConflict && state.date) {
     for (const [group, types] of Object.entries(state.tickets || {})) {
@@ -796,11 +863,10 @@ function updateCart() {
       typeConflict;
   }
 
-  // Show message if needed
-  if (dateSold) showSoldOut("This date is sold out. Please select another date.");
-  else if (slotSold) showSoldOut("This time slot is sold out. Please choose another slot.");
-  else if (categoryConflict) showSoldOut("One or more selected ticket categories are sold out for this date.");
-  else if (typeConflict) showSoldOut("One or more selected ticket types are sold out for this date.");
+  if (dateSold) showSoldOut(I18N.dateSoldOut);
+  else if (slotSold) showSoldOut(I18N.slotSoldOut);
+  else if (categoryConflict) showSoldOut(I18N.groupSoldOut);
+  else if (typeConflict) showSoldOut(I18N.typeSoldOut);
   else clearSoldOut();
 
   // Add-ons row
@@ -844,7 +910,7 @@ function syncCountersFromDOM() {
   document.querySelectorAll(".counter[data-group]").forEach((counter) => {
     const group = counter.dataset.group;
     const type = counter.dataset.type;
-    const value = parseInt(counter.querySelector(".count").textContent, 10) || 0;
+    const value = parseIntSafe(counter.querySelector(".count")?.textContent || "0");
     if (state.tickets[group] && state.tickets[group][type] != null) {
       state.tickets[group][type] = value;
     }
@@ -854,7 +920,7 @@ function syncCountersFromDOM() {
 function syncCMTicketsFromDOM() {
   document.querySelectorAll(".cm-counter").forEach((counter) => {
     const group = counter.dataset.cmGroup;
-    const value = parseInt(counter.querySelector(".count").textContent, 10) || 0;
+    const value = parseIntSafe(counter.querySelector(".count")?.textContent || "0");
     if (state.cmTickets[group] != null) state.cmTickets[group] = value;
   });
 }
@@ -863,12 +929,10 @@ function syncCMTicketsFromDOM() {
 function updateStep2Subtitle() {
   const el = document.getElementById("step-2-subtitle");
   if (!el) return;
-  if (!state.experience) {
-    el.textContent = "";
-    return;
-  }
+  if (!state.experience) el.textContent = "";
 }
 
+// ---------- HERO / NAV ----------
 function scrollToBooking() {
   const section = document.getElementById("booking-section");
   if (section) section.scrollIntoView({ behavior: "smooth" });
@@ -882,7 +946,6 @@ function setExperience(value) {
   updateCart();
 }
 
-// ---------- HERO / NAV ----------
 const navBookBtn = document.getElementById("nav-book-btn");
 if (navBookBtn) {
   navBookBtn.addEventListener("click", () => {
@@ -892,7 +955,6 @@ if (navBookBtn) {
 }
 
 const heroGalleriesBtn = document.getElementById("hero-book-galleries");
-
 document.querySelectorAll("[data-book]").forEach((btn) => {
   btn.addEventListener("click", () => {
     const exp = btn.dataset.book;
@@ -906,7 +968,6 @@ document.querySelectorAll("[data-book]").forEach((btn) => {
 // ---------- TICKET TYPE / LANGUAGE / TIME ----------
 const tourLangGroup = document.getElementById("tour-language-group");
 
-// adds hover “Sold out” text for ticket rows + disables INC/DEC for sold-out rows
 function applySoldOutToTicketRows() {
   const dateStr = state.date;
 
@@ -920,10 +981,9 @@ function applySoldOutToTicketRows() {
 
     counter.classList.toggle("is-soldout", soldOut);
 
-    // tooltip for hover
     if (soldOut) {
-      counter.title = "Sold out";
-      counter.setAttribute("aria-label", `${group} ${type} sold out`);
+      counter.title = I18N.soldOut;
+      counter.setAttribute("aria-label", `${group} ${type} ${I18N.soldOut}`);
     } else {
       counter.removeAttribute("title");
       counter.removeAttribute("aria-label");
@@ -950,17 +1010,16 @@ function applyTicketTypeChange(newType) {
   resetTicketCountersUI();
 
   state.cmTickets = { Egyptians: 0, Arabs: 0, Expatriates: 0 };
-  document.querySelectorAll(".cm-counter .count").forEach((el) => (el.textContent = "0"));
+  document.querySelectorAll(".cm-counter .count").forEach((el) => (el.textContent = IS_AR ? "٠" : "0"));
 
   state.addons = { "gem-discovery": 0, "audio-guide": 0, "mixed-reality": 0 };
-  document.querySelectorAll(".addon-counter .count").forEach((el) => (el.textContent = "0"));
+  document.querySelectorAll(".addon-counter .count").forEach((el) => (el.textContent = IS_AR ? "٠" : "0"));
 
   document.querySelectorAll('input[name="tourLanguage"]').forEach((i) => (i.checked = false));
   document.querySelectorAll(".time-slot").forEach((b) => b.classList.remove("is-selected"));
 
   if (typeof window.resetVisitCalendar === "function") window.resetVisitCalendar();
 
-  // Show/hide language group
   if (state.experience === "children") {
     state.ticketType = "admission";
     if (tourLangGroup) tourLangGroup.classList.add("hidden");
@@ -981,7 +1040,6 @@ function applyTicketTypeChange(newType) {
   updateCart();
 
   setTicketTypeRadio(state.ticketType);
-
   showStep(1);
 }
 
@@ -996,7 +1054,6 @@ document.querySelectorAll('input[name="ticketType"]').forEach((radio) => {
 
     // visually revert until confirm
     setTicketTypeRadio(state.ticketType);
-
     openTicketTypeModal();
   });
 });
@@ -1031,7 +1088,6 @@ document.querySelectorAll('input[name="tourLanguage"]').forEach((radio) => {
     applySoldOutToTicketRows();
     updateCart();
 
-    // update calendar strike-through for full-day sold out based on guided language
     if (typeof window.reRenderVisitCalendar === "function") window.reRenderVisitCalendar();
   });
 });
@@ -1042,11 +1098,10 @@ if (visitDateInput) {
   visitDateInput.addEventListener("change", (e) => {
     const nextDate = e.target.value || null;
 
-    // safety (calendar already blocks)
     if (nextDate && isDateSoldOut(nextDate)) {
       state.date = null;
       state.time = null;
-      showSoldOut("This date is sold out. Please select another date.");
+      showSoldOut(I18N.dateSoldOut);
       renderTimeSlots();
       updateCategoryAvailabilityUI();
       applySoldOutToTicketRows();
@@ -1068,7 +1123,7 @@ if (visitDateInput) {
 document.querySelectorAll(".category-tab").forEach((tab) => {
   tab.addEventListener("click", () => {
     if (tab.disabled) {
-      showSoldOut("This ticket category is sold out for the selected date.");
+      showSoldOut(IS_AR ? "هذه الفئة ممتلئة في التاريخ المختار." : "This ticket category is sold out for the selected date.");
       return;
     }
     const group = tab.dataset.groupTab;
@@ -1080,15 +1135,14 @@ document.querySelectorAll(".category-tab").forEach((tab) => {
   });
 });
 
-
-
 // ---------- CHILDREN'S MUSEUM COUNTERS (ADD-ON) ----------
 document.querySelectorAll(".cm-counter .btn-inc").forEach((btn) => {
   btn.addEventListener("click", () => {
     const counter = btn.closest(".cm-counter");
     const span = counter.querySelector(".count");
-    let value = parseInt(span.textContent, 10) || 0;
-    span.textContent = ++value;
+    let value = parseIntSafe(span.textContent);
+    value += 1;
+    span.textContent = IS_AR ? toArabicDigits(value) : String(value);
     syncCMTicketsFromDOM();
     updateCart();
   });
@@ -1098,9 +1152,9 @@ document.querySelectorAll(".cm-counter .btn-dec").forEach((btn) => {
   btn.addEventListener("click", () => {
     const counter = btn.closest(".cm-counter");
     const span = counter.querySelector(".count");
-    let value = parseInt(span.textContent, 10) || 0;
+    let value = parseIntSafe(span.textContent);
     value = Math.max(0, value - 1);
-    span.textContent = value;
+    span.textContent = IS_AR ? toArabicDigits(value) : String(value);
     syncCMTicketsFromDOM();
     updateCart();
   });
@@ -1116,20 +1170,20 @@ document.querySelectorAll(".addon-counter").forEach((wrapper) => {
 
   function setAddon(value) {
     const safe = Math.max(0, value | 0);
-    span.textContent = safe;
+    span.textContent = IS_AR ? toArabicDigits(safe) : String(safe);
     state.addons[addonId] = safe;
     updateCart();
   }
 
   if (inc) {
     inc.addEventListener("click", () => {
-      const value = parseInt(span.textContent, 10) || 0;
+      const value = parseIntSafe(span.textContent);
       setAddon(value + 1);
     });
   }
   if (dec) {
     dec.addEventListener("click", () => {
-      const value = parseInt(span.textContent, 10) || 0;
+      const value = parseIntSafe(span.textContent);
       setAddon(value - 1);
     });
   }
@@ -1264,7 +1318,9 @@ const otpClose = document.getElementById("otp-close");
 function openTerms() {
   if (!termsModal || !termsBody || !termsAcceptBtn || !termsHint) return;
   termsAcceptBtn.disabled = true;
-  termsHint.textContent = "Please scroll to the end of this text to enable the “Accept” button.";
+  termsHint.textContent = IS_AR
+    ? "يرجى التمرير حتى نهاية النص لتفعيل زر «أوافق»."
+    : "Please scroll to the end of this text to enable the “Accept” button.";
   termsModal.classList.remove("hidden");
   termsBody.scrollTop = 0;
 }
@@ -1273,7 +1329,9 @@ if (termsBody && termsAcceptBtn && termsHint) {
     const nearBottom = termsBody.scrollTop + termsBody.clientHeight >= termsBody.scrollHeight - 10;
     if (nearBottom) {
       termsAcceptBtn.disabled = false;
-      termsHint.textContent = "You can now accept the Terms & Conditions.";
+      termsHint.textContent = IS_AR
+        ? "يمكنك الآن الموافقة على الشروط والأحكام."
+        : "You can now accept the Terms & Conditions.";
     }
   });
 }
@@ -1305,14 +1363,14 @@ function handleOtpSubmit() {
 
   if (val.length < 4) {
     if (otpError) {
-      otpError.textContent = "Please enter the 4-digit code.";
+      otpError.textContent = IS_AR ? "يرجى إدخال الرمز المكوّن من ٤ أرقام." : "Please enter the 4-digit code.";
       otpError.classList.remove("hidden");
     }
     return;
   }
   if (val !== CORRECT_OTP) {
     if (otpError) {
-      otpError.textContent = "The code you entered is incorrect. Please try again.";
+      otpError.textContent = IS_AR ? "الرمز غير صحيح. حاول مرة أخرى." : "The code you entered is incorrect. Please try again.";
       otpError.classList.remove("hidden");
     }
     otpDigits.forEach((i) => i.classList.add("is-invalid"));
@@ -1354,18 +1412,7 @@ if (reopenTermsBtn) {
   reopenTermsBtn.addEventListener("click", () => openTerms());
 }
 
-if (termsAcceptBtn) {
-  termsAcceptBtn.addEventListener("click", () => {
-    state.termsAccepted = true;
-    if (termsModal) termsModal.classList.add("hidden");
-    buildSummary();
-    showStep(4);
-    const panel = document.getElementById(stepPanels[4]);
-    if (panel) panel.scrollIntoView({ behavior: "smooth" });
-  });
-}
-
-// ---------- SUMMARY / PAYMENT ----------
+// ---------- SUMMARY / PAYMENT (Arabic-only labels) ----------
 function buildSummary() {
   const basic = document.getElementById("summary-basic");
   const container = document.getElementById("summary-tickets");
@@ -1383,32 +1430,53 @@ function buildSummary() {
   if (state.promo && state.promo.percent > 0) {
     discountAmount = Math.round(total * (state.promo.percent / 100));
     finalTotal = total - discountAmount;
-    promoLabel = `${state.promo.code} (${state.promo.percent}% off)`;
+    promoLabel = `${state.promo.code} (${IS_AR ? toArabicDigits(state.promo.percent) : state.promo.percent}% ${IS_AR ? "خصم" : "off"})`;
   }
 
-  const items = [
-    ["Experience", experienceLabel(state.experience)],
-    [
-      "Ticket type",
-      state.experience === "children"
-        ? "Admission ticket"
-        : state.ticketType === "admission"
-        ? "Admission ticket"
-        : "Guided tour ticket"
-    ],
-    ["Date & time", (state.date || "-") + (state.time ? `, ${state.time}` : "")],
-    ["Number of tickets", count.toString()],
-    ["Lead visitor", state.contact.name || "-"],
-    ["Email", state.contact.email || "-"],
-    ["Mobile", state.contact.phone || "-"],
-    ["Country", state.contact.country || "-"]
-  ];
+  const items = IS_AR
+    ? [
+        ["التجربة", experienceLabel(state.experience)],
+        [
+          "نوع التذكرة",
+          state.experience === "children"
+            ? "تذكرة دخول"
+            : state.ticketType === "admission"
+            ? "تذكرة دخول"
+            : "تذكرة جولة إرشادية"
+        ],
+        ["التاريخ والوقت", (state.date ? formatISOToDisplayDate(state.date) : "-") + (state.time ? `، ${toArabicTimeLabel(state.time)}` : "")],
+        ["عدد التذاكر", toArabicDigits(count.toString())],
+        ["الزائر الرئيسي", state.contact.name || "-"],
+        ["البريد الإلكتروني", state.contact.email || "-"],
+        ["رقم الهاتف", state.contact.phone || "-"],
+        ["الدولة", state.contact.country || "-"]
+      ]
+    : [
+        ["Experience", experienceLabel(state.experience)],
+        [
+          "Ticket type",
+          state.experience === "children"
+            ? "Admission ticket"
+            : state.ticketType === "admission"
+            ? "Admission ticket"
+            : "Guided tour ticket"
+        ],
+        ["Date & time", (state.date || "-") + (state.time ? `, ${state.time}` : "")],
+        ["Number of tickets", count.toString()],
+        ["Lead visitor", state.contact.name || "-"],
+        ["Email", state.contact.email || "-"],
+        ["Mobile", state.contact.phone || "-"],
+        ["Country", state.contact.country || "-"]
+      ];
 
   if (state.ticketType === "guided" && state.experience !== "children") {
-    items.splice(2, 0, [
-      "Tour language",
-      state.tourLanguage === "ar" ? "Arabic guided tour" : state.tourLanguage === "en" ? "English guided tour" : "-"
-    ]);
+    const langVal = state.tourLanguage === "ar"
+      ? (IS_AR ? "جولة إرشادية بالعربية" : "Arabic guided tour")
+      : state.tourLanguage === "en"
+      ? (IS_AR ? "جولة إرشادية بالإنجليزية" : "English guided tour")
+      : "-";
+
+    items.splice(2, 0, [IS_AR ? "لغة الجولة" : "Tour language", langVal]);
   }
 
   items.forEach(([label, value]) => {
@@ -1429,7 +1497,7 @@ function buildSummary() {
         const unit = groupPrices[type] || 0;
         const row = document.createElement("div");
         row.className = "summary-table-row";
-        row.innerHTML = `<span>${group} – ${type} × ${qty}</span><span>${formatCurrency(unit * qty)}</span>`;
+row.innerHTML = `<span>${labelGroup(group)} – ${labelType(type)} × ${IS_AR ? toArabicDigits(qty) : qty}</span><span>${formatCurrency(unit * qty)}</span>`;
         container.appendChild(row);
       }
     }
@@ -1441,7 +1509,7 @@ function buildSummary() {
       const unit = prices.children[group].Admission;
       const row = document.createElement("div");
       row.className = "summary-table-row";
-      row.innerHTML = `<span>Children's Museum – ${group} × ${qty}</span><span>${formatCurrency(unit * qty)}</span>`;
+row.innerHTML = `<span>${IS_AR ? "متحف الطفل" : "Children's Museum"} – ${labelGroup(group)} × ${IS_AR ? toArabicDigits(qty) : qty}</span><span>${formatCurrency(unit * qty)}</span>`;
       container.appendChild(row);
     }
   }
@@ -1453,30 +1521,45 @@ function buildSummary() {
       if (!def) continue;
       const row = document.createElement("div");
       row.className = "summary-table-row";
-      row.innerHTML = `<span>Optional add-on – ${def.label} × ${qty}</span><span>${formatCurrency(def.price * qty)}</span>`;
+      row.innerHTML = `<span>${IS_AR ? "إضافة اختيارية" : "Optional add-on"} – ${def.label} × ${IS_AR ? toArabicDigits(qty) : qty}</span><span>${formatCurrency(def.price * qty)}</span>`;
       container.appendChild(row);
     }
   }
 
   const subtotalRow = document.createElement("div");
   subtotalRow.className = "summary-table-row";
-  subtotalRow.innerHTML = `<span>Subtotal</span><span>${formatCurrency(total)}</span>`;
+  subtotalRow.innerHTML = `<span>${IS_AR ? "المجموع الفرعي" : "Subtotal"}</span><span>${formatCurrency(total)}</span>`;
   container.appendChild(subtotalRow);
 
   if (discountAmount > 0) {
     const discountRow = document.createElement("div");
     discountRow.className = "summary-table-row";
-    discountRow.innerHTML = `<span>Promo discount – ${promoLabel}</span><span>−${formatCurrency(discountAmount)}</span>`;
+    discountRow.innerHTML = `<span>${IS_AR ? "خصم الكود" : "Promo discount"} – ${promoLabel}</span><span>−${formatCurrency(discountAmount)}</span>`;
     container.appendChild(discountRow);
   }
 
   const totalRow = document.createElement("div");
   totalRow.className = "summary-table-row total";
-  totalRow.innerHTML = `<span>Total amount</span><span>${formatCurrency(finalTotal)}</span>`;
+  totalRow.innerHTML = `<span>${IS_AR ? "الإجمالي" : "Total amount"}</span><span>${formatCurrency(finalTotal)}</span>`;
   container.appendChild(totalRow);
 
   const termsFlag = document.getElementById("summary-terms-flag");
-  if (termsFlag) termsFlag.textContent = "✔ You have read and accepted the Terms & Conditions.";
+  if (termsFlag) {
+    termsFlag.textContent = IS_AR
+      ? "✔ لقد قرأت ووافقت على الشروط والأحكام."
+      : "✔ You have read and accepted the Terms & Conditions.";
+  }
+}
+
+if (termsAcceptBtn) {
+  termsAcceptBtn.addEventListener("click", () => {
+    state.termsAccepted = true;
+    if (termsModal) termsModal.classList.add("hidden");
+    buildSummary();
+    showStep(4);
+    const panel = document.getElementById(stepPanels[4]);
+    if (panel) panel.scrollIntoView({ behavior: "smooth" });
+  });
 }
 
 // ---------- PROMO CODE ----------
@@ -1492,7 +1575,7 @@ if (promoApply && promoInput && promoMsg) {
 
     if (!code) {
       state.promo = { code: null, percent: 0 };
-      promoMsg.textContent = "Please enter a promo code.";
+      promoMsg.textContent = IS_AR ? "يرجى إدخال كود الخصم." : "Please enter a promo code.";
       promoMsg.classList.add("is-error");
       buildSummary();
       return;
@@ -1500,12 +1583,14 @@ if (promoApply && promoInput && promoMsg) {
 
     if (code === VALID_PROMO) {
       state.promo = { code: VALID_PROMO, percent: PROMO_PERCENT };
-      promoMsg.textContent = `Promo applied: ${PROMO_PERCENT}% discount.`;
+      promoMsg.textContent = IS_AR
+        ? `تم تطبيق الكود: خصم ${toArabicDigits(PROMO_PERCENT)}٪.`
+        : `Promo applied: ${PROMO_PERCENT}% discount.`;
       promoMsg.classList.remove("is-error");
       buildSummary();
     } else {
       state.promo = { code: null, percent: 0 };
-      promoMsg.textContent = "Invalid promo code.";
+      promoMsg.textContent = IS_AR ? "كود خصم غير صحيح." : "Invalid promo code.";
       promoMsg.classList.add("is-error");
       buildSummary();
     }
@@ -1515,7 +1600,7 @@ if (promoApply && promoInput && promoMsg) {
 const payBtn = document.getElementById("pay-btn");
 if (payBtn) {
   payBtn.addEventListener("click", () => {
-    alert("Prototype only: this would redirect to the payment gateway.");
+    alert(IS_AR ? "نسخة تجريبية فقط: سيتم تحويلك لبوابة الدفع." : "Prototype only: this would redirect to the payment gateway.");
   });
 }
 
@@ -1550,7 +1635,7 @@ if (cartPanelEl && mobileCartBtn && mobileCartCta) {
   mobileCartBtn.addEventListener("click", () => {
     mobileCartOpen = !mobileCartOpen;
     cartPanelEl.classList.toggle("cart-mobile-visible", mobileCartOpen);
-    mobileCartCta.textContent = mobileCartOpen ? "Hide" : "View";
+    mobileCartCta.textContent = mobileCartOpen ? (IS_AR ? "إخفاء" : "Hide") : (IS_AR ? "عرض" : "View");
   });
 }
 
@@ -1570,12 +1655,9 @@ const infoOpenBtn = document.getElementById("open-info");
 const infoCloseBtns = document.querySelectorAll('[data-close="info"]');
 const infoAccept = document.getElementById("info-accept");
 
-if (infoOpenBtn) {
-  infoOpenBtn.addEventListener("click", () => infoModal && infoModal.classList.remove("hidden"));
-}
-if (heroGalleriesBtn) {
-  heroGalleriesBtn.addEventListener("click", () => infoModal && infoModal.classList.remove("hidden"));
-}
+if (infoOpenBtn) infoOpenBtn.addEventListener("click", () => infoModal && infoModal.classList.remove("hidden"));
+if (heroGalleriesBtn) heroGalleriesBtn.addEventListener("click", () => infoModal && infoModal.classList.remove("hidden"));
+
 infoCloseBtns.forEach((btn) => {
   btn.addEventListener("click", () => infoModal && infoModal.classList.add("hidden"));
 });
@@ -1601,17 +1683,6 @@ if (infoAccept) {
 
   if (!hiddenInput || !popup || !textSpan || !monthLabel || !grid) return;
 
-  const isArabicPage = (document.documentElement.lang || "").toLowerCase() === "ar";
-
-  const AR_DIGITS = "٠١٢٣٤٥٦٧٨٩";
-  const toArabicDigits = (s) => String(s).replace(/\d/g, (d) => AR_DIGITS[d]);
-
-  const AR_MONTHS = [
-    "يناير","فبراير","مارس","أبريل","مايو","يونيو",
-    "يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"
-  ];
-  const AR_WEEKDAYS = ["الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
-
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -1627,7 +1698,7 @@ if (infoAccept) {
   }
 
   function formatLabel(date) {
-    if (!isArabicPage) {
+    if (!IS_AR) {
       return date.toLocaleDateString("en-GB", {
         weekday: "short",
         day: "numeric",
@@ -1635,8 +1706,6 @@ if (infoAccept) {
         year: "numeric"
       });
     }
-
-    // مثال: الخميس، ٢٥ ديسمبر ٢٠٢٥
     const wd = AR_WEEKDAYS[date.getDay()];
     const d = toArabicDigits(date.getDate());
     const m = AR_MONTHS[date.getMonth()];
@@ -1645,11 +1714,8 @@ if (infoAccept) {
   }
 
   function formatMonthHeader(year, monthIndex) {
-    if (!isArabicPage) {
-      return new Date(year, monthIndex, 1).toLocaleString("en-GB", {
-        month: "long",
-        year: "numeric"
-      });
+    if (!IS_AR) {
+      return new Date(year, monthIndex, 1).toLocaleString("en-GB", { month: "long", year: "numeric" });
     }
     return `${AR_MONTHS[monthIndex]} ${toArabicDigits(year)}`;
   }
@@ -1666,7 +1732,7 @@ if (infoAccept) {
     hiddenInput.value = "";
     hiddenInput.dispatchEvent(new Event("change", { bubbles: true }));
 
-    textSpan.textContent = isArabicPage ? "اختر تاريخًا" : "Select a Date";
+    textSpan.textContent = I18N.selectDate;
     popup.classList.remove("is-hidden");
     renderCalendar();
   };
@@ -1694,7 +1760,7 @@ if (infoAccept) {
     for (let d = 1; d <= daysInMonth; d++) {
       const btn = document.createElement("button");
       btn.type = "button";
-      btn.textContent = isArabicPage ? toArabicDigits(d) : String(d);
+      btn.textContent = IS_AR ? toArabicDigits(d) : String(d);
       btn.className = "cal-day";
 
       const dateObj = new Date(currentYear, currentMonth, d);
@@ -1713,23 +1779,20 @@ if (infoAccept) {
 
       if (!btn.disabled && isFullDaySoldOut(iso)) {
         btn.classList.add("is-fullday-soldout");
-        btn.title = isArabicPage ? "نفدت التذاكر" : "Sold out";
+        btn.title = I18N.soldOut;
       }
 
       if (selectedDate && sameDay(dateObj, selectedDate)) btn.classList.add("is-selected");
 
       btn.addEventListener("click", () => {
         if (btn.disabled || btn.classList.contains("is-fullday-soldout")) {
-          showSoldOut(isArabicPage ? "هذا التاريخ ممتلئ. يُرجى اختيار تاريخ آخر." : "This date is sold out. Please select another date.");
+          showSoldOut(I18N.dateSoldOut);
           return;
         }
         selectedDate = dateObj;
         hiddenInput.value = iso;
         hiddenInput.dispatchEvent(new Event("change", { bubbles: true }));
-
-        // ✅ This is what fixes your “December ,Thu” issue
         textSpan.textContent = formatLabel(dateObj);
-
         popup.classList.add("is-hidden");
         renderCalendar();
       });
@@ -1764,14 +1827,9 @@ if (infoAccept) {
     });
   }
 
-  // initial UI label
-  if (!hiddenInput.value) {
-    textSpan.textContent = isArabicPage ? "اختر تاريخًا" : "Select a Date";
-  }
-
+  if (!hiddenInput.value) textSpan.textContent = I18N.selectDate;
   renderCalendar();
 })();
-
 
 document.querySelectorAll('.radio-pill input[type="radio"]').forEach((radio) => {
   radio.addEventListener("change", () => {
@@ -1787,14 +1845,17 @@ document.querySelectorAll(".addon-more-btn").forEach((btn) => {
   const panel = document.getElementById(targetId);
   if (!panel) return;
 
+  // Set initial Arabic text if needed
+  if (IS_AR) btn.textContent = I18N.seeMore;
+
   btn.addEventListener("click", () => {
     const isHidden = panel.classList.contains("hidden");
     if (isHidden) {
       panel.classList.remove("hidden");
-      btn.textContent = "Hide information";
+      btn.textContent = I18N.hideInfo;
     } else {
       panel.classList.add("hidden");
-      btn.textContent = "See more information";
+      btn.textContent = I18N.seeMore;
     }
   });
 });
